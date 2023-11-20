@@ -10,3 +10,4 @@ Currently, two official plugins are available:
 ## command lines 
 1. npm install
 2. npm run dev
+3. npm install @supabase/supabase-js (instalar libreria de supabase)
