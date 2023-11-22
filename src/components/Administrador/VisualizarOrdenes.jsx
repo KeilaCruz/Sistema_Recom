@@ -1,18 +1,38 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import { getAllOrdenTrabajo } from "../../services/OrdenTrabajo"
+import { getAllOrdenTrabajo, getOrdenActivas, getOrdenEntregada } from "../../services/OrdenTrabajo"
 
 export function VisualizarOrdenes() {
     const [ordenes, setOrdenes] = useState([])
+    const [filtro, setFiltro] = useState("Todos");
     useEffect(() => {
         async function loadOrdenes() {
-            const res = await getAllOrdenTrabajo()
+            let res;
+            if (filtro === "Todos") {
+                res = await getAllOrdenTrabajo();
+            } else if (filtro === "Pendientes") {
+                res = await getOrdenActivas();
+            } else if (filtro === "Entregado") {
+                res = await getOrdenEntregada();
+            }
             setOrdenes(res);
         }
         loadOrdenes()
-    })
+    }, [filtro])
+    const handleTodos = () => {
+        setFiltro("Todos")
+    }
+    const handlePendiente = () => {
+        setFiltro("Pendientes")
+    }
+    const handleEntregado = () => {
+        setFiltro("Entregado")
+    }
     return (
         <>
+            <button onClick={handleTodos}>Todos</button>
+            <button onClick={handlePendiente}>Pendientes</button>
+            <button onClick={handleEntregado}>Entregado</button>
             <table>
                 <thead>
                     <tr>

@@ -2,6 +2,8 @@ import { supabase } from "../supabase/connection";
 
 const rpcRegistrarOrden = "add_orden_trabajo";
 const rpcVisualizarOrdenes = "get_ordenes_trabajo";
+const rpcVisualizarOrderActivas = "get_ordenes_activas";
+const rpcVisualizarOrderEntregada = "get_ordenes_realizadas";
 
 export const registrarOrden = async (orden) => {
     try {
@@ -27,6 +29,26 @@ export const registrarOrden = async (orden) => {
 export const getAllOrdenTrabajo = async () => {
     try {
         const { error, data } = await supabase.rpc(rpcVisualizarOrdenes);
+        if (error) throw error
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getOrdenActivas = async () => {
+    try {
+        const { error, data } = await supabase.rpc(rpcVisualizarOrderActivas);
+        if (error) throw error
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getOrdenEntregada = async () => {
+    try {
+        const { error, data } = await supabase.rpc(rpcVisualizarOrderActivas);
         if (error) throw error
         return data;
     } catch (error) {
