@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginMain from '../components/Auth/Login'
-function Login() {
+function V_Login() {
   return (
     <>
     <LoginMain/>
@@ -8,4 +8,4 @@ function Login() {
   )
 }
 
-export default Login
+export default V_Login
