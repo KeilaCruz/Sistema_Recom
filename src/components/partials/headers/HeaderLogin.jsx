@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 function HeaderLogin() {
   return (
     <>
-      <main className="flex flex-row bg-[#152034] w-screen p-[20px] gap-[30px]  items-center justify-between">
-        <Link to="/login" className="flex items-center gap-[20px]">
+      <main className="flex flex-row bg-[#152034] w-screen p-[20px] gap-[30px]  items-center justify-between font-sans">
+        <Link to="/login" className="flex items-center gap-[40px]">
           <picture>
             <img
               src="/src/assets/icons/icon-main.svg"
