@@ -3,7 +3,58 @@ import { toast } from 'react-hot-toast'
 import { registrarOrden } from "../../services/OrdenTrabajo";
 
 export function RegistrarOrden() {
-    const { register, handleSubmit, formState: { errors }, setValue} = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm();
+
+    const getFechaSolicitud = () => {
+        const fechaActual = new Date()
+        setValue('fecha_solicitud', fechaActual.getDate)
+
+    }
+
+    const validarFechaEntrega = () => {
+        const fechaActual = new Date()
+        const diaActual = fechaActual.getDay()
+        const mesActual = fechaActual.getMonth()
+        const anioActual = fechaActual.getFullYear()
+
+        const data = getValues()
+        const fechaEntrega = new Date(data.fecha_entrega)
+
+        if (fechaActual <= fechaEntrega) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const validarPrecio = (precio) => {
+        const precioRegex = /^[0-9.]{1,10}$/
+
+        return precioRegex.test(precio)
+    }
+
+    const validarEspecificaciones = (especificacion) => {
+        const especificacionRegex = /^[A-Za-zÁÉÍÓÚáéíóúü0-9./\s-]{1,1000}$/
+
+        return especificacionRegex.test(especificacion)
+    }
+
+    const validarNombreCompleto = (nombreoApellido) => {
+        const nombreCompletoRegex = /^[A-Za-zÁÉÍÓÚáéíóúü\s]{1,40}$/
+
+        return nombreCompletoRegex.test(nombreoApellido)
+    }
+
+    const validarCorreo = (correo) => {
+        const correoRegex = /^[A-Za-zÁÉÍÓÚáéíóúü0-9_.+-]+@[A-Za-zÁÉÍÓÚáéíóúü0-9]+\.[A-Za-zÁÉÍÓÚáéíóúü0-9]+$/
+        return correoRegex.test(correo)
+    }
+    
+    const validarTelefono = (telefono) => {
+        const telefonoRegex = /^[0-9]{10}$/
+
+        return telefonoRegex.test(telefono)
+    }
 
     const onSubmit = handleSubmit(async (data) => {
         data.precio = parseFloat(data.precio)
