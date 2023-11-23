@@ -13,3 +13,4 @@ Currently, two official plugins are available:
 3. npm install @supabase/supabase-js (instalar libreria de supabase)
 4. npm install react-hook-form (instalar libreria para formularios de react)
 5. npm install react-router-dom
+6. npm install react-hot-toast 
