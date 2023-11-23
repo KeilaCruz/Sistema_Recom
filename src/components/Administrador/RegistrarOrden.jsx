@@ -1,21 +1,28 @@
 import { useForm } from "react-hook-form"
 import { toast } from 'react-hot-toast'
 import { registrarOrden } from "../../services/OrdenTrabajo";
+import { useEffect } from "react";
 
 export function RegistrarOrden() {
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm();
 
     const getFechaSolicitud = () => {
-        const fechaActual = new Date()
-        setValue('fecha_solicitud', fechaActual.getDate)
+        const fecha = new Date()
+        const diaActual = fecha.getDate()
+        const mesActual = fecha.getMonth() + 1
+        const anioActual = fecha.getFullYear()
+        const fechaActual = `${anioActual}-${mesActual}-${diaActual}`
+        
+        setValue('fecha_solicitud', fechaActual)
 
     }
 
     const validarFechaEntrega = () => {
-        const fechaActual = new Date()
-        const diaActual = fechaActual.getDay()
-        const mesActual = fechaActual.getMonth()
-        const anioActual = fechaActual.getFullYear()
+        const fecha = new Date()
+        const diaActual = fecha.getDay()
+        const mesActual = fecha.getMonth()
+        const anioActual = fecha.getFullYear()
+        const fechaActual = new Date(diaActual,mesActual -1, anioActual)
 
         const data = getValues()
         const fechaEntrega = new Date(data.fecha_entrega)
@@ -28,7 +35,7 @@ export function RegistrarOrden() {
     }
 
     const validarPrecio = (precio) => {
-        const precioRegex = /^[0-9.]{1,10}$/
+        const precioRegex = /^[0-9][0-9.]{1,10}$/
 
         return precioRegex.test(precio)
     }
@@ -49,18 +56,56 @@ export function RegistrarOrden() {
         const correoRegex = /^[A-Za-zÁÉÍÓÚáéíóúü0-9_.+-]+@[A-Za-zÁÉÍÓÚáéíóúü0-9]+\.[A-Za-zÁÉÍÓÚáéíóúü0-9]+$/
         return correoRegex.test(correo)
     }
-    
+
     const validarTelefono = (telefono) => {
         const telefonoRegex = /^[0-9]{10}$/
 
         return telefonoRegex.test(telefono)
     }
 
+    useEffect(() => {
+        getFechaSolicitud()
+    }, [])
+
     const onSubmit = handleSubmit(async (data) => {
         data.precio = parseFloat(data.precio)
         data.estado = true;
+
+        const fechaEntregaValida = validarFechaEntrega(data.fecha_entrega)
+        const precioValido = validarPrecio(data.precio)
+        const especificacionValida = validarEspecificaciones(data.especificacion)
+        const nombreCValida = validarNombreCompleto(data.nombre)
+        const apePaternoCValida = validarNombreCompleto(data.ape_paterno)
+        const apeMaternoCValida = validarNombreCompleto(data.ape_materno)
+        const correoValido = validarCorreo(data.correo)
+        const telefonoValido = validarTelefono(data.telefono)
+
         console.log(data);
-        registrarOrden(data);
+        if (!fechaEntregaValida) {
+            toast.error("La fecha de entrega debe ser posterior o igual a la actual")
+        } else if (!precioValido) {
+            toast.error("El precio ingresado sólo debe ser con números")
+        } else if (!especificacionValida) {
+            toast.error("Sólo se permiten caracteres alfanuméricos y ./-")
+        } else if (!nombreCValida) {
+            toast.error("El nombre debe ser máximo de 40 letras")
+        } else if (!apePaternoCValida) {
+            toast.error("El apellido paterno debe ser máximo de 40 letras")
+        } else if (!apeMaternoCValida) {
+            toast.error("El apellido materno debe ser máximo de 40 letras")
+        } else if(!correoValido){
+            toast.error("El correo ingresado no es valido, asegurese que contenga @ y .")
+        } else if(!telefonoValido){
+            toast.error("El teléfono debe ser de 10 dígitos numéricos")
+        } else{
+            try{
+                registrarOrden(data);
+                toast.success("Se ha registrado con éxito")
+            }catch(e){
+                console.error("Error al registrar orden" + e)
+            }            
+        }
+        
     })
 
     return (
