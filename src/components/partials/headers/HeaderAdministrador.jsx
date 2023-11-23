@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
 function HeaderAdministrador() {
   return (
-    <div>HeaderAdministrador</div>
-  )
+    <>
+      <div>HeaderAdministrador</div>
+      
+    </>
+  );
 }
 
-export default HeaderAdministrador
+export default HeaderAdministrador;

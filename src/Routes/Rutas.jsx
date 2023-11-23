@@ -5,9 +5,19 @@ import HomeAdministrador from "../Views/V_HomeAdministrador.jsx"
 import RecuperarContraseña from "../Views/V_RecuperarContraseña";
 import NotFound from "../Views/NotFound";
 
+
 function Rutas() {
+
+  const nombreRutas = {
+    '/login': 'Login',
+    '/recuperar-contraseña':'Recuperar contraseña',
+  }
+
   return (
+    
+   
     <Routes>
+      
       <Route path="*" element={<NotFound />}></Route>
       <Route path="/" element={<HomeAdministrador/>}></Route>
 
