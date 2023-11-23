@@ -48,7 +48,7 @@ export const getOrdenActivas = async () => {
 
 export const getOrdenEntregada = async () => {
     try {
-        const { error, data } = await supabase.rpc(rpcVisualizarOrderActivas);
+        const { error, data } = await supabase.rpc(rpcVisualizarOrderEntregada);
         if (error) throw error
         return data;
     } catch (error) {

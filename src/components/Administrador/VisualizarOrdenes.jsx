@@ -19,20 +19,14 @@ export function VisualizarOrdenes() {
         }
         loadOrdenes()
     }, [filtro])
-    const handleTodos = () => {
-        setFiltro("Todos")
-    }
-    const handlePendiente = () => {
-        setFiltro("Pendientes")
-    }
-    const handleEntregado = () => {
-        setFiltro("Entregado")
+    const handleFiltro = (filtro) => {
+        setFiltro(filtro)
     }
     return (
         <>
-            <button onClick={handleTodos}>Todos</button>
-            <button onClick={handlePendiente}>Pendientes</button>
-            <button onClick={handleEntregado}>Entregado</button>
+            <button onClick={() => handleFiltro("Todos")}>Todos</button>
+            <button onClick={() => handleFiltro("Pendientes")}>Pendientes</button>
+            <button onClick={() => handleFiltro("Entregado")}>Entregado</button>
             <table>
                 <thead>
                     <tr>
@@ -48,8 +42,10 @@ export function VisualizarOrdenes() {
                             <td>{orden.id_orden}</td>
                             <td>Nombre trabajador</td>
                             <td>{orden.fecha_entrega}</td>
-                            {orden.estado && (
+                            {orden.estado ? (
                                 <td>Pendiente</td>
+                            ) : (
+                                <td>Entregado</td>
                             )}
                         </tr>
                     ))}
