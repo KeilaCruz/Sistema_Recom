@@ -1,7 +1,6 @@
-import { useEffect } from "react"
-import { useState } from "react"
-import { getTrabajadores } from "../../services/Trabajador"
-
+import { useEffect, useState } from "react"
+import { darBajaTrabajador, getTrabajadores } from "../../services/Trabajador"
+import { useParams } from "react-router-dom"
 export function VisualizarTrabajadores() {
     const [trabajadores, setTrabajadores] = useState([])
     useEffect(() => {
@@ -11,6 +10,9 @@ export function VisualizarTrabajadores() {
         }
         loadTrabajadores();
     })
+    const handleDarBaja = async (idTrabajador) => {
+        const res = await darBajaTrabajador(idTrabajador);
+    }
     return (
         <>
             <table>
@@ -27,6 +29,8 @@ export function VisualizarTrabajadores() {
                             <td>{trabajador.idtrabajador}</td>
                             <td>{trabajador.nom_trabajador} {trabajador.apepaterno} {trabajador.apematerno}</td>
                             <td>{trabajador.tipotrabajador}</td>
+                            <button onClick={()=> handleDarBaja(trabajador.idtrabajador)}>Eliminar</button>
+                            <button>Editar</button>
                         </tr>
                     ))}
                 </tbody>

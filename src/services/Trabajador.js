@@ -2,6 +2,7 @@ import { supabase } from "../supabase/connection";
 
 const rpcRegistrarTrabajador = "add_empleado";
 const rpcVisualizarTrabajadores = "get_trabajadores";
+const rpcDarBajaTrabajador = "delete_trabajador";
 
 export const registrarTrabajador = async (trabajador) => {
     try {
@@ -10,7 +11,8 @@ export const registrarTrabajador = async (trabajador) => {
                 nombre: trabajador.nombre,
                 apepaterno: trabajador.apepaterno,
                 apematerno: trabajador.apematerno,
-                tipo_trabajador: trabajador.tipo_trabajador
+                tipo_trabajador: trabajador.tipo_trabajador,
+                estado_t: true
             });
         if (error) throw error;
     } catch (error) {
@@ -25,5 +27,16 @@ export const getTrabajadores = async () => {
         return data;
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const darBajaTrabajador = async (idTrabajador) => {
+    try {
+        const { error } = await supabase.rpc(rpcDarBajaTrabajador,{
+            idtrabajador: idTrabajador
+        });
+        if (error) throw error;
+    } catch (error) {
+        console.log(error)
     }
 }

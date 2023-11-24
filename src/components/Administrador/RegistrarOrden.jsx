@@ -42,6 +42,12 @@ export function RegistrarOrden() {
                     <option value="nuevo">Nuevo</option>
                     <option value="reparacion">Reparación</option>
                 </select>
+                <label>
+                    <textarea id="materiales_requeridos" placeholder="Materiales requeridos"></textarea>
+                </label>
+                <label>
+                    <input id="precio_material" type="number" placeholder="Precio del material" />
+                </label>
                 <button>Registrar</button>
             </form>
         </>
