@@ -5,22 +5,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);
     const sesion = await iniciarSesion(data);
-    if(sesion){
-      navigate("/")
+    if (sesion) {
+      navigate("/");
+    } else {
+      alert("usuario o constraseña incorrectos");
     }
   });
 
   return (
-    <main className="flex flex-col font-sans">
+    <main className="flex flex-col font-sans w-screen">
       <Header />
 
-      <section className="m-[40px] shadow flex flex-row p-[20px] items-center gap-[220px] ">
+      <section className="m-[40px] flex flex-row p-[20px] items-center gap-[220px] ">
         <article className="flex flex-col gap-[40px] items-center">
           <h1 className="text-[#3B315F] text-[40px] font-bold ">
             RYCO <br /> Taller de Torno y Soldadura
@@ -50,7 +52,8 @@ function Login() {
                 type="email"
                 placeholder="example@gmail.com"
                 {...register("correo")}
-                className="border-[1px] border-[#3B315F] p-[10px] rounded-[5px] w-[450px] text-[22px] visited:border-black "
+                className="border-[1px] border-[#3B315F] p-[10px] rounded-[5px] w-[450px] text-[22px]  focus:border-[#3B315F]
+                focus:outline-none focus:ring-1 focus:ring-[#3B315F]"
               />
               <label htmlFor="contraseña" className="text-[25px] font-semibold">
                 Contraseña
@@ -59,12 +62,12 @@ function Login() {
                 type="password"
                 placeholder="Ingresa tu contraseña"
                 {...register("contraseña")}
-                className="border-[1px] border-[#3B315F] p-[10px] rounded-[5px] w-[450px] text-[22px]"
+                className="border-[1px] border-[#3B315F] p-[10px] rounded-[5px] w-[450px] text-[22px]  focus:border-[#3B315F]
+                focus:outline-none focus:ring-1 focus:ring-[#3B315F]"
               />
-
-              <button className="mt-[50px] bg-[#3B315F] p-[10px] text-white text-[20px] font-sans font-medium rounded hover:bg-[#4D407E]">
-                Ingresar
-              </button>
+               <button type="submit" className="mt-[20px] bg-[#3B315F] p-[10px] text-white text-[20px] font-sans font-medium rounded hover:bg-[#4D407E]">
+              Ingresar
+            </button>
             </form>
 
             <Link
@@ -73,6 +76,8 @@ function Login() {
             >
               ¿Olvidaste tu contraseña?
             </Link>
+
+           
           </section>
         </section>
       </section>

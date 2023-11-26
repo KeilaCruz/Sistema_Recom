@@ -12,7 +12,7 @@ function HeaderLogin() {
               alt="logotipo de empresa RECOM"
             />
           </picture>
-          <p className="text-white text-[22px]">RECOM Taller y Soldadura</p>
+          <p className="text-white text-[22px]">RECOM Taller de torno y soldadura</p>
         </Link>
 
         <section className="flex gap-[50px]">

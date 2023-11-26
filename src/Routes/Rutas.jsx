@@ -8,10 +8,7 @@ import NotFound from "../Views/NotFound";
 
 function Rutas() {
 
-  const nombreRutas = {
-    '/login': 'Login',
-    '/recuperar-contraseña':'Recuperar contraseña',
-  }
+  
 
   return (
     
