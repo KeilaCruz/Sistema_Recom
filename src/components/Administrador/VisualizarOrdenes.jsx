@@ -38,11 +38,11 @@ export function VisualizarOrdenes() {
                 </thead>
                 <tbody>
                     {ordenes.map((orden) => (
-                        <tr key={orden.id_orden}>
-                            <td>{orden.id_orden}</td>
-                            <td>Nombre trabajador</td>
-                            <td>{orden.fecha_entrega}</td>
-                            {orden.estado ? (
+                        <tr key={orden.ordentrabajo}>
+                            <td>{orden.ordentrabajo}</td>
+                            <td>{orden.nomtrabajador} {orden.apepaterno} {orden.apematerno}</td>
+                            <td>{orden.fechaentrega}</td>
+                            {orden.estado_o ? (
                                 <td>Pendiente</td>
                             ) : (
                                 <td>Entregado</td>

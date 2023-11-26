@@ -1,10 +1,30 @@
 import { useForm } from "react-hook-form"
 import { registrarOrden } from "../../services/OrdenTrabajo";
+import { useEffect, useState } from "react";
+import { getTrabajadores } from "../../services/Trabajador";
 export function RegistrarOrden() {
+    const [trabajadores, setTrabajadores] = useState([]);
+    const [trabajadoresSeleccionados, setTrabajadoresSeleccionados] = useState([])
     const { register, handleSubmit } = useForm();
+    useEffect(() => {
+        async function loadTrabajadores() {
+            const res = await getTrabajadores();
+            setTrabajadores(res);
+        }
+        loadTrabajadores();
+    }, [])
+
+    const handleCheckboxChange = (trabajadorId) => {
+        setTrabajadoresSeleccionados(prev => (
+            prev.includes(trabajadorId)
+                ? prev.filter(id => id !== trabajadorId) : [...prev, trabajadorId]
+        ));
+    }
     const onSubmit = handleSubmit(async (data) => {
         data.precio = parseFloat(data.precio)
         data.estado = true;
+        data.preciomaterial = parseFloat(data.preciomaterial);
+        data.trabajadores = trabajadoresSeleccionados;
         console.log(data);
         registrarOrden(data);
     })
@@ -43,10 +63,20 @@ export function RegistrarOrden() {
                     <option value="reparacion">Reparación</option>
                 </select>
                 <label>
-                    <textarea id="materiales_requeridos" placeholder="Materiales requeridos"></textarea>
+                    <textarea id="materiales_requeridos" placeholder="Materiales requeridos" {...register("materialtrabajo")}></textarea>
                 </label>
                 <label>
-                    <input id="precio_material" type="number" placeholder="Precio del material" />
+                    <input id="precio_material" type="number" placeholder="Precio del material" step="any" {...register("preciomaterial")} />
+                </label>
+                <label> Seleccione el trabajador
+                    {trabajadores.map((trabajador) => (
+                        <div key={trabajador.idtrabajador}>
+                            <input id="trabajador" type="checkbox" value={trabajador.idtrabajador} onChange={() => handleCheckboxChange(trabajador.idtrabajador)} />
+                            <label htmlFor={`trabajador_${trabajador.idtrabajador}`}>
+                                {trabajador.nom_trabajador} {trabajador.apepaterno} {trabajador.apematerno} {trabajador.tipotrabajador}
+                            </label>
+                        </div>
+                    ))}
                 </label>
                 <button>Registrar</button>
             </form>

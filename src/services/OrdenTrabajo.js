@@ -19,6 +19,9 @@ export const registrarOrden = async (orden) => {
             especificacionestrabajo: orden.especificaciones,
             estado_o: orden.estado,
             tipotrabajo: orden.tipotrabajo,
+            trabajadores_id: orden.trabajadores,
+            materialrequerido: orden.materialtrabajo,
+            preciomaterial: orden.preciomaterial
         });
         if (error) throw error;
     } catch (error) {
