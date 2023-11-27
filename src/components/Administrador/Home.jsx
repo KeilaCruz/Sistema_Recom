@@ -16,13 +16,13 @@ function Home() {
   return (
     <>
       <main className="flex flex-row bg-[#F4F1ED] h-screen w-screen m-0">
-      <Sidebar/>
-      <section className="flex flex-col">
-        <Header/>
+      <div className="bg-black w-[20%]">
+          s
+        </div>
+        <div className="bg-slate-600 w-[80%] flex flex-col">
+          <Header/>
+        </div>
 
-      </section>
-
-     
       </main>
 
       {/*<Sidebar />
