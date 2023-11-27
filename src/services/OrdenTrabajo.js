@@ -19,6 +19,9 @@ export const registrarOrden = async (orden) => {
             especificacionestrabajo: orden.especificaciones,
             estado_o: orden.estado,
             tipotrabajo: orden.tipotrabajo,
+            trabajadores_id: orden.trabajadores,
+            materialrequerido: orden.materialtrabajo,
+            preciomaterial: orden.preciomaterial
         });
         if (error) throw error;
     } catch (error) {
@@ -48,7 +51,7 @@ export const getOrdenActivas = async () => {
 
 export const getOrdenEntregada = async () => {
     try {
-        const { error, data } = await supabase.rpc(rpcVisualizarOrderActivas);
+        const { error, data } = await supabase.rpc(rpcVisualizarOrderEntregada);
         if (error) throw error
         return data;
     } catch (error) {

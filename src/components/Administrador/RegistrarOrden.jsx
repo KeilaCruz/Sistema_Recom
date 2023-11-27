@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form"
 import { toast } from 'react-hot-toast'
 import { registrarOrden } from "../../services/OrdenTrabajo";
+import { getTrabajadores } from "../../services/Trabajador";
 import { useEffect } from "react";
 
 export function RegistrarOrden() {
+    const [trabajadores, setTrabajadores] = useState([]);
+    const [trabajadoresSeleccionados, setTrabajadoresSeleccionados] = useState([])
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm();
 
     const getFechaSolicitud = () => {
@@ -12,7 +15,7 @@ export function RegistrarOrden() {
         const mesActual = fecha.getMonth() + 1
         const anioActual = fecha.getFullYear()
         const fechaActual = `${anioActual}-${mesActual}-${diaActual}`
-        
+
         setValue('fecha_solicitud', fechaActual)
 
     }
@@ -22,7 +25,7 @@ export function RegistrarOrden() {
         const diaActual = fecha.getDay()
         const mesActual = fecha.getMonth()
         const anioActual = fecha.getFullYear()
-        const fechaActual = new Date(diaActual,mesActual -1, anioActual)
+        const fechaActual = new Date(diaActual, mesActual - 1, anioActual)
 
         const data = getValues()
         const fechaEntrega = new Date(data.fecha_entrega)
@@ -65,11 +68,26 @@ export function RegistrarOrden() {
 
     useEffect(() => {
         getFechaSolicitud()
+
+        async function loadTrabajadores() {
+            const res = await getTrabajadores()
+            setTrabajadores(res)
+        }
+        loadTrabajadores()
     }, [])
+
+    const handleCheckboxChange = (trabajadorId) => {
+        setTrabajadoresSeleccionados(prev => (
+            prev.includes(trabajadorId)
+                ? prev.filter(id => id !== trabajadorId) : [...prev, trabajadorId]
+        ));
+    }
 
     const onSubmit = handleSubmit(async (data) => {
         data.precio = parseFloat(data.precio)
         data.estado = true;
+        data.preciomaterial = parseFloat(data.preciomaterial);
+        data.trabajadores = trabajadoresSeleccionados;
 
         const fechaEntregaValida = validarFechaEntrega(data.fecha_entrega)
         const precioValido = validarPrecio(data.precio)
@@ -80,7 +98,6 @@ export function RegistrarOrden() {
         const correoValido = validarCorreo(data.correo)
         const telefonoValido = validarTelefono(data.telefono)
 
-        console.log(data);
         if (!fechaEntregaValida) {
             toast.error("La fecha de entrega debe ser posterior o igual a la actual")
         } else if (!precioValido) {
@@ -105,7 +122,6 @@ export function RegistrarOrden() {
                 console.error("Error al registrar orden" + e)
             }            
         }
-        
     })
 
     return (
@@ -151,7 +167,22 @@ export function RegistrarOrden() {
                     <option value="nuevo">Nuevo</option>
                     <option value="reparacion">Reparación</option>
                 </select>
-                {errors.tipotrabajo && <span>Este campo es necesario</span>}
+                <label>
+                    <textarea id="materiales_requeridos" placeholder="Materiales requeridos" {...register("materialtrabajo")}></textarea>
+                </label>
+                <label>
+                    <input id="precio_material" type="number" placeholder="Precio del material" step="any" {...register("preciomaterial")} />
+                </label>
+                <label> Seleccione el trabajador
+                    {trabajadores.map((trabajador) => (
+                        <div key={trabajador.idtrabajador}>
+                            <input id="trabajador" type="checkbox" value={trabajador.idtrabajador} onChange={() => handleCheckboxChange(trabajador.idtrabajador)} />
+                            <label htmlFor={`trabajador_${trabajador.idtrabajador}`}>
+                                {trabajador.nom_trabajador} {trabajador.apepaterno} {trabajador.apematerno} {trabajador.tipotrabajador}
+                            </label>
+                        </div>
+                    ))}
+                </label>
                 <button>Registrar</button>
             </form>
         </>
