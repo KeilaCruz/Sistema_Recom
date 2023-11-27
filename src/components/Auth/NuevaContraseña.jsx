@@ -3,11 +3,20 @@ import Header from "../partials/headers/HeaderLogin";
 import { actualizarContraseña } from "../../services/Auth/Autenticación";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import ModalExito from "../Modales/ModalExito";
 
 function NuevaContraseña() {
   const navigate = useNavigate();
   const [actualizado, setActualizado] = useState(false);
+  const [mostrarModal, setMostrarModal] = useState(false);
 
+  const handleMostrarModal = () => {
+    setMostrarModal(true);
+  };
+
+  const handleCerrarModal = () => {
+    setMostrarModal(false);
+  };
   const regresar = () => {
     navigate(-1);
   };
@@ -18,14 +27,14 @@ function NuevaContraseña() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = handleSubmit(async (data)=>{
-    const {contraseña} = data;
+  const onSubmit = handleSubmit(async (data) => {
+    const { contraseña } = data;
     const actualizar = await actualizarContraseña(contraseña);
 
-    if(actualizar){
-        setActualizado(!actualizado);
+    if (actualizar) {
+      setActualizado(!actualizado);
     }
-  })
+  });
 
   return (
     <>
@@ -47,7 +56,12 @@ function NuevaContraseña() {
             <section className="flex flex-col p-[30px] mt-[30px] shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] rounded-[5px] w-[737px] h-[363] ">
               <form className="flex flex-col gap-[20px]">
                 <div className="flex flex-col ">
-                  <label htmlFor="nueva contraseña" className="font-semibold text-[25px] text-[#152034]">Nueva contraseña</label>
+                  <label
+                    htmlFor="nueva contraseña"
+                    className="font-semibold text-[25px] text-[#152034]"
+                  >
+                    Nueva contraseña
+                  </label>
                   <input
                     type="password"
                     placeholder="Ingresa tu contraseña"
@@ -59,7 +73,12 @@ function NuevaContraseña() {
                   />
                 </div>
                 <div className="flex flex-col ">
-                  <label htmlFor="confirmar nueva contraseña" className="font-semibold text-[25px] text-[#152034]">Confirmar contraseña</label>
+                  <label
+                    htmlFor="confirmar nueva contraseña"
+                    className="font-semibold text-[25px] text-[#152034]"
+                  >
+                    Confirmar contraseña
+                  </label>
                   <input
                     type="password"
                     placeholder="Confirma tu nueva contraseña"
@@ -77,13 +96,24 @@ function NuevaContraseña() {
                     </span>
                   </>
                 )} */}
-                <button
-                  type="submit"
-                  className="mt-[20px] text-white bg-[#3B315F] rounded-[5px] p-[10px] font-sans font-medium text-[22px] w-[500px] hover:bg-[#2f274d]"
-                >
-                  Actualizar
-                </button>
               </form>
+              <button
+                className="mt-[20px] text-white bg-[#3B315F] rounded-[5px] p-[10px] font-sans font-medium text-[22px] w-[500px] hover:bg-[#2f274d]"
+                onClick={handleMostrarModal}
+              >
+                Actualizar
+              </button>
+              {mostrarModal && (
+                <>
+                  <ModalExito
+                    mostrar={mostrarModal}
+                    onClose={handleCerrarModal}
+                  >
+                    <p className="uppercase'">Tu contraseña se actualizo correctamente</p>
+                    <p>En un momento serás redirigido a la página de logueo.</p>
+                  </ModalExito>
+                </>
+              )}
             </section>
           </section>
           {/* Debo arreglar lo de picture para WR, ya que no se muestra al hacer zoom */}
