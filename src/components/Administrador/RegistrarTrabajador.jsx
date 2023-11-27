@@ -24,13 +24,13 @@ export function RegistrarTrabajador() {
             toast.error('El apellido paterno debe incluir máximo 40 letras')
         } else if (!apeMaternoValido) {
             toast.error('El apellido materno debe incluir máximo 40 letras')
-        } 
+        }
         else {
             try {
                 registrarTrabajador(data);
-            } catch(e){
+            } catch (e) {
                 console.error("Error al crear trabajador: " + e)
-            }            
+            }
         }
     });
 
@@ -51,6 +51,7 @@ export function RegistrarTrabajador() {
                 </label>
                 <label>Tipo de trabajador
                     <select id="tipoTrabajador" {...register("tipo_trabajador", { required: true })}>
+                        <option value="" disabled>Elija una opción</option>
                         <option value={1}>Tornero</option>
                         <option value={2}>Soldador</option>
                         <option value={3}>Ayudante</option>
