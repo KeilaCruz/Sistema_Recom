@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form"
 import { toast } from 'react-hot-toast'
 import { registrarOrden } from "../../services/OrdenTrabajo";
 import { getTrabajadores } from "../../services/Trabajador";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 
 export function RegistrarOrden() {
     const [trabajadores, setTrabajadores] = useState([]);
