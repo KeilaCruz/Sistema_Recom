@@ -49,7 +49,7 @@ function NuevaContraseña() {
             />
           </Link>
 
-          <section className="flex flex-col mr-[100px] ml-[50px]">
+          <section className="flex flex-col mr-[100px] ml-[50px] ">
             <p className="text-[40px] text-[#3B315F] font-semibold">
               Actualiza tu contraseña
             </p>
@@ -89,27 +89,31 @@ function NuevaContraseña() {
                     {...register("contraseñaConfirmada", { required: true })}
                   />
                 </div>
-                {/*{errors.correo && (
+                {errors.correo & errors.contraseñaConfirmada && (
                   <>
                     <span className="text-[22px] text-[#C71111] font-medium font-sans">
-                      Se debe ingresar un correo electrónico
+                      Se debe ingresar una contraseña
                     </span>
                   </>
-                )} */}
+                )}
+
+                <button
+                  className="mt-[20px] text-white bg-[#3B315F] rounded-[5px] p-[10px] font-sans font-medium text-[22px] w-[500px] hover:bg-[#2f274d]"
+                  type="submit"
+                >
+                  Actualizar
+                </button>
               </form>
-              <button
-                className="mt-[20px] text-white bg-[#3B315F] rounded-[5px] p-[10px] font-sans font-medium text-[22px] w-[500px] hover:bg-[#2f274d]"
-                onClick={handleMostrarModal}
-              >
-                Actualizar
-              </button>
+
               {mostrarModal && (
                 <>
                   <ModalExito
                     mostrar={mostrarModal}
                     onClose={handleCerrarModal}
                   >
-                    <p className="uppercase'">Tu contraseña se actualizo correctamente</p>
+                    <p className="uppercase'">
+                      Tu contraseña se actualizo correctamente
+                    </p>
                     <p>En un momento serás redirigido a la página de logueo.</p>
                   </ModalExito>
                 </>
