@@ -22,8 +22,10 @@ export function VisualizarOrdenes() {
     const handleFiltro = (filtro) => {
         setFiltro(filtro)
     }
+    
     return (
         <>
+            <input id="barra_busqueda" placeholder="Número de orden, fecha de solicitud, nombre de cliente"/>
             <button onClick={() => handleFiltro("Todos")}>Todos</button>
             <button onClick={() => handleFiltro("Pendientes")}>Pendientes</button>
             <button onClick={() => handleFiltro("Entregado")}>Entregado</button>

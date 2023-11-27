@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { darBajaTrabajador, getTrabajadores } from "../../services/Trabajador"
-import { useParams } from "react-router-dom"
+import { getTrabajadores } from "../../services/Trabajador"
+import { useNavigate } from "react-router-dom"
 export function VisualizarTrabajadores() {
     const [trabajadores, setTrabajadores] = useState([])
+    const navigate = useNavigate();
     useEffect(() => {
         async function loadTrabajadores() {
             const res = await getTrabajadores();
@@ -10,8 +11,8 @@ export function VisualizarTrabajadores() {
         }
         loadTrabajadores();
     })
-    const handleDarBaja = async (idTrabajador) => {
-        const res = await darBajaTrabajador(idTrabajador);
+    const handleNavigate = async (idTrabajador) => {
+        navigate(`/visualizar-trabajador/${idTrabajador}`)
     }
     return (
         <>
@@ -29,8 +30,8 @@ export function VisualizarTrabajadores() {
                             <td>{trabajador.idtrabajador}</td>
                             <td>{trabajador.nom_trabajador} {trabajador.apepaterno} {trabajador.apematerno}</td>
                             <td>{trabajador.tipotrabajador}</td>
-                            <button onClick={()=> handleDarBaja(trabajador.idtrabajador)}>Eliminar</button>
-                            <button>Editar</button>
+                            {/* Aquí ira un icono de una flechita*/}
+                            <button onClick={() => handleNavigate(trabajador.idtrabajador)}>Detalles</button>
                         </tr>
                     ))}
                 </tbody>
