@@ -5,14 +5,14 @@ import HomeAdministrador from "../Views/V_HomeAdministrador.jsx";
 import RecuperarContraseña from "../Views/V_RecuperarContraseña";
 import NuevaContraseña from "../components/Auth/NuevaContraseña.jsx";
 import NotFound from "../Views/NotFound";
-import { RegistrarOrden } from "./components/Administrador/RegistrarOrden";
-import { RegistrarTrabajador } from "./components/Administrador/RegistrarTrabajador";
-import { VisualizarOrdenes } from "./components/Administrador/VisualizarOrdenes";
+import { RegistrarOrden } from "../components/Administrador/RegistrarOrden";
+import { RegistrarTrabajador } from "../components/Administrador/RegistrarTrabajador.jsx"
+import { VisualizarOrdenes } from "../components/Administrador/VisualizarOrdenes";
 import { Toaster } from "react-hot-toast";
-import { VisualizarTrabajadores } from "./components/Administrador/VisualizarTrabajadores";
-import { VisualizarTrabajador } from "./components/Administrador/VisualizarTrabajador";
+import { VisualizarTrabajadores } from "../components/Administrador/VisualizarTrabajadores";
+import { VisualizarTrabajador } from "../components/Administrador/VisualizarTrabajador";
 
-import { Toaster } from 'react-hot-toast'
+
 
 function Rutas() {
   return (
@@ -39,7 +39,8 @@ function Rutas() {
         path="/visualizar-trabajador/:id"
         element={<VisualizarTrabajador />}
       />
-      <Toaster/>
+    
+  
     </Routes>
     
   );
