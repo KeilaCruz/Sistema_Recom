@@ -1,15 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { RegistrarOrden } from './components/Administrador/RegistrarOrden'
+import Rutas from './Routes/Rutas'
 
 
 function App() {
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/registrar-orden-trabajo' element={<RegistrarOrden />} />
-        </Routes>
-      </BrowserRouter>
+     <Rutas/>
     </>
   )
 }
