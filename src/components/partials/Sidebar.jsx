@@ -1,7 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { cerrarSesion } from "../../services/Auth/Autenticación";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const onSubmit = async () => {
+    const { data, error } = await cerrarSesion();
+    if (data) {
+      navigate("/login");
+    } else {
+      alert("Error al salir");
+    }
+  };
+
+  
+
   return (
     <>
       {/*En genral se deben cambiar el tamaño de los componentes, NO USAR PX, usar mediciones como em, rem, investigar como añadirlo bien */}
@@ -41,8 +55,8 @@ function Sidebar() {
               <p className="text-[18px] font-bold text-white">Trabajadores</p>
             </Link>
             <Link
-              to="/clientes"
               className="flex flex-row items-center gap-[10px] p-[10px] rounded-[5px] hover:bg-colorHover"
+              to="/trabajos"
             >
               <img src="/src/assets/icons/trabajos-icon.svg" alt="" />
               <p className="text-[18px] font-bold text-white">Trabajos</p>
@@ -57,8 +71,15 @@ function Sidebar() {
           </ul>
         </section>
 
-        <button className="flex flex-row items-center gap-[10px] p-[10px] rounded-[5px] hover:bg-colorHover ">
-          <img src="/src/assets/icons/logout-icon.svg" alt="" className="h-[25px]"/>
+        <button
+          className="flex flex-row items-center gap-[10px] p-[10px] rounded-[5px] hover:bg-colorHover "
+          onClick={open}
+        >
+          <img
+            src="/src/assets/icons/logout-icon.svg"
+            alt=""
+            className="h-[25px]"
+          />
           <p className="text-white text-[18px] font-bold">Cerrar Sesion</p>
         </button>
       </aside>
