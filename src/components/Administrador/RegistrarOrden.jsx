@@ -20,6 +20,8 @@ export function RegistrarOrden() {
 
     }
 
+
+
     const validarFechaEntrega = () => {
         const fecha = new Date()
         const diaActual = fecha.getDay()
