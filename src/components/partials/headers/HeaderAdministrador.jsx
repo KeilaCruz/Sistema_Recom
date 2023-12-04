@@ -12,7 +12,9 @@ function HeaderAdministrador({ placeholder }) {
     "/trabajos": "Trabajos",
   };
 
-  const abrirDropdown = () => {setDropdownOpen(!dropdownOpen)};
+  const abrirDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   useEffect(() => {
     setTituloHeader(titulosRuta[location.pathname] || "Home");
@@ -45,13 +47,21 @@ function HeaderAdministrador({ placeholder }) {
             className="w-[40px]"
           />
           <button onClick={abrirDropdown}>
-            {`${dropdownOpen ? (<></>): (<>
-              <img
-              src="/src/assets/icons/down-arrow-dropdown.svg"
-              alt="icono de flecha abajo para abrir dropdown"
-              className="w-[20px]"
-            /></>) }`}
-           
+            {dropdownOpen ? (
+              <>
+                <section className="absolute flex flex-col bg-black p-[10px]  ">
+
+                </section>
+              </>
+            ) : (
+              <>
+                <img
+                  src="/src/assets/icons/down-arrow-dropdown.svg"
+                  alt="icono de flecha abajo para abrir dropdown"
+                  className="w-[20px]"
+                />
+              </>
+            )}
           </button>
         </article>
       </main>
