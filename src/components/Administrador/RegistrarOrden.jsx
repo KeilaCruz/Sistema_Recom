@@ -146,32 +146,32 @@ export function RegistrarOrden() {
                 </div>
 
                 <div className="flex ml-10" >
-                    <label className="text-[20px] font-semibold"> Precio del trabajo </label>
+                    <label className="text-[18px] font-semibold"> Precio del trabajo </label>
                     <input id="precio_trabajo" type="number" step="any"
-                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[100px] text-[18px]  focus:border-[#3B315F]
+                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[100px] text-[16px]  focus:border-[#3B315F]
                     focus:outline-none focus:ring-1 focus:ring-[#3B315F]"
                         {...register("precio", { required: true })} />
                     {errors.precio && <span>Este campo es necesario</span>}
 
-                    <label className="text-[20px] font-semibold"> Especificaciones del trabajo </label>
+                    <label className="text-[18px] font-semibold"> Especificaciones del trabajo </label>
                     <textarea id="descripcion"
-                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[18px]  focus:border-[#3B315F]
+                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[16px]  focus:border-[#3B315F]
                     focus:outline-none focus:ring-1 focus:ring-[#3B315F]"
                         placeholder="Escriba los detalles del trabajo a realizar" {...register("especificaciones", { required: true })}></textarea>
                     {errors.especificaciones && <span>Este campo es necesario</span>}
                 </div>
 
                 <div className="flex ml-10">
-                    <label className="text-[20px] font-semibold"> Nombre </label>
+                    <label className="text-[18px] font-semibold"> Nombre </label>
                     <input id="nom_cliente" type="text"
-                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[18px]  focus:border-[#3B315F]
+                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[16px]  focus:border-[#3B315F]
                     focus:outline-none focus:ring-1 focus:ring-[#3B315F]"
                         placeholder="Ej. Eduardo" {...register("nombre", { required: true })} />
                     {errors.nombre && <span>Este campo es necesario</span>}
 
-                    <label className="text-[20px] font-semibold"> Apellido paterno </label>
+                    <label className="text-[18px] font-semibold"> Apellido paterno </label>
                     <input id="ape_paterno" type="text"
-                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[18px]  focus:border-[#3B315F]
+                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[16px]  focus:border-[#3B315F]
                     focus:outline-none focus:ring-1 focus:ring-[#3B315F]"
                         placeholder="Ej. Pérez" {...register("ape_paterno", { required: true })} />
                     {errors.ape_paterno && <span>Este campo es necesario</span>}
