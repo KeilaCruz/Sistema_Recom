@@ -178,7 +178,7 @@ export function RegistrarOrden() {
                     <input id="precio_material" type="number" placeholder="Precio del material" step="any" {...register("preciomaterial")} />
                 </label>
                 <label> Seleccione el trabajador
-                    {trabajadores.map((trabajador) => (
+                    {trabajadores && trabajadores.map((trabajador) => (
                         <div key={trabajador.idtrabajador}>
                             <input id="trabaador" type="checkbox" value={trabajador.idtrabajador} onChange={() => handleCheckboxChange(trabajador.idtrabajador)} />
                             <label htmlFor={`trabajador_${trabajador.idtrabajador}`}>
