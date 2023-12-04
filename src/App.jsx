@@ -4,6 +4,7 @@ import { RegistrarTrabajador } from './components/Administrador/RegistrarTrabaja
 import { VisualizarOrdenes } from './components/Administrador/VisualizarOrdenes'
 import { VisualizarTrabajadores } from './components/Administrador/VisualizarTrabajadores'
 import { VisualizarTrabajador } from './components/Administrador/VisualizarTrabajador'
+import { VisualizarOrden } from './components/Administrador/VisualizarOrden'
 
 
 function App() {
@@ -14,8 +15,9 @@ function App() {
           <Route path='/registrar-orden-trabajo' element={<RegistrarOrden />} />
           <Route path='/registrar-trabajador' element={<RegistrarTrabajador />} />
           <Route path='/visualizar-ordenes' element={<VisualizarOrdenes />} />
+          <Route path='/visualizar-orden/:id' element={<VisualizarOrden />} />
           <Route path='/visualizar-trabajadores' element={<VisualizarTrabajadores />} />
-          <Route path='/visualizar-trabajador/:id' element={<VisualizarTrabajador/>} />
+          <Route path='/visualizar-trabajador/:id' element={<VisualizarTrabajador />} />
         </Routes>
       </BrowserRouter>
     </>
