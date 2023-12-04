@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
-function HeaderAdministrador() {
+function HeaderAdministrador({ placeholder }) {
+  const location = useLocation();
+  const [tituloHeader, setTituloHeader] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const titulosRuta = {
+    "/clientes": "Clientes",
+    "/trabajadores": "Trabajadores",
+    "/trabajos": "Trabajos",
+  };
+
+  const abrirDropdown = () => {setDropdownOpen(!dropdownOpen)};
+
+  useEffect(() => {
+    setTituloHeader(titulosRuta[location.pathname] || "Home");
+  }, [location]);
+
   return (
     <>
-      <main className="flex flex-row items-center font-sans bg-white p-[15px] justify-between ">
-        <p className="text-[#152034] text-[25px] font-bold ml-3">HOME</p>
+      <main className="flex flex-row items-center font-sans bg-white p-[15px] justify-between w-full">
+        <p className="text-[#152034] text-[25px] font-bold ml-3">
+          {tituloHeader}
+        </p>
         <section className="flex items-center ">
           <img
             src="/src/assets/icons/search-icon.svg"
@@ -13,7 +32,7 @@ function HeaderAdministrador() {
           />
           <input
             type="search"
-            placeholder="Buscar orden de trabajo, trabajador, cliente ..."
+            placeholder={placeholder}
             className="gap-[20px] rounded-[10px] border-colorMain border-[2px] w-[600px] py-[10px] pr-[10px] pl-[45px] text-[20px]  focus:border-colorMain
             focus:outline-none focus:ring-1 focus:ring-colorMain"
           />
@@ -25,12 +44,14 @@ function HeaderAdministrador() {
             alt="icono de usuario del sistema"
             className="w-[40px]"
           />
-          <button>
-            <img
+          <button onClick={abrirDropdown}>
+            {`${dropdownOpen ? (<></>): (<>
+              <img
               src="/src/assets/icons/down-arrow-dropdown.svg"
               alt="icono de flecha abajo para abrir dropdown"
               className="w-[20px]"
-            />
+            /></>) }`}
+           
           </button>
         </article>
       </main>

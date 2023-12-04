@@ -11,6 +11,7 @@ import { VisualizarOrdenes } from "../components/Administrador/VisualizarOrdenes
 import { Toaster } from "react-hot-toast";
 import { VisualizarTrabajadores } from "../components/Administrador/VisualizarTrabajadores";
 import { VisualizarTrabajador } from "../components/Administrador/VisualizarTrabajador";
+import Clientes from "../Views/V_Clientes.jsx";
 
 
 
@@ -27,7 +28,7 @@ function Rutas() {
       ></Route>
 
       <Route path="/nueva-contraseña" element={<NuevaContraseña />}></Route>
-
+      <Route path="/clientes" element={<Clientes/>}></Route>
       <Route path="/registrar-orden-trabajo" element={<RegistrarOrden />} />
       <Route path="/registrar-trabajador" element={<RegistrarTrabajador />} />
       <Route path="/visualizar-ordenes" element={<VisualizarOrdenes />} />

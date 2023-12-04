@@ -15,14 +15,12 @@ function Home() {
 
   return (
     <>
-      <main className="flex flex-row bg-colorFondo h-screen w-screen overflow-auto">
-        <div className="bg-black w-[20%] fixed">
-          <Sidebar/>
+      <main className="flex flex-row bg-colorFondo h-screen w-screen  ">
+        <div className=" fixed h-full">
+          <Sidebar />
         </div>
-        <div className="flex flex-col w-[80%] ml-[300px] h-auto">
-          <Header/>
-          
-
+        <div className="flex flex-col w-full h-auto ml-[290px]">
+          <Header placeholder={"Buscar por trabajo, cliente, trabajores....."} />
         </div>
       </main>
     </>
