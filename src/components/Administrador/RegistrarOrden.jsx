@@ -130,16 +130,16 @@ export function RegistrarOrden() {
                 onSubmit={onSubmit}>
 
                 <div className="flex ml-10">
-                    <label className="text-[20px] font-semibold"> Fecha solicitud </label>
+                    <label className="text-[18px] font-semibold"> Fecha solicitud </label>
                     <input id="fecha_solicitud" type="date"
-                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[18px]  focus:border-[#3B315F]
+                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[16px]  focus:border-[#3B315F]
                     focus:outline-none focus:ring-1 focus:ring-[#3B315F] ml-4"
                         readOnly {...register("fecha_solicitud", { required: true })} />
                     {errors.fecha_solicitud && <span>Este campo es necesario</span>}
 
-                    <label className="text-[20px] font-semibold ml-10"> Fecha entrega </label>
+                    <label className="text-[18px] font-semibold ml-10"> Fecha entrega </label>
                     <input id="fecha_entrega" type="date"
-                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[18px]  focus:border-[#3B315F]
+                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[16px]  focus:border-[#3B315F]
                     focus:outline-none focus:ring-1 focus:ring-[#3B315F] ml-4"
                         {...register("fecha_entrega", { required: true })} />
                     {errors.fecha_entrega && <span>Este campo es necesario</span>}
@@ -176,25 +176,25 @@ export function RegistrarOrden() {
                         placeholder="Ej. Pérez" {...register("ape_paterno", { required: true })} />
                     {errors.ape_paterno && <span>Este campo es necesario</span>}
 
-                    <label className="text-[20px] font-semibold"> Apellido materno </label>
+                    <label className="text-[18px] font-semibold"> Apellido materno </label>
                     <input id="ape_materno" type="text"
-                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[18px]  focus:border-[#3B315F]
+                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[16px]  focus:border-[#3B315F]
                     focus:outline-none focus:ring-1 focus:ring-[#3B315F]"
                         placeholder="Ej. Ruiz" {...register("ape_materno", { required: true })} />
                     {errors.ape_materno && <span>Este campo es necesario</span>}
                 </div>
 
                 <div className="flex ml-10">
-                    <label className="text-[20px] font-semibold"> Correo </label>
+                    <label className="text-[18px] font-semibold"> Correo </label>
                     <input id="correo" type="email"
-                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[18px]  focus:border-[#3B315F]
+                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[16px]  focus:border-[#3B315F]
                     focus:outline-none focus:ring-1 focus:ring-[#3B315F]"
                         placeholder="Ej. edu12@" {...register("correo", { required: true })} />
                     {errors.correo && <span>Este campo es necesario</span>}
 
-                    <label className="text-[20px] font-semibold"> Teléfono </label>
+                    <label className="text-[18px] font-semibold"> Teléfono </label>
                     <input id="telefono" type="text"
-                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[18px]  focus:border-[#3B315F]
+                        className="border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] text-[16px]  focus:border-[#3B315F]
                     focus:outline-none focus:ring-1 focus:ring-[#3B315F]"
                         placeholder="Ej. 9212834738" {...register("telefono", { required: true })} />
                     {errors.telefono && <span>Este campo es necesario</span>}
