@@ -59,8 +59,8 @@ export function RegistrarOrden() {
                     <input id="telefono" type="text" placeholder="Ej. 9212834738" {...register("telefono", { required: true })} />
                 </label>
                 <select id="tipo_trabajo" {...register("tipotrabajo", { required: true })}>
-                    <option value="nuevo">Nuevo</option>
-                    <option value="reparacion">Reparación</option>
+                    <option value="Nuevo">Nuevo</option>
+                    <option value="Reparacion">Reparación</option>
                 </select>
                 <label>
                     <textarea id="materiales_requeridos" placeholder="Materiales requeridos" {...register("materialtrabajo")}></textarea>

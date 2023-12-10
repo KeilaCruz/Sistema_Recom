@@ -103,7 +103,7 @@ export function VisualizarOrdenes() {
                     {ordenes.map((orden) => (
                         <tr key={orden.ordentrabajo}>
                             <td>{orden.ordentrabajo}</td>
-                            <td>{orden.nomtrabajador} {orden.apepaterno} {orden.apematerno}</td>
+                            <td>{orden.nomtrabajadores[0]}</td>
                             <td>{orden.fechaentrega}</td>
                             {orden.estado_o ? (
                                 <td>Pendiente</td>
