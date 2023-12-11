@@ -153,7 +153,7 @@ export function RegistrarOrden() {
     return (
         <>
             <div className="fixed">
-                {/*<Sidebar />*/}
+                <Sidebar />
             </div>
 
             <form className="flex flex-col gap-5 font-sans"
