@@ -116,7 +116,6 @@ export function VisualizarOrden() {
         )}
       </form>
       <button onClick={handleActivateEdit}>Editar</button>
-
     </>
   )
 }
