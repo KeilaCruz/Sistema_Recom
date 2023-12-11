@@ -17,3 +17,4 @@ Este pagina web tiene como objetivo brindar al gerente de la empresa RECOM poder
 4. npm install react-hook-form (instalar libreria para formularios de react)
 5. npm install react-router-dom
 6. npm install react-hot-toast 
+7. npm install jspdf --save (librería para pdf)
