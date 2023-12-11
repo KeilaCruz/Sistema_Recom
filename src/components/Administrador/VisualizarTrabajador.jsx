@@ -64,24 +64,26 @@ export function VisualizarTrabajador() {
     return (
         <>
             <form onSubmit={onSubmit}>
-                <label>Id del trabajador
+                <label htmlFor="id_trabajador">Id del trabajador
                     <input id="id_trabajador" type="number" {...register("id_trabajador")} disabled={true} />
                 </label>
-                <label>Nombre del trabajador
+                <label htmlFor="nombre">Nombre del trabajador
                     <input id="nombre" type="text" {...register("nombre")} disabled={!activateEdit} />
                 </label>
-                <label>Apellido paterno
+                <label htmlFor="ape_paterno">Apellido paterno
                     <input id="ape_paterno" type="text" {...register("ape_paterno")} disabled={!activateEdit} />
                 </label>
-                <label>Apellido materno
+                <label htmlFor="ape_materno">Apellido materno
                     <input id="ape_materno" type="text" {...register("ape_materno")} disabled={!activateEdit} />
                 </label>
-                <select id="id_rol_trabajador" {...register("id_rol_trabajador")} value={selectedRol} onChange={handleSelected} disabled={!activateEdit}>
-                    {roles.map((rol) => (
-                        <option key={rol.id_tipo_trabajador} value={rol.id_tipo_trabajador}>{rol.descripcion}</option>
-                    ))}
-                </select>
-                <label>Tipo de pago del trabajador
+                <label htmlFor="id_rol_trabajador"> Tipo de trabajador
+                    <select id="id_rol_trabajador" {...register("id_rol_trabajador")} value={selectedRol} onChange={handleSelected} disabled={!activateEdit}>
+                        {roles.map((rol) => (
+                            <option key={rol.id_tipo_trabajador} value={rol.id_tipo_trabajador}>{rol.descripcion}</option>
+                        ))}
+                    </select>
+                </label>
+                <label htmlFor="tipo_pago">Tipo de pago del trabajador
                     <input id="tipo_pago" type="text" {...register("tipo_pago")} disabled={true} />
                 </label>
                 {activateEdit && (

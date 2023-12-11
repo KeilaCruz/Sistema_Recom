@@ -7,6 +7,7 @@ const rpcVisualizarOrderEntregada = "get_ordenes_realizadas";
 const rpcBuscarOrden = "buscar_orden_trabajo";
 const rpcVisualizarOrden = "get_orden";
 const rpcEditarOrden = "edit_orden_trabajo";
+
 export const registrarOrden = async (orden) => {
     try {
         const { error } = await supabase.rpc(rpcRegistrarOrden, {

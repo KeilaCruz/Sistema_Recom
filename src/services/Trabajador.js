@@ -6,6 +6,7 @@ const rpcDarBajaTrabajador = "delete_trabajador";
 const rpcVisualizarTrabajador = "get_trabajador";
 const rpcEditarTrabajador = "edit_trabajador";
 const rpcRolTrabajador = "get_rol_trabajador";
+
 export const registrarTrabajador = async (trabajador) => {
     try {
         const { error } = await supabase.rpc(rpcRegistrarTrabajador,

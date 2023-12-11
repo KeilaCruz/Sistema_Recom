@@ -63,36 +63,49 @@ export function VisualizarOrden() {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <label>Número de orden</label>
-        <input id="orden" type="number" {...register("orden_trabajo")} disabled={true} />
-        <label>Fecha solicitud</label>
-        <input id="fecha_solicitud" type="date" {...register("fecha_solicitud")} disabled={true} />
-        <label>Fecha entrega</label>
-        <input id="fecha_entrega" type="date" {...register("fecha_entrega")} disabled={!activateEdit} />
-        <label>Especificaciones del trabajo</label>
-        <textarea id="especificaciones" type="date" {...register("especificaciones")} disabled={!activateEdit}></textarea>
-        <label>Material requerido</label>
-        <textarea id="material_requerido" type="text" {...register("material_requerido")} disabled={!activateEdit}></textarea>
-        <label>Precio del material</label>
-        <input id="precio_material" type="number" step="any" {...register("precio_material")} disabled={!activateEdit} />
-        <label>Precio del trabajo</label>
-        <input id="precio_trabajo" type="number" step="any"  {...register("precio_trabajo")} disabled={!activateEdit} />
-        <label>Tipo de trabajo</label>
-        <select id="tipo_trabajo" {...register("tipo_trabajo")} disabled={!activateEdit}>
-          <option value="Nuevo">Nuevo</option>
-          <option value="Reparacion">Reparación</option>
-        </select>
-        <label>Nombre del cliente</label>
-        <input id="nom_cliente" type="text" {...register("nom_cliente")} disabled={true} />
-        <label>Apellido paterno</label>
-        <input id="ape_paterno" type="text" {...register("ape_paterno_c")} disabled={true} />
-        <label>Apellido materno</label>
-        <input id="ape_materno" type="text" {...register("ape_materno_c")} disabled={true} />
-        <label>Correo del cliente</label>
-        <input id="correo_cliente" type="text" {...register("correo_cliente")} disabled={true} />
-        <label>Telefono del cliente</label>
-        <input id="telefono_cliente" type="text"{...register("telefono_cliente")} disabled={true} />
-        <label>Trabajadores asignados</label>
+        <label htmlFor="orden">Número de orden
+          <input id="orden" type="number" {...register("orden_trabajo")} disabled={true} />
+        </label>
+        <label htmlFor="fecha_solicitud">Fecha solicitud
+          <input id="fecha_solicitud" type="date" {...register("fecha_solicitud")} disabled={true} />
+        </label>
+        <label htmlFor="fecha_entrega">Fecha entrega
+          <input id="fecha_entrega" type="date" {...register("fecha_entrega")} disabled={!activateEdit} />
+        </label>
+        <label htmlFor="expecificaciones">Especificaciones del trabajo
+          <textarea id="especificaciones" type="date" {...register("especificaciones")} disabled={!activateEdit}></textarea>
+        </label>
+        <label htmlFor="material_requerido">Material requerido
+          <textarea id="material_requerido" type="text" {...register("material_requerido")} disabled={!activateEdit}></textarea>
+        </label>
+        <label htmlFor="precio_material">Precio del material
+          <input id="precio_material" type="number" step="any" {...register("precio_material")} disabled={!activateEdit} />
+        </label>
+        <label htmlFor="precio_trabajo">Precio del trabajo
+          <input id="precio_trabajo" type="number" step="any"  {...register("precio_trabajo")} disabled={!activateEdit} />
+        </label>
+        <label htmlFor="tipo_trabajo">Tipo de trabajo
+          <select id="tipo_trabajo" {...register("tipo_trabajo")} disabled={!activateEdit}>
+            <option value="Nuevo">Nuevo</option>
+            <option value="Reparacion">Reparación</option>
+          </select>
+        </label>
+        <label htmlFor="nom_cliente">Nombre del cliente
+          <input id="nom_cliente" type="text" {...register("nom_cliente")} disabled={true} />
+        </label>
+        <label htmlFor="ape_paterno">Apellido paterno
+          <input id="ape_paterno" type="text" {...register("ape_paterno_c")} disabled={true} />
+        </label>
+        <label htmlFor="ape_materno">Apellido materno
+          <input id="ape_materno" type="text" {...register("ape_materno_c")} disabled={true} />
+        </label>
+        <label htmlFor="correo_cliente">Correo del cliente
+          <input id="correo_cliente" type="text" {...register("correo_cliente")} disabled={true} />
+        </label>
+        <label htmlFor="telefono_cliente">Telefono del cliente
+          <input id="telefono_cliente" type="text"{...register("telefono_cliente")} disabled={true} />
+        </label>
+        <label htmlFor="trabajador_asignado">Trabajadores asignados</label>
 
         {trabajadores.map((trabajador) => (
           <div key={trabajador.idtrabajador}>
