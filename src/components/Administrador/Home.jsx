@@ -3,7 +3,7 @@ import { cerrarSesion } from "../../services/Auth/Autenticación";
 import { useNavigate } from "react-router-dom";
 
 import Sidebar from "../partials/Sidebar";
-import Header from "../partials/headers/HeaderAdministrador";
+import Header from "../partials/headers/Header";
 
 function Home() {
   const navigate = useNavigate();

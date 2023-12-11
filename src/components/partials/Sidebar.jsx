@@ -9,11 +9,11 @@ function Sidebar() {
   const [rutaActiva, setRutaActiva] = useState("");
   const navigate = useNavigate();
   const onSubmit = async () => {
-    const { data, error } = await cerrarSesion();
-    if (data) {
-      navigate("/login");
-    } else {
+    const { error } = await cerrarSesion();
+    if (error) {
       alert("Error al salir");
+    } else {
+      navigate("/login");
     }
   };
 
@@ -40,28 +40,6 @@ function Sidebar() {
           </article>
 
           <ul className="mt-[50px] font-sans gap-[20px] flex flex-col text-white justify-center ">
-            {/*<Link
-              to="/"
-              className={`flex flex-row items-center gap-[10px] p-[10px]  rounded-[5px]   transition-colors duration-300 ${
-                rutaActiva === "/"
-                  ? "bg-white hover:bg-none"
-                  : "hover:bg-colorHover"
-              }`}
-            >
-              <img src={`${
-                  rutaActiva === "/"
-                    ? "/src/assets/icons/active/homeActive-icon.svg"
-                    : "/src/assets/icons/home-icon.svg"
-                }`}alt="" />
-              <p
-                className={`text-[18px] font-bold ${
-                  rutaActiva === "/" ? "text-colorMain" : "text-white"
-                }`}
-              >
-                Home
-              </p>
-            </Link> */}
-
             <OptionSidebar
               ruta={"/"}
               label={"Home"}

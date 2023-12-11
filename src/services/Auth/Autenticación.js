@@ -19,6 +19,11 @@ export const iniciarSesion = async (datos) => {
 
 export const cerrarSesion = async () => {
   const { error } = await supabase.auth.signOut();
+  if(error){
+    return true;
+  }else{
+    return false;
+  }
 };
 
 export const recuperarContraseña = async (email) => {

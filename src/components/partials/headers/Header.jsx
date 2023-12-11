@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Dropdown, Button } from "flowbite-react";
 
-function HeaderAdministrador({ placeholder }) {
+function Header({ placeholder}) {
   const location = useLocation();
   const [tituloHeader, setTituloHeader] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -16,7 +16,6 @@ function HeaderAdministrador({ placeholder }) {
   const abrirDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
-
   useEffect(() => {
     setTituloHeader(titulosRuta[location.pathname] || "Home");
   }, [location]);
@@ -99,4 +98,4 @@ function HeaderAdministrador({ placeholder }) {
   );
 }
 
-export default HeaderAdministrador;
+export default Header;
