@@ -18,3 +18,4 @@ Este pagina web tiene como objetivo brindar al gerente de la empresa RECOM poder
 5. npm install react-router-dom
 6. npm install react-hot-toast 
 7. npm install jspdf --save (librería para pdf)
+8. npm install date-fns-tz (libería para dar formato a la fecha)

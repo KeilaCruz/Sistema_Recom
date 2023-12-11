@@ -5,6 +5,8 @@ import { registrarOrden } from "../../services/OrdenTrabajo";
 import { getTrabajadores } from "../../services/Trabajador";
 import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
+import format from "date-fns/format";
+import es from "date-fns/esm/locale/es/index.js";
 
 export function RegistrarOrden() {
     const [trabajadores, setTrabajadores] = useState([]);
@@ -85,7 +87,8 @@ export function RegistrarOrden() {
 
     const generarPDF = async (data)=> {
         const fecha = new Date()
-
+        const fechaFormateada = format(fecha, "cccc d 'de' MMMM 'del' yyyy",{locale: es})
+        
         const documento = new jsPDF()
         documento.setFont("Arial", "normal")
         documento.setFontSize(20)        
@@ -93,7 +96,7 @@ export function RegistrarOrden() {
         documento.setFontSize(12)
         documento.text('AV. Uno 305 Col.Tierra y Libertad \tRFC: BARC820218UU7 \tCURP: BARC820218MVZRTL03', 15 , 20)
         documento.text('TEL. 9212066688 \tCorreo: Claus2118.cb@gmail.com \tCP.96580', 20, 30)
-        documento.text(`Coatzacoalcos, Ver., a ${fecha}`,60,40)
+        documento.text(`Coatzacoalcos, Ver., a ${fechaFormateada}`,60,40)
         documento.text(`${data.nombre} ${data.ape_paterno} ${data.ape_materno}`, 60,50)
         documento.text(`Especificaciones del trabajo: ${data.especificaciones}`, 20, 60)        
         documento.text(`Tipo de trabajo: ${data.tipotrabajo}`, 20, 70)
