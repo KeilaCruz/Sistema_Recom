@@ -11,6 +11,7 @@ const rpcEditarOrden = "edit_orden_trabajo";
 export const registrarOrden = async (orden) => {
     try {
         const { error } = await supabase.rpc(rpcRegistrarOrden, {
+            idcliente_b: orden.idCliente,
             name: orden.nombre,
             apepaterno: orden.ape_paterno,
             apematerno: orden.ape_materno,

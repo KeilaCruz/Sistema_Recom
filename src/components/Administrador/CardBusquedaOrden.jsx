@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
-export function CardBusqueda({ orden }) {
+export function CardBusquedaOrden({ orden }) {
     const navigate = useNavigate()
     const handleNavegar = async (idOrden) => {
         navigate(`/visualizar-orden/${idOrden}`)
