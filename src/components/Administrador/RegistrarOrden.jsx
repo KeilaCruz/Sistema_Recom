@@ -3,6 +3,8 @@ import { toast } from 'react-hot-toast'
 import Sidebar from "../partials/Sidebar";
 import { registrarOrden } from "../../services/OrdenTrabajo";
 import { getTrabajadores } from "../../services/Trabajador";
+import { buscarCliente } from "../../services/Clientes";
+import { CardBusquedaCliente } from "./CardBusquedaCliente";
 import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import format from "date-fns/format";
@@ -11,7 +13,18 @@ import es from "date-fns/esm/locale/es/index.js";
 export function RegistrarOrden() {
     const [trabajadores, setTrabajadores] = useState([]);
     const [trabajadoresSeleccionados, setTrabajadoresSeleccionados] = useState([])
+    const [resultBusqueda, setResultBusqueda] = useState([])
+    const [idCliente, setIdCliente] = useState(null);
+    const [criterioBusqueda, setCriterioBusqueda] = useState("");
+    const [nombreCliente, setNombreCliente] = useState(null);
+    const [apePaterCliente, setApePaterCliente] = useState(null);
+    const [apeMaterCliente, setApeMaterCliente] = useState(null);
+    const [existeCliente, setExisteCliente] = useState(false);
+    const [idClienteResult, setIdClienteResult] = useState(null);
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm();
+
+    let numberReg = /^\d+$/;
+    let nombre = /^\D+$/;
 
     const getFechaSolicitud = () => {
         const fecha = new Date()
@@ -70,14 +83,48 @@ export function RegistrarOrden() {
     }
 
     useEffect(() => {
-        getFechaSolicitud()        
+        getFechaSolicitud()
         async function loadTrabajadores() {
             const res = await getTrabajadores()
             setTrabajadores(res)
         }
         loadTrabajadores()
     }, [])
-
+    useEffect(() => {
+        const handleBusqueda = async () => {
+            resetBusqueda();
+            const isNumber = numberReg.test(criterioBusqueda);
+            const isNombre = nombre.test(criterioBusqueda);
+            if (isNumber) {
+                const id_cliente = parseInt(criterioBusqueda);
+                setIdCliente(id_cliente);
+                setNombreCliente(null);
+                setApePaterCliente(null);
+                setApeMaterCliente(null);
+            } else if (isNombre) {
+                const nombres = criterioBusqueda.split(" ");
+                setIdCliente(null);
+                setNombreCliente(nombres[0]);
+                setApePaterCliente(nombres[1]);
+                setApeMaterCliente(nombres[2]);
+            } else {
+                //mostrar toast que no es un criterio válido
+                console.log("No es un criterio de búsqueda");
+                return;
+            }
+        }
+        handleBusqueda();
+    }, [criterioBusqueda])
+    const handleBuscar = async () => {
+        let resultado = await buscarCliente(idCliente, nombreCliente, apePaterCliente, apeMaterCliente);
+        setResultBusqueda(resultado);
+        if (resultado.length > 0) {
+            setExisteCliente(true)
+            setIdClienteResult(resultado[0].id_cliente);
+        } else {
+            setExisteCliente(false)
+        }
+    }
     const handleCheckboxChange = (trabajadorId) => {
         setTrabajadoresSeleccionados(prev => (
             prev.includes(trabajadorId)
@@ -85,20 +132,20 @@ export function RegistrarOrden() {
         ));
     }
 
-    const generarPDF = async (data)=> {
+    const generarPDF = async (data) => {
         const fecha = new Date()
-        const fechaFormateada = format(fecha, "cccc d 'de' MMMM 'del' yyyy",{locale: es})
-        
+        const fechaFormateada = format(fecha, "cccc d 'de' MMMM 'del' yyyy", { locale: es })
+
         const documento = new jsPDF()
         documento.setFont("Arial", "normal")
-        documento.setFontSize(20)        
-        documento.text('Torno-Soldadura y Servicios En General RECOM \t', 40,10)
+        documento.setFontSize(20)
+        documento.text('Torno-Soldadura y Servicios En General RECOM \t', 40, 10)
         documento.setFontSize(12)
-        documento.text('AV. Uno 305 Col.Tierra y Libertad \tRFC: BARC820218UU7 \tCURP: BARC820218MVZRTL03', 15 , 20)
+        documento.text('AV. Uno 305 Col.Tierra y Libertad \tRFC: BARC820218UU7 \tCURP: BARC820218MVZRTL03', 15, 20)
         documento.text('TEL. 9212066688 \tCorreo: Claus2118.cb@gmail.com \tCP.96580', 20, 30)
-        documento.text(`Coatzacoalcos, Ver., a ${fechaFormateada}`,60,40)
-        documento.text(`${data.nombre} ${data.ape_paterno} ${data.ape_materno}`, 60,50)
-        documento.text(`Especificaciones del trabajo: ${data.especificaciones}`, 20, 60)        
+        documento.text(`Coatzacoalcos, Ver., a ${fechaFormateada}`, 60, 40)
+        documento.text(`${data.nombre} ${data.ape_paterno} ${data.ape_materno}`, 60, 50)
+        documento.text(`Especificaciones del trabajo: ${data.especificaciones}`, 20, 60)
         documento.text(`Tipo de trabajo: ${data.tipotrabajo}`, 20, 70)
         documento.text(`Material: ${data.materialtrabajo}`, 20, 80)
         documento.text(`Precio del material: ${data.preciomaterial}`, 20, 90)
@@ -108,12 +155,19 @@ export function RegistrarOrden() {
         documento.save('Orden_Trabajo_1.pdf')//De momento
     }
 
+    const resetBusqueda = () => {
+        setResultBusqueda([]);
+        setExisteCliente(false);
+        setIdClienteResult(null);
+    }
+
     const onSubmit = handleSubmit(async (data) => {
         data.precio = parseFloat(data.precio)
         data.estado = true;
         data.preciomaterial = parseFloat(data.preciomaterial);
         data.trabajadores = trabajadoresSeleccionados;
 
+        data.idCliente = idClienteResult;
         const fechaEntregaValida = validarFechaEntrega(data.fecha_entrega)
         const precioValido = validarPrecio(data.precio)
         const especificacionValida = validarEspecificaciones(data.especificaciones)
@@ -155,6 +209,12 @@ export function RegistrarOrden() {
             <div className="fixed">
                 <Sidebar />
             </div>
+
+            <input id="barra_busqueda" placeholder="Núm cliente: 1, Nombre completo cliente: Keila Ruiz Miran" onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
+            <button onClick={handleBuscar}>Buscar</button>
+            {resultBusqueda.map(cliente => (
+                <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
+            ))}
 
             <form className="flex flex-col gap-5 font-sans"
                 onSubmit={onSubmit}>
@@ -209,40 +269,34 @@ export function RegistrarOrden() {
                     {errors.especificaciones && <span>Este campo es necesario</span>}
                 </div>
 
-                <div className="flex ml-80 mt-5">
-                    <label className="etiqueta"> Nombre </label>
-                    <input id="nom_cliente" type="text"
-                        className="inputs"
-                        placeholder="Ej. Eduardo" {...register("nombre", { required: true })} />
-                    {errors.nombre && <span>Este campo es necesario</span>}
+                {!existeCliente && (
+                    <div className="flex ml-80 mt-5">
+                        <label className="etiqueta"> Nombre </label>
+                        <input id="nom_cliente" type="text"
+                            className="inputs"
+                            placeholder="Ej. Eduardo" {...register("nombre", { required: true })} />
 
-                    <label className="etiqueta"> Apellido paterno </label>
-                    <input id="ape_paterno" type="text"
-                        className="inputs"
-                        placeholder="Ej. Pérez" {...register("ape_paterno", { required: true })} />
-                    {errors.ape_paterno && <span>Este campo es necesario</span>}
+                        <label className="etiqueta"> Apellido paterno </label>
+                        <input id="ape_paterno" type="text"
+                            className="inputs"
+                            placeholder="Ej. Pérez" {...register("ape_paterno", { required: true })} />
 
-                    <label className="etiqueta"> Apellido materno </label>
-                    <input id="ape_materno" type="text"
-                        className="inputs"
-                        placeholder="Ej. Ruiz" {...register("ape_materno", { required: true })} />
-                    {errors.ape_materno && <span>Este campo es necesario</span>}
-                </div>
+                        <label className="etiqueta"> Apellido materno </label>
+                        <input id="ape_materno" type="text"
+                            className="inputs"
+                            placeholder="Ej. Ruiz" {...register("ape_materno", { required: true })} />
 
-                <div className="flex ml-80 mt-5">
-                    <label className="etiqueta"> Correo </label>
-                    <input id="correo" type="email"
-                        className="inputs"
-                        placeholder="Ej. edu12@" {...register("correo", { required: true })} />
-                    {errors.correo && <span>Este campo es necesario</span>}
+                        <label className="etiqueta"> Correo </label>
+                        <input id="correo" type="email"
+                            className="inputs"
+                            placeholder="Ej. edu12@" {...register("correo", { required: true })} />
 
-                    <label className="etiqueta"> Teléfono </label>
-                    <input id="telefono" type="text"
-                        className="inputs"
-                        placeholder="Ej. 9212834738" {...register("telefono", { required: true })} />
-                    {errors.telefono && <span>Este campo es necesario</span>}
-
-                </div>
+                        <label className="etiqueta"> Teléfono </label>
+                        <input id="telefono" type="text"
+                            className="inputs"
+                            placeholder="Ej. 9212834738" {...register("telefono", { required: true })} />
+                    </div>
+                )}
 
                 <div className="ml-80 mt-5">
                     <label className="etiqueta"> Seleccione el trabajador </label>
@@ -257,12 +311,12 @@ export function RegistrarOrden() {
                 </div>
 
 
-                <button 
-                className="bg-[#3B315F] p-[10px] w-[150px] ml-80 mt-0
+                <button
+                    className="bg-[#3B315F] p-[10px] w-[150px] ml-80 mt-0
                  text-white text-[20px] font-sans font-medium rounded 
                  hover:bg-[#4D407E]">
                     Registrar
-                    </button>
+                </button>
             </form>
         </>
     )
