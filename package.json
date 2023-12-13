@@ -10,15 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.10",
+    "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/list": "^6.1.10",
+    "@fullcalendar/react": "^6.1.10",
+    "@fullcalendar/timegrid": "^6.1.10",
     "@supabase/supabase-js": "^2.38.5",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
+    "fullcalendar": "^6.1.10",
     "jspdf": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
     "react-hot-toast": "^2.4.1",
-    "react-router-dom": "^6.20.0"
+    "react-router-dom": "^6.20.0",
+    "supabase": "^1.123.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
