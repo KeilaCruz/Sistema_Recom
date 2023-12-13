@@ -2,8 +2,10 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"
 import esLocale from "@fullcalendar/core/locales/es"
 import React, { useEffect, useState } from "react";
+import { parseISO } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 
-import { getOrdenActivas } from "../../services/OrdenTrabajo";
+import { visualizarCalendario } from "../../services/OrdenTrabajo";
 
 function Calendario() {
 
@@ -12,12 +14,17 @@ function Calendario() {
     useEffect(() => {
         const fetchEventos = async () => {
             try {
-                const data = await getOrdenActivas();
-                const eventos = data.map((evento) => ({
-                    title: evento.ordentrabajo,
-                    //description: evento.especificacionestrabajo,
-                    start: new Date(evento.fechaentrega),                    
-                }));
+                const data = await visualizarCalendario();
+                const eventos = data.map((evento) => {
+                    const fechaEntrega = parseISO(evento.fechaentrega); // Parsea la fecha en formato ISO
+                    const fechaEntregaZonificada = utcToZonedTime(fechaEntrega, 'America/Mexico_City'); // Ajusta a la zona horaria de México
+
+                    return {
+                        title: evento.especificacion,
+                        description: evento.idorden,
+                        start: new Date(fechaEntregaZonificada),
+                    }
+                });
                 setEventos(eventos);
                 console.log(eventos)
             } catch (error) {
