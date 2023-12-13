@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useParams } from "react-router-dom"
-import { editarOrden, visualizarOrden } from "../../services/OrdenTrabajo"
+import { editarOrden, marcarEstadoOrden, visualizarOrden } from "../../services/OrdenTrabajo"
 import { getTrabajadores } from "../../services/Trabajador"
 
 export function VisualizarOrden() {
   let { id } = useParams()
   const { setValue, register, handleSubmit } = useForm()
-  //const [orden, setOrden] = useState([]);
   const [trabajadores, setTrabajadores] = useState([]);
+  const [orden, setOrden] = useState([]);
   const [trabajadoresSeleccionados, setTrabajadoresSeleccionados] = useState([])
   const [activateEdit, setActivateEdit] = useState(false)
 
@@ -23,8 +23,8 @@ export function VisualizarOrden() {
   useEffect(() => {
     async function loadOrden() {
       const res = await visualizarOrden(id);
-      //setOrden(res[0])
       const orden = res[0];
+      setOrden(orden);
       setValue("orden_trabajo", orden.ordentrabajo)
       setValue("fecha_solicitud", orden.fechasolicitud)
       setValue("fecha_entrega", orden.fechaentrega)
@@ -60,6 +60,13 @@ export function VisualizarOrden() {
     console.log(data)
     editarOrden(data)
   })
+  const handleEstadoChange = async () => {
+    await marcarEstadoOrden(id);
+
+    setOrden((prevOrden) => ({
+      ...prevOrden, estadot: !prevOrden.estadot,
+    }))
+  }
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -129,6 +136,14 @@ export function VisualizarOrden() {
         )}
       </form>
       <button onClick={handleActivateEdit}>Editar</button>
+      {/*Mostrar mensaje de estado de orden */}
+      {orden.estadot ? (
+        <td>Pendiente</td>
+      ) : (
+        <td>Entregado</td>
+      )}
+      {/*Marcar estado de orden */}
+      <input id="marcar_estado" type="checkbox" checked={!orden.estadot} onChange={handleEstadoChange}/>Trabajo entregado
     </>
   )
 }
