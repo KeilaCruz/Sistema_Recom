@@ -7,7 +7,7 @@ const rpcVisualizarOrderEntregada = "get_ordenes_realizadas";
 const rpcBuscarOrden = "buscar_orden_trabajo";
 const rpcVisualizarOrden = "get_orden";
 const rpcEditarOrden = "edit_orden_trabajo";
-
+const rpcVisualizarCalendario = "get_calendar_ordenes";
 export const registrarOrden = async (orden) => {
     try {
         const { error } = await supabase.rpc(rpcRegistrarOrden, {
@@ -106,5 +106,15 @@ export const editarOrden = async (orden) => {
         if (error) throw error;
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const visualizarCalendario = async () => {
+    try {
+        const { error, data } = await supabase.rpc(rpcVisualizarCalendario);
+        if (error) throw error
+        return data;
+    } catch (error) {
+        console.log(error);
     }
 }
