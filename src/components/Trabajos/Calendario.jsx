@@ -5,11 +5,22 @@ import React, { useEffect, useState } from "react";
 import { parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
-import { visualizarCalendario } from "../../services/OrdenTrabajo";
+import { visualizarCalendario,visualizarOrden } from "../../services/OrdenTrabajo";
+import { ModalCalendario } from "../Modales/ModalCalendario";
 
 function Calendario() {
 
     const [eventos, setEventos] = useState([]);
+    const [showModal, setShowModal] = useState(false)
+
+    const handleModal = () => {
+        setShowModal(true)        
+    }
+
+    const handleCloseModal = () => {
+        setShowModal(false);        
+    }
+
 
     useEffect(() => {
         const fetchEventos = async () => {
@@ -47,12 +58,18 @@ function Calendario() {
                     <div>
                         <b>{info.event.title}</b>
                         <p>{info.event.description}</p>
-
-
                     </div>
                 )}
+                eventClick={() => handleModal()}
             />
+            {showModal && (
+                <div>
+                    <ModalCalendario onClose={handleCloseModal} orden={eventos}></ModalCalendario>
+                </div>
+            )
+            }
         </div>
+
     )
 
 }
