@@ -7,12 +7,19 @@ import { utcToZonedTime } from 'date-fns-tz';
 
 import { visualizarCalendario } from "../../services/OrdenTrabajo";
 import { ModalCalendario } from "../Modales/ModalCalendario";
+import { useNavigate } from "react-router-dom";
 
 function Calendario() {
 
     const [eventos, setEventos] = useState([]);
     const [infoEvento, setInfoEvento] = useState(null)
     const [showModal, setShowModal] = useState(false)
+    const navigate = useNavigate()
+
+    const handleRedireccion = () => {
+        const idOrden = infoEvento.idorden
+        navigate(`visualizar-orden/${idOrden}`)
+    }
 
     const handleModal = (info) => {
         setShowModal(true)
@@ -34,7 +41,7 @@ function Calendario() {
                 return {
                     title: evento.especificacion,
                     description: evento.idorden,
-                    extendedProps: evento,                   
+                    extendedProps: evento,
                     start: new Date(fechaEntregaZonificada),
                 }
             });
@@ -44,7 +51,7 @@ function Calendario() {
             console.error("Error al obtener eventos:", error);
         }
     }
-    
+
     useEffect(() => {
         fetchEventos();
     }, [])
@@ -70,7 +77,7 @@ function Calendario() {
             />
             {showModal && (
                 <div>
-                    <ModalCalendario onClose={handleCloseModal} orden={infoEvento}></ModalCalendario>
+                    <ModalCalendario onClose={handleCloseModal} orden={infoEvento} verOrden={handleRedireccion}></ModalCalendario>
                 </div>
             )
             }

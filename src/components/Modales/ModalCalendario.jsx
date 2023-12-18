@@ -1,6 +1,7 @@
 import React from "react";
-export function ModalCalendario({ onClose, orden }) {
 
+export function ModalCalendario({ onClose, orden, verOrden }) {    
+    
     return (
         <div className="fixed inset-0 flex justify-center items-center z-50">
             <div className="flex flex-col justify-center items-center bg-[#3B315F] p-5 rounded ">
@@ -12,7 +13,7 @@ export function ModalCalendario({ onClose, orden }) {
 
                 </div>
 
-                <button onClick={onClose} className="text-[#3B315F] text-[18px] mt-4 px-4 bg-white py-2 rounded">
+                <button onClick={verOrden} className="text-[#3B315F] text-[18px] mt-4 px-4 bg-white py-2 rounded">
                     Ver completo
                 </button>
 
