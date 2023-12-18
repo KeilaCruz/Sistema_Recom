@@ -5,14 +5,17 @@ import HomeAdministrador from "../Views/V_HomeAdministrador.jsx";
 import RecuperarContraseña from "../Views/V_RecuperarContraseña";
 import NuevaContraseña from "../components/Auth/NuevaContraseña.jsx";
 import NotFound from "../Views/NotFound";
+import Clientes from "../Views/V_Clientes.jsx";
+import HomeTrabajos from "../Views/V_HomeTrabajos.jsx";
+
+//Hacer views
 import { RegistrarOrden } from "../components/Administrador/RegistrarOrden";
 import { RegistrarTrabajador } from "../components/Administrador/RegistrarTrabajador.jsx"
 import { VisualizarOrdenes } from "../components/Administrador/VisualizarOrdenes";
-import { Toaster } from "react-hot-toast";
 import { VisualizarTrabajadores } from "../components/Administrador/VisualizarTrabajadores";
 import { VisualizarTrabajador } from "../components/Administrador/VisualizarTrabajador";
-import Clientes from "../Views/V_Clientes.jsx";
-import HomeTrabajos from "../Views/V_HomeTrabajos.jsx";
+import { VisualizarOrden } from "../components/Administrador/VisualizarOrden";
+
 
 
 
@@ -37,6 +40,7 @@ function Rutas() {
 
       <Route path="/registrar-trabajador" element={<RegistrarTrabajador />} />
       <Route path="/visualizar-ordenes" element={<VisualizarOrdenes />} />
+      <Route path="/visualizar-orden/:id" element={<VisualizarOrden />} />
       <Route
         path="/visualizar-trabajadores"
         element={<VisualizarTrabajadores />}

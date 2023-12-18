@@ -18,7 +18,7 @@ function Calendario() {
 
     const handleRedireccion = () => {
         const idOrden = infoEvento.idorden
-        navigate(`visualizar-orden/${idOrden}`)
+        navigate(`/visualizar-orden/${idOrden}`)
     }
 
     const handleModal = (info) => {
