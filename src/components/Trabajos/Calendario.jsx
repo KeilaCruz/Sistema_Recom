@@ -5,16 +5,18 @@ import React, { useEffect, useState } from "react";
 import { parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
-import { visualizarCalendario, visualizarOrden } from "../../services/OrdenTrabajo";
+import { visualizarCalendario } from "../../services/OrdenTrabajo";
 import { ModalCalendario } from "../Modales/ModalCalendario";
 
 function Calendario() {
 
     const [eventos, setEventos] = useState([]);
+    const [infoEvento, setInfoEvento] = useState(null)
     const [showModal, setShowModal] = useState(false)
 
-    const handleModal = () => {
+    const handleModal = (info) => {
         setShowModal(true)
+        setInfoEvento(info.event.extendedProps)
     }
 
     const handleCloseModal = () => {
@@ -32,6 +34,7 @@ function Calendario() {
                 return {
                     title: evento.especificacion,
                     description: evento.idorden,
+                    extendedProps: evento,                   
                     start: new Date(fechaEntregaZonificada),
                 }
             });
@@ -45,6 +48,8 @@ function Calendario() {
     useEffect(() => {
         fetchEventos();
     }, [])
+
+    console.log(infoEvento)
 
     return (
         <div className="flex-col p-4 ml-80">
@@ -61,11 +66,11 @@ function Calendario() {
                         <p>{info.event.description}</p>
                     </div>
                 )}
-                eventClick={() => handleModal()}
+                eventClick={(info) => handleModal(info)}
             />
             {showModal && (
                 <div>
-                    <ModalCalendario onClose={handleCloseModal} orden={eventos}></ModalCalendario>
+                    <ModalCalendario onClose={handleCloseModal} orden={infoEvento}></ModalCalendario>
                 </div>
             )
             }
