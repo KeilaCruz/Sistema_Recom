@@ -73,9 +73,16 @@ const TablaDatos = ({ data }) => {
       <section className="flex flex-row justify-between items-center font-sans bg-white p- ">
         <section>
           <p className="mt-2 ">
-            Mostrando <span className="font-medium">{(pestañaActual - 1) * itemsPagina + 1}</span> a{" "}
-            <span className="font-medium">{Math.min(pestañaActual * itemsPagina, data.length)}</span> resultados de{" "}
-            <span className="font-medium">{data.length}</span> clientes
+            Mostrando{" "}
+            <span className="font-medium">
+              {(pestañaActual - 1) * itemsPagina + 1}
+            </span>{" "}
+            a{" "}
+            <span className="font-medium">
+              {Math.min(pestañaActual * itemsPagina, data.length)}
+            </span>{" "}
+            resultados de <span className="font-medium">{data.length}</span>{" "}
+            clientes
           </p>
         </section>
         <section>

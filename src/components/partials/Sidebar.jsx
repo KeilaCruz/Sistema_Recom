@@ -74,14 +74,6 @@ function Sidebar() {
               descripcionImagen={"icono de opcion trabajo"}
               rutaActiva={rutaActiva}
             />
-            <OptionSidebar
-              ruta={"/salarios"}
-              label={"Salarios"}
-              iconBase={"/src/assets/icons/salarios-icon.svg"}
-              iconChange={"/src/assets/icons/active/salariosActive-icon.svg"}
-              descripcionImagen={"icono de opcion salarios"}
-              rutaActiva={rutaActiva}
-            />
           </ul>
         </section>
 

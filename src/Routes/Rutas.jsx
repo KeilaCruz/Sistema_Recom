@@ -11,7 +11,10 @@ import { VisualizarOrdenes } from "../components/Administrador/VisualizarOrdenes
 import { Toaster } from "react-hot-toast";
 import { VisualizarTrabajadores } from "../components/Administrador/VisualizarTrabajadores";
 import { VisualizarTrabajador } from "../components/Administrador/VisualizarTrabajador";
+
+
 import Clientes from "../Views/V_Clientes.jsx";
+import AddCliente from '../Views/V_NuevoCliente.jsx'
 
 
 
@@ -41,6 +44,7 @@ function Rutas() {
         element={<VisualizarTrabajador />}
       />
     
+      <Route path="/nuevo-cliente" element={<AddCliente/>}/>
   
     </Routes>
     
