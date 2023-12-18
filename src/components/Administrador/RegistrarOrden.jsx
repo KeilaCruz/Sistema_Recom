@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import format from "date-fns/format";
 import es from "date-fns/esm/locale/es/index.js";
+import { useNavigate } from "react-router-dom";
 
 export function RegistrarOrden() {
     const [trabajadores, setTrabajadores] = useState([]);
@@ -22,6 +23,8 @@ export function RegistrarOrden() {
     const [existeCliente, setExisteCliente] = useState(false);
     const [idClienteResult, setIdClienteResult] = useState(null);
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm();
+    
+    const navigate = useNavigate()
 
     let numberReg = /^\d+$/;
     let nombre = /^\D+$/;
@@ -197,7 +200,9 @@ export function RegistrarOrden() {
             try {
                 registrarOrden(data);
                 toast.success("Se ha registrado con éxito")
+                navigate("/trabajos")
                 generarPDF(data)
+
             } catch (e) {
                 console.error("Error al registrar orden" + e)
             }
