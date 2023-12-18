@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
-import { visualizarCalendario,visualizarOrden } from "../../services/OrdenTrabajo";
+import { visualizarCalendario, visualizarOrden } from "../../services/OrdenTrabajo";
 import { ModalCalendario } from "../Modales/ModalCalendario";
 
 function Calendario() {
@@ -14,34 +14,35 @@ function Calendario() {
     const [showModal, setShowModal] = useState(false)
 
     const handleModal = () => {
-        setShowModal(true)        
+        setShowModal(true)
     }
 
     const handleCloseModal = () => {
-        setShowModal(false);        
+        setShowModal(false);
     }
 
 
-    useEffect(() => {
-        const fetchEventos = async () => {
-            try {
-                const data = await visualizarCalendario();
-                const eventos = data.map((evento) => {
-                    const fechaEntrega = parseISO(evento.fechaentrega); // Parsea la fecha en formato ISO
-                    const fechaEntregaZonificada = utcToZonedTime(fechaEntrega, 'America/Mexico_City'); // Ajusta a la zona horaria de México
+    const fetchEventos = async () => {
+        try {
+            const data = await visualizarCalendario();
+            const eventos = data.map((evento) => {
+                const fechaEntrega = parseISO(evento.fechaentrega); // Parsea la fecha en formato ISO
+                const fechaEntregaZonificada = utcToZonedTime(fechaEntrega, 'America/Mexico_City'); // Ajusta a la zona horaria de México
 
-                    return {
-                        title: evento.especificacion,
-                        description: evento.idorden,
-                        start: new Date(fechaEntregaZonificada),
-                    }
-                });
-                setEventos(eventos);
-                console.log(eventos)
-            } catch (error) {
-                console.error("Error al obtener eventos:", error);
-            }
+                return {
+                    title: evento.especificacion,
+                    description: evento.idorden,
+                    start: new Date(fechaEntregaZonificada),
+                }
+            });
+            setEventos(eventos);
+            console.log(eventos)
+        } catch (error) {
+            console.error("Error al obtener eventos:", error);
         }
+    }
+    
+    useEffect(() => {
         fetchEventos();
     }, [])
 
