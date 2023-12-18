@@ -9,7 +9,7 @@ import Clientes from "../Views/V_Clientes.jsx";
 import HomeTrabajos from "../Views/V_HomeTrabajos.jsx";
 
 //Hacer views
-import { RegistrarOrden } from "../components/Administrador/RegistrarOrden";
+import V_RegistrarOrden from "../Views/V_RegistrarOrden";
 import { RegistrarTrabajador } from "../components/Administrador/RegistrarTrabajador.jsx"
 import { VisualizarOrdenes } from "../components/Administrador/VisualizarOrdenes";
 import { VisualizarTrabajadores } from "../components/Administrador/VisualizarTrabajadores";
@@ -34,7 +34,7 @@ function Rutas() {
       <Route path="/nueva-contraseña" element={<NuevaContraseña />}></Route>
       <Route path="/clientes" element={<Clientes />}></Route>
       <Route path="/trabajos" element={<HomeTrabajos />}></Route>
-      <Route path="/registrar-orden-trabajo" element={<RegistrarOrden />}></Route>
+      <Route path="/registrar-orden-trabajo" element={<V_RegistrarOrden />}></Route>
       {/*<Route path="/trabajos" element={<EventosProvider> <HomeTrabajos /></EventosProvider>}></Route>
       <Route path="/registrar-orden-trabajo" element={<EventosProvider><RegistrarOrden/></EventosProvider>} />*/}
 
