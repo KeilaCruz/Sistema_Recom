@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.etiqueta {
+    @apply text-[18px] font-semibold ml-10;
+}
+.inputs {
+    @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] h-[36px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F] ml-4
+}
+.inputs_precio{
+    @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[100px] h-[36px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F] ml-4    
+}
+.selects {
+    @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[100px] h-[36px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F] ml-4    
+}
+.etiqueta_checkbox{
+    @apply text-[16px] ml-10;
+}
+.area_texto{
+    @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] h-[100px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F] ml-4    
+}

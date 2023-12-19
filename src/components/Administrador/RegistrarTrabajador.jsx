@@ -37,19 +37,19 @@ export function RegistrarTrabajador() {
     return (
         <>
             <form onSubmit={onSubmit}>
-                <label>Nombre
+                <label htmlFor="nombre">Nombre
                     <input id="nombre" type="text" {...register("nombre", { required: true })} />
                     {errors.nombre && <span>Este campo es necesario</span>}
                 </label>
-                <label>Apellido paterno
+                <label htmlFor="apePaterno">Apellido paterno
                     <input id="apePaterno" type="text" {...register("apepaterno", { required: true })} />
                     {errors.apepaterno && <span>Este campo es necesario</span>}
                 </label>
-                <label>Apellido materno
+                <label htmlFor="apeMaterno">Apellido materno
                     <input id="apeMaterno" type="text" {...register("apematerno", { required: true })} />
                     {errors.apematerno && <span>Este campo es necesario</span>}
                 </label>
-                <label>Tipo de trabajador
+                <label htmlFor="tipoTrabajador">Tipo de trabajador
                     <select id="tipoTrabajador" {...register("tipo_trabajador", { required: true })}>
                         <option value="" disabled>Elija una opción</option>
                         <option value={1}>Tornero</option>
