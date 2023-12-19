@@ -239,8 +239,6 @@ export function RegistrarOrden() {
                 onSubmit={onSubmit}>
 
                 <div className="flex-col ml-80 mt-5">
-
-
                     <div className="mt-5">
                         <label className="etiqueta mt-5"> Fecha solicitud </label>
                         <input id="fecha_solicitud" type="date"
