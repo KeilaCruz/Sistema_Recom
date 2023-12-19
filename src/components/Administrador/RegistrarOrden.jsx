@@ -23,7 +23,7 @@ export function RegistrarOrden() {
     const [existeCliente, setExisteCliente] = useState(false);
     const [idClienteResult, setIdClienteResult] = useState(null);
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm();
-    
+
     const navigate = useNavigate()
 
     let numberReg = /^\d+$/;
@@ -85,39 +85,34 @@ export function RegistrarOrden() {
         return telefonoRegex.test(telefono)
     }
 
-    useEffect(() => {
-        getFechaSolicitud()
-        async function loadTrabajadores() {
-            const res = await getTrabajadores()
-            setTrabajadores(res)
+    const loadTrabajadores = async () => {
+        const res = await getTrabajadores()
+        setTrabajadores(res)
+    }
+
+    const handleBusqueda = async () => {
+        resetBusqueda();
+        const isNumber = numberReg.test(criterioBusqueda);
+        const isNombre = nombre.test(criterioBusqueda);
+        if (isNumber) {
+            const id_cliente = parseInt(criterioBusqueda);
+            setIdCliente(id_cliente);
+            setNombreCliente(null);
+            setApePaterCliente(null);
+            setApeMaterCliente(null);
+        } else if (isNombre) {
+            const nombres = criterioBusqueda.split(" ");
+            setIdCliente(null);
+            setNombreCliente(nombres[0]);
+            setApePaterCliente(nombres[1]);
+            setApeMaterCliente(nombres[2]);
+        } else {
+            //mostrar toast que no es un criterio válido
+            console.log("No es un criterio de búsqueda");
+            return;
         }
-        loadTrabajadores()
-    }, [])
-    useEffect(() => {
-        const handleBusqueda = async () => {
-            resetBusqueda();
-            const isNumber = numberReg.test(criterioBusqueda);
-            const isNombre = nombre.test(criterioBusqueda);
-            if (isNumber) {
-                const id_cliente = parseInt(criterioBusqueda);
-                setIdCliente(id_cliente);
-                setNombreCliente(null);
-                setApePaterCliente(null);
-                setApeMaterCliente(null);
-            } else if (isNombre) {
-                const nombres = criterioBusqueda.split(" ");
-                setIdCliente(null);
-                setNombreCliente(nombres[0]);
-                setApePaterCliente(nombres[1]);
-                setApeMaterCliente(nombres[2]);
-            } else {
-                //mostrar toast que no es un criterio válido
-                console.log("No es un criterio de búsqueda");
-                return;
-            }
-        }
-        handleBusqueda();
-    }, [criterioBusqueda])
+    }
+
     const handleBuscar = async () => {
         let resultado = await buscarCliente(idCliente, nombreCliente, apePaterCliente, apeMaterCliente);
         setResultBusqueda(resultado);
@@ -133,6 +128,12 @@ export function RegistrarOrden() {
             prev.includes(trabajadorId)
                 ? prev.filter(id => id !== trabajadorId) : [...prev, trabajadorId]
         ));
+    }
+
+    const resetBusqueda = () => {
+        setResultBusqueda([]);
+        setExisteCliente(false);
+        setIdClienteResult(null);
     }
 
     const generarPDF = async (data) => {
@@ -158,11 +159,14 @@ export function RegistrarOrden() {
         documento.save('Orden_Trabajo_1.pdf')//De momento
     }
 
-    const resetBusqueda = () => {
-        setResultBusqueda([]);
-        setExisteCliente(false);
-        setIdClienteResult(null);
-    }
+    useEffect(() => {
+        getFechaSolicitud()
+        loadTrabajadores()
+    }, [])
+
+    useEffect(() => {
+        handleBusqueda();
+    }, [criterioBusqueda])
 
     const onSubmit = handleSubmit(async (data) => {
         data.precio = parseFloat(data.precio)
