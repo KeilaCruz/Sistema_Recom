@@ -125,8 +125,7 @@ export function RegistrarOrden() {
     }
     const handleCheckboxChange = (trabajadorId) => {
         setTrabajadoresSeleccionados(prev => (
-            prev.includes(trabajadorId)
-                ? prev.filter(id => id !== trabajadorId) : [...prev, trabajadorId]
+            prev.includes(trabajadorId) ? prev.filter(id => id !== trabajadorId) : [...prev, trabajadorId]
         ));
     }
 
@@ -140,6 +139,11 @@ export function RegistrarOrden() {
         const fecha = new Date()
         const fechaFormateada = format(fecha, "cccc d 'de' MMMM 'del' yyyy", { locale: es })
 
+        const trabajadoresText = trabajadoresSeleccionados.map(trabajadorId => {
+            const trabajador = trabajadores.find(t => t.idtrabajador === trabajadorId);
+            return `${trabajador.nom_trabajador} ${trabajador.apepaterno} ${trabajador.apematerno} ${trabajador.tipotrabajador}`;
+        }).join(', ');
+                
         const documento = new jsPDF()
         documento.setFont("Arial", "normal")
         documento.setFontSize(20)
@@ -154,7 +158,7 @@ export function RegistrarOrden() {
         documento.text(`Material: ${data.materialtrabajo}`, 20, 80)
         documento.text(`Precio del material: ${data.preciomaterial}`, 20, 90)
         documento.text(`Precio del trabajo: ${data.precio}`, 20, 100)
-        documento.text(`Trabajador: ${data.trabajadores}`, 20, 110)
+        documento.text(`Trabajadores: ${trabajadoresText}`, 20, 110);
 
         documento.save('Orden_Trabajo_1.pdf')//De momento
     }
