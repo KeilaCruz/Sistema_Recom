@@ -160,7 +160,7 @@ export function RegistrarOrden() {
         documento.text(`Precio del trabajo: ${data.precio}`, 20, 100)
         documento.text(`Trabajadores: ${trabajadoresText}`, 20, 110);
 
-        documento.save('Orden_Trabajo_1.pdf')//De momento
+        documento.save(`Orden_Trabajo_${data.nombre}.pdf`)//De momento
     }
 
     useEffect(() => {
@@ -323,7 +323,6 @@ export function RegistrarOrden() {
                     ))}
                 </div>
 
-
                 <button
                     className="bg-[#3B315F] p-[10px] w-[150px] ml-80 mt-0
                  text-white text-[20px] font-sans font-medium rounded 
@@ -331,6 +330,7 @@ export function RegistrarOrden() {
                     Registrar
                 </button>
             </form>
+
         </>
     )
 }
