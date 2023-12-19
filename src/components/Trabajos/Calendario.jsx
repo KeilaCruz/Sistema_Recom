@@ -69,7 +69,7 @@ function Calendario() {
                 events={eventos}
                 eventContent={(info) => (
                     <div>
-                        <b>{info.event.title}</b>
+                        <b>{info.event.title.substring(0, 20)}{info.event.title.length > 20 ? '...' : ''}</b>
                         <p>{info.event.description}</p>
                     </div>
                 )}
