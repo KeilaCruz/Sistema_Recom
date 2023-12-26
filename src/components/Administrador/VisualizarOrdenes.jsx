@@ -95,15 +95,9 @@ export function VisualizarOrdenes() {
 
             </div>
             <div className="ml-80 mt-5">
-                <button className="bg-[#3B315F] p-[8px] w-[150px] mt-0
-                 text-white text-[18px] font-sans font-medium 
-                 hover:bg-[#4D407E]" onClick={() => handleFiltro("Todos")}>Todos</button>
-                <button className="bg-[#3B315F] p-[8px] w-[150px] mt-0
-                 text-white text-[18px] font-sans font-medium 
-                 hover:bg-[#4D407E]" onClick={() => handleFiltro("Pendientes")}>Pendientes</button>
-                <button className="bg-[#3B315F] p-[8px] w-[150px] mt-0
-                 text-white text-[18px] font-sans font-medium 
-                 hover:bg-[#4D407E]" onClick={() => handleFiltro("Entregado")}>Entregado</button>
+                <button className="boton_filtrado" onClick={() => handleFiltro("Todos")}>Todos</button>
+                <button className="boton_filtrado" onClick={() => handleFiltro("Pendientes")}>Pendientes</button>
+                <button className="boton_filtrado" onClick={() => handleFiltro("Entregado")}>Entregado</button>
             </div>
 
             <section className="mb-4">
