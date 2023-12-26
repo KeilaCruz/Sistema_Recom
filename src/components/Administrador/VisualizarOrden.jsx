@@ -162,7 +162,7 @@ export function VisualizarOrden() {
             <label className="etiqueta mt-5" htmlFor="correo_cliente">Correo del cliente </label>
             <input className="inputs" id="correo_cliente" type="text" {...register("correo_cliente")} disabled={true} />
           </div>
-          
+
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="telefono_cliente">Telefono del cliente</label>
             <input className="inputs" id="telefono_cliente" type="text"{...register("telefono_cliente")} disabled={true} />
@@ -172,19 +172,23 @@ export function VisualizarOrden() {
 
         {activateEdit && (
           <div>
-            <button>Guardar</button>
+            <button className="bg-[#3B315F] p-[10px] w-[150px] ml-80 mt-0 text-white text-[20px] font-sans font-medium rounded hover:bg-[#4D407E]">Guardar</button>
+            {/*Agregar el navigate a recargar la misma pagina */}
           </div>
         )}
       </form>
-      <button onClick={handleActivateEdit}>Editar</button>
+
+      {/*Marcar estado de orden */}
+      <input className="bg-[#3B315F] p-[10px] w-[150px] ml-80 mt-0 text-white text-[20px] font-sans font-medium rounded hover:bg-[#4D407E]" id="marcar_estado" type="checkbox" checked={!orden.estadot} onChange={handleEstadoChange} />Trabajo entregado
       {/*Mostrar mensaje de estado de orden */}
       {orden.estadot ? (
         <td>Pendiente</td>
       ) : (
         <td>Entregado</td>
       )}
-      {/*Marcar estado de orden */}
-      <input id="marcar_estado" type="checkbox" checked={!orden.estadot} onChange={handleEstadoChange} />Trabajo entregado
+
+      <button className="bg-[#3B315F] p-[10px] w-[150px] ml-80 mt-0 text-white text-[20px] font-sans font-medium rounded hover:bg-[#4D407E]" onClick={handleActivateEdit}>Editar</button>
+
     </>
   )
 }
