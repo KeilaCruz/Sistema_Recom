@@ -232,16 +232,18 @@ export function RegistrarOrden() {
                     className="inputs"
                     onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
 
-                <button onClick={handleBuscar}>Buscar</button>
+                <button className="bg-[#3B315F] p-[8px] w-[100px] mt-0
+                 text-white text-[14px] font-sans font-medium rounded
+                 hover:bg-[#4D407E]" onClick={handleBuscar}>Buscar</button>
                 {resultBusqueda.map(cliente => (
                     <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
                 ))}
             </div>
 
-            <form className="flex gap-5 font-sans"
+            <form className="flex font-sans"
                 onSubmit={onSubmit}>
 
-                <div className="flex-col ml-80 mt-5">
+                <div className="flex-col ml-80">
                     <div className="mt-5">
                         <label className="etiqueta mt-5"> Fecha solicitud </label>
                         <input id="fecha_solicitud" type="date"
@@ -330,7 +332,7 @@ export function RegistrarOrden() {
                     )}
                 </div>
 
-                <div className="flex-col w-[1/2] ml-40 mt-5">
+                <div className="flex-col w-[1/2] ml-40">
                     <div className="mt-5">
                         <label className="etiqueta"> Fecha entrega </label>
                         <input id="fecha_entrega" type="date"
