@@ -88,9 +88,7 @@ export function VisualizarOrdenes() {
             </div>
             <div className="ml-80">
                 <input className="inputs" id="barra_busqueda" placeholder="Núm orden: 123, Fecha solicitud: 0000-00-00, Nombre: Lucas Cruz Romero" onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
-                <button className="bg-[#3B315F] p-[8px] w-[100px] mt-0
-                 text-white text-[14px] font-sans font-medium rounded
-                 hover:bg-[#4D407E]" onClick={handleBuscar}>Buscar</button>
+                <button className="boton_busqueda" onClick={handleBuscar}>Buscar</button>
                 {resultBusqueda.map(orden => (
                     <CardBusquedaOrden orden={orden} />
                 ))}

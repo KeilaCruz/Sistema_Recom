@@ -232,9 +232,7 @@ export function RegistrarOrden() {
                     className="inputs"
                     onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
 
-                <button className="bg-[#3B315F] p-[8px] w-[100px] mt-0
-                 text-white text-[14px] font-sans font-medium rounded
-                 hover:bg-[#4D407E]" onClick={handleBuscar}>Buscar</button>
+                <button className="boton_busqueda" onClick={handleBuscar}>Buscar</button>
                 {resultBusqueda.map(cliente => (
                     <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
                 ))}
