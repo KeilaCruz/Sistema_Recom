@@ -77,7 +77,7 @@ export function VisualizarOrden() {
         <input className="inputs" id="orden" type="number" {...register("orden_trabajo")} disabled={true} />
       </div>
 
-      <form className="flex gap-5 font-sans" onSubmit={onSubmit}>
+      <form className="flex gap-5 font-sans">
 
         <div className="flex-col ml-80 mt-5">
           <div className="mt-5">
@@ -169,28 +169,36 @@ export function VisualizarOrden() {
           </div>
 
         </div>
-
-        {activateEdit && (
-          <div>
-            <button className="bg-[#3B315F] p-[10px] w-[150px] ml-80 mt-0 text-white text-[20px] font-sans font-medium rounded hover:bg-[#4D407E]">Guardar</button>
-            {/*Agregar el navigate a recargar la misma pagina */}
-          </div>
-        )}
       </form>
 
-      {/*Marcar estado de orden */}
-      <input className="bg-[#3B315F] p-[10px] w-[150px] ml-80 mt-0 text-white text-[20px] font-sans font-medium rounded hover:bg-[#4D407E]" id="marcar_estado" type="checkbox" checked={!orden.estadot} onChange={handleEstadoChange} />Trabajo entregado
-      {/*Mostrar mensaje de estado de orden */}
-      {orden.estadot ? (
-        <td>Pendiente</td>
-      ) : (
-        <td>Entregado</td>
-      )}
+      <div className="ml-80 mt-5 mb-5">
+        <label className="font-bold" htmlFor="Trabajo entregado">
+          Trabajo entregado
+        </label>
 
-      <button className="boton_generico" onClick={handleActivateEdit}>
-        Editar
+        {/*Marcar estado de orden */}
+        <input className="ml-5" id="marcar_estado"
+          type="checkbox" checked={!orden.estadot} onChange={handleEstadoChange} />
+        {/*Mostrar mensaje de estado de orden */}
+
+        {orden.estadot ? (
+          <td className="font-normal text-colorSecundario text-[16px]">Pendiente</td>
+        ) : (
+          <td className="font-semibold text-colorSecundario text-[16px]">Entregado</td>
+        )}
+      </div>
+
+      <div className="mt-5 mb-5">
+        {!activateEdit && (<button className="boton_generico" onClick={handleActivateEdit}>
+          Editar
         </button>
+        )}
 
+        {activateEdit && (
+          //Llama a 2 métodos para permanecer en la misma página
+          <button className="boton_generico" onClick={() => { onSubmit(); handleActivateEdit() }}>Guardar</button>
+        )}
+      </div>
     </>
   )
 }
