@@ -178,7 +178,7 @@ export function RegistrarOrden() {
         } else if (!telefonoValido) {
             toast.error("El teléfono debe ser de 10 dígitos numéricos")
         } else {
-            try {                
+            try {
 
                 idOrdenRegistrada = await registrarOrden(data);
 
@@ -221,146 +221,147 @@ export function RegistrarOrden() {
     }
 
     return (
-        <>
-            <div className="fixed">
+        <div className="flex">
+            <div className="w-1/4 sticky top-0 h-screen">
                 <Sidebar />
             </div>
 
-            <div className="ml-80 ">
-                <input id="barra_busqueda"
-                    placeholder="Núm cliente: 1, Nombre completo cliente: Keila Ruiz Miran"
-                    className="inputs"
-                    onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
+            <div className="w-3/4 mt-0">
 
-                <button className="boton_busqueda" onClick={handleBuscar}>Buscar</button>
-                {resultBusqueda.map(cliente => (
-                    <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
-                ))}
-            </div>
+                <div className="ml-5 mt-5">
+                    <input id="barra_busqueda"
+                        placeholder="Núm cliente: 1, Nombre completo cliente: Keila Ruiz Miran"
+                        className="inputs"
+                        onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
 
-            <form className="flex font-sans"
-                onSubmit={onSubmit}>
+                    <button className="boton_busqueda" onClick={handleBuscar}>Buscar</button>
+                    {resultBusqueda.map(cliente => (
+                        <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
+                    ))}
+                </div>
 
-                <div className="flex-col ml-80">
-                    <div className="mt-5">
-                        <label className="etiqueta mt-5"> Fecha solicitud </label>
-                        <input id="fecha_solicitud" type="date"
-                            className="inputs"
-                            readOnly {...register("fecha_solicitud", { required: true })} />
-                        {errors.fecha_solicitud && <span>Este campo es necesario</span>}
-                    </div>
+                <form className="flex font-sans"
+                    onSubmit={onSubmit}>
 
-                    <div className="mt-5">
-                        <label className="etiqueta"> Tipo de trabajo </label>
-                        <select id="tipo_trabajo"
-                            className="selects"
-                            {...register("tipotrabajo", { required: true })}>
-                            <option value="" disabled>Elija una opción</option>
-                            <option value="nuevo">Nuevo</option>
-                            <option value="reparacion">Reparación</option>
-                        </select>
-                        {errors.tipotrabajo && <span>Este campo es necesario</span>}
-                    </div>
-
-                    <div className="mt-5">
-                        <label className="etiqueta"> Precio del material </label>
-                        <input id="precio_material" type="number"
-                            className="inputs_precio"
-                            placeholder="Precio del material" step="any" {...register("preciomaterial")} />
-                    </div>
-
-                    <div className="mt-5">
-                        <label className="etiqueta"> Precio del trabajo </label>
-                        <input id="precio_trabajo" type="number" step="any"
-                            className="inputs_precio"
-                            {...register("precio", { required: true })} />
-                        {errors.precio && <span>Este campo es necesario</span>}
-                    </div>
-                    <div className="mt-5">
-                        <label className="etiqueta"> Seleccione el trabajador </label>
-                        {trabajadores.map((trabajador) => (
-                            <div key={trabajador.idtrabajador}>
-                                <input id="trabaador" type="checkbox" value={trabajador.idtrabajador} onChange={() => handleCheckboxChange(trabajador.idtrabajador)} />
-                                <label className="etiqueta_checkbox" htmlFor={`trabajador_${trabajador.idtrabajador}`}>
-                                    {trabajador.nom_trabajador} {trabajador.apepaterno} {trabajador.apematerno} {trabajador.tipotrabajador}
-                                </label>
-                            </div>
-                        ))}
-                    </div>
-
-                    {!existeCliente && (
-                        <div className="">
-
-                            <div className=" mt-5">
-                                <label className="etiqueta"> Nombre </label>
-                                <input id="nom_cliente" type="text"
-                                    className="inputs"
-                                    placeholder="Ej. Eduardo" {...register("nombre", { required: true })} />
-                            </div>
-
-                            <div className=" mt-5">
-                                <label className="etiqueta"> Apellido paterno </label>
-                                <input id="ape_paterno" type="text"
-                                    className="inputs"
-                                    placeholder="Ej. Pérez" {...register("ape_paterno", { required: true })} />
-                            </div>
-
-                            <div className=" mt-5">
-                                <label className="etiqueta"> Apellido materno </label>
-                                <input id="ape_materno" type="text"
-                                    className="inputs"
-                                    placeholder="Ej. Ruiz" {...register("ape_materno", { required: true })} />
-                            </div>
-
-                            <div className=" mt-5">
-                                <label className="etiqueta"> Correo </label>
-                                <input id="correo" type="email"
-                                    className="inputs"
-                                    placeholder="Ej. edu12@" {...register("correo", { required: true })} />
-                            </div>
-
-                            <div className=" mt-5">
-                                <label className="etiqueta"> Teléfono </label>
-                                <input id="telefono" type="text"
-                                    className="inputs"
-                                    placeholder="Ej. 9212834738" {...register("telefono", { required: true })} />
-                            </div>
-
+                    <div className="flex-col ml-5">
+                        <div className="mt-5">
+                            <label className="etiqueta mt-5"> Fecha solicitud </label>
+                            <input id="fecha_solicitud" type="date"
+                                className="inputs"
+                                readOnly {...register("fecha_solicitud", { required: true })} />
+                            {errors.fecha_solicitud && <span>Este campo es necesario</span>}
                         </div>
-                    )}
-                </div>
 
-                <div className="flex-col w-[1/2] ml-40">
-                    <div className="mt-5">
-                        <label className="etiqueta"> Fecha entrega </label>
-                        <input id="fecha_entrega" type="date"
-                            className="inputs"
-                            {...register("fecha_entrega", { required: true })} />
-                        {errors.fecha_entrega && <span>Este campo es necesario</span>}
+                        <div className="mt-5">
+                            <label className="etiqueta"> Tipo de trabajo </label>
+                            <select id="tipo_trabajo"
+                                className="selects"
+                                {...register("tipotrabajo", { required: true })}>
+                                <option value="" disabled>Elija una opción</option>
+                                <option value="nuevo">Nuevo</option>
+                                <option value="reparacion">Reparación</option>
+                            </select>
+                            {errors.tipotrabajo && <span>Este campo es necesario</span>}
+                        </div>
+
+                        <div className="mt-5">
+                            <label className="etiqueta"> Precio del material </label>
+                            <input id="precio_material" type="number"
+                                className="inputs_precio"
+                                placeholder="Precio del material" step="any" {...register("preciomaterial")} />
+                        </div>
+
+                        <div className="mt-5">
+                            <label className="etiqueta"> Precio del trabajo </label>
+                            <input id="precio_trabajo" type="number" step="any"
+                                className="inputs_precio"
+                                {...register("precio", { required: true })} />
+                            {errors.precio && <span>Este campo es necesario</span>}
+                        </div>
+                        <div className="mt-5 mb-5">
+                            <label className="etiqueta"> Seleccione el trabajador </label>
+                            {trabajadores.map((trabajador) => (
+                                <div key={trabajador.idtrabajador}>
+                                    <input id="trabaador" type="checkbox" value={trabajador.idtrabajador} onChange={() => handleCheckboxChange(trabajador.idtrabajador)} />
+                                    <label className="etiqueta_checkbox" htmlFor={`trabajador_${trabajador.idtrabajador}`}>
+                                        {trabajador.nom_trabajador} {trabajador.apepaterno} {trabajador.apematerno} {trabajador.tipotrabajador}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+
+                        {!existeCliente && (
+                            <div className="mb-5">
+
+                                <div className=" mt-5">
+                                    <label className="etiqueta"> Nombre </label>
+                                    <input id="nom_cliente" type="text"
+                                        className="inputs"
+                                        placeholder="Ej. Eduardo" {...register("nombre", { required: true })} />
+                                </div>
+
+                                <div className=" mt-5">
+                                    <label className="etiqueta"> Apellido paterno </label>
+                                    <input id="ape_paterno" type="text"
+                                        className="inputs"
+                                        placeholder="Ej. Pérez" {...register("ape_paterno", { required: true })} />
+                                </div>
+
+                                <div className=" mt-5">
+                                    <label className="etiqueta"> Apellido materno </label>
+                                    <input id="ape_materno" type="text"
+                                        className="inputs"
+                                        placeholder="Ej. Ruiz" {...register("ape_materno", { required: true })} />
+                                </div>
+
+                                <div className=" mt-5">
+                                    <label className="etiqueta"> Correo </label>
+                                    <input id="correo" type="email"
+                                        className="inputs"
+                                        placeholder="Ej. edu12@" {...register("correo", { required: true })} />
+                                </div>
+
+                                <div className=" mt-5">
+                                    <label className="etiqueta"> Teléfono </label>
+                                    <input id="telefono" type="text"
+                                        className="inputs"
+                                        placeholder="Ej. 9212834738" {...register("telefono", { required: true })} />
+                                </div>
+
+                            </div>
+                        )}
+
+                        <button
+                            className="boton_generico">
+                            Registrar
+                        </button>
                     </div>
-                    <div className="mt-5">
-                        <label className="etiqueta"> Material </label>
-                        <textarea id="materiales_requeridos"
-                            className="area_texto"
-                            placeholder="Materiales requeridos" {...register("materialtrabajo")}></textarea>
+
+                    <div className="flex-col ml-10 mb-5">
+                        <div className="mt-5">
+                            <label className="etiqueta"> Fecha entrega </label>
+                            <input id="fecha_entrega" type="date"
+                                className="inputs"
+                                {...register("fecha_entrega", { required: true })} />
+                            {errors.fecha_entrega && <span>Este campo es necesario</span>}
+                        </div>
+                        <div className="mt-5">
+                            <label className="etiqueta"> Material </label>
+                            <textarea id="materiales_requeridos"
+                                className="area_texto"
+                                placeholder="Materiales requeridos" {...register("materialtrabajo")}></textarea>
+                        </div>
+                        <div className="mt-5">
+                            <label className="etiqueta"> Especificaciones del trabajo </label>
+                            <textarea id="descripcion"
+                                className="area_texto"
+                                placeholder="Escriba los detalles del trabajo a realizar" {...register("especificaciones", { required: true })}></textarea>
+                            {errors.especificaciones && <span>Este campo es necesario</span>}
+                        </div>
                     </div>
-                    <div className="mt-5">
-                        <label className="etiqueta"> Especificaciones del trabajo </label>
-                        <textarea id="descripcion"
-                            className="area_texto"
-                            placeholder="Escriba los detalles del trabajo a realizar" {...register("especificaciones", { required: true })}></textarea>
-                        {errors.especificaciones && <span>Este campo es necesario</span>}
-                    </div>
-
-                    <button
-                        className="boton_generico">
-                        Registrar
-                    </button>
-                </div>
-
-            </form>
-
-        </>
+                </form>
+            </div>
+        </div>
     )
 }
 
