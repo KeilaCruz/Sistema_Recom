@@ -16,7 +16,6 @@ export function RegistrarOrden() {
     const [existeCliente, setExisteCliente] = useState(false);
     const [idClienteResult, setIdClienteResult] = useState(null);
     const { register, handleSubmit } = useForm();
-
     let numberReg = /^\d+$/;
     let nombre = /^\D+$/;
     useEffect(() => {
@@ -79,8 +78,9 @@ export function RegistrarOrden() {
         data.trabajadores = trabajadoresSeleccionados;
         data.idCliente = idClienteResult;
         console.log(data);
-        //registrarOrden(data);
+        registrarOrden(data);
     })
+
     return (
         <>
             <input id="barra_busqueda" placeholder="Núm cliente: 1, Nombre completo cliente: Keila Ruiz Miran" onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
