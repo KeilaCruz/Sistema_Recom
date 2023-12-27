@@ -99,7 +99,7 @@ export function VisualizarOrdenes() {
                 ))}
 
             </div>
-            <div className="ml-80 mt-5">
+            <div className="ml-80 mt-5 mb-5">
                 <button className="boton_filtrado" onClick={() => handleFiltro("Todos")}>Todos</button>
                 <button className="boton_filtrado" onClick={() => handleFiltro("Pendientes")}>Pendientes</button>
                 <button className="boton_filtrado" onClick={() => handleFiltro("Entregado")}>Entregado</button>
