@@ -106,7 +106,7 @@ export function VisualizarOrdenes() {
             </div>
 
             <section className="mb-4">
-                <table className="w-4/5 ml-80 text-left shadow">
+                <table className="w-3/4 ml-80 text-left shadow">
                     <thead className="bg-colorMain font-sans font-normal text-[18px] text-white sticky">
                         <tr>
                             <td>Orden de trabajo</td>
@@ -119,7 +119,7 @@ export function VisualizarOrdenes() {
                     <tbody>
                         {ordenes.map((orden) => (
                             <tr key={orden.ordentrabajo} className="font-sans font-normal text-[18px] border-b-[1px] border-black bg-white">
-                                <td className="p-[10px] ">{orden.ordentrabajo}</td>
+                                <td className="p-[5px] ">{orden.ordentrabajo}</td>
                                 <td>{orden.nomtrabajadores[0]}</td>
                                 <td>{orden.fechaentrega}</td>
                                 {orden.estado_o ? (
