@@ -1,9 +1,11 @@
 import { useEffect } from "react"
 import { useState } from "react"
+import { toast } from 'react-hot-toast'
 import { buscarOrden, getAllOrdenTrabajo, getOrdenActivas, getOrdenEntregada } from "../../services/OrdenTrabajo"
 import { useNavigate } from "react-router-dom";
 import { CardBusquedaOrden } from "./CardBusquedaOrden";
 import Sidebar from "../partials/Sidebar";
+
 
 export function VisualizarOrdenes() {
     const [ordenes, setOrdenes] = useState([])
@@ -76,6 +78,9 @@ export function VisualizarOrdenes() {
     const handleBuscar = async () => {
         let resultado = await buscarOrden(idOrden, fechaOrden, nombreCliente, apePaterno, apeMaterno);
         setResultBusqueda(resultado);
+        if(resultado.length == 0){
+            toast.error('No se encontraron resultados');
+        }
     }
 
     const handleNavegar = async (idOrden) => {
