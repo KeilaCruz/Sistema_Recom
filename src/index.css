@@ -29,3 +29,6 @@
 .boton_filtrado{
     @apply bg-[#3B315F] p-[8px] w-[150px] mt-0 text-white text-[18px] font-sans font-medium hover:bg-[#4D407E]
 }
+.boton_detalle_busqueda{
+    @apply bg-white p-[5px] w-[100px] h-[40px] mt-5 ml-40 text-black text-[16px] font-sans font-medium rounded hover:bg-slate-500
+}
