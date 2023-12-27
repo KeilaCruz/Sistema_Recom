@@ -122,6 +122,7 @@ export function RegistrarOrden() {
             setIdClienteResult(resultado[0].id_cliente);
         } else {
             setExisteCliente(false)
+            toast.error("El cliente no está registrado en el sistema")
         }
     }
     const handleCheckboxChange = (trabajadorId) => {
@@ -240,20 +241,20 @@ export function RegistrarOrden() {
                     ))}
                 </div>
 
-                <form className="flex font-sans"
-                    onSubmit={onSubmit}>
+                <form className="flex font-sans" onSubmit={onSubmit}>
 
-                    <div className="flex-col ml-5">
+                    <div className="flex-col w-1/4 ml-5">
                         <div className="mt-5">
-                            <label className="etiqueta mt-5"> Fecha solicitud </label>
-                            <input id="fecha_solicitud" type="date"
-                                className="inputs"
+                            <label className="etiqueta"> Fecha solicitud </label>
+                            <br />
+                            <input id="fecha_solicitud" type="date" className="inputs"
                                 readOnly {...register("fecha_solicitud", { required: true })} />
                             {errors.fecha_solicitud && <span>Este campo es necesario</span>}
                         </div>
 
                         <div className="mt-5">
                             <label className="etiqueta"> Tipo de trabajo </label>
+                            <br />
                             <select id="tipo_trabajo"
                                 className="selects"
                                 {...register("tipotrabajo", { required: true })}>
@@ -266,6 +267,7 @@ export function RegistrarOrden() {
 
                         <div className="mt-5">
                             <label className="etiqueta"> Precio del material </label>
+                            <br />
                             <input id="precio_material" type="number"
                                 className="inputs_precio"
                                 placeholder="Precio del material" step="any" {...register("preciomaterial")} />
@@ -273,13 +275,16 @@ export function RegistrarOrden() {
 
                         <div className="mt-5">
                             <label className="etiqueta"> Precio del trabajo </label>
+                            <br />
                             <input id="precio_trabajo" type="number" step="any"
                                 className="inputs_precio"
                                 {...register("precio", { required: true })} />
                             {errors.precio && <span>Este campo es necesario</span>}
                         </div>
+
                         <div className="mt-5 mb-5">
                             <label className="etiqueta"> Seleccione el trabajador </label>
+                            <br />
                             {trabajadores.map((trabajador) => (
                                 <div key={trabajador.idtrabajador}>
                                     <input id="trabaador" type="checkbox" value={trabajador.idtrabajador} onChange={() => handleCheckboxChange(trabajador.idtrabajador)} />
@@ -291,43 +296,41 @@ export function RegistrarOrden() {
                         </div>
 
                         {!existeCliente && (
-                            <div className="mb-5">
-
-                                <div className=" mt-5">
-                                    <label className="etiqueta"> Nombre </label>
-                                    <input id="nom_cliente" type="text"
-                                        className="inputs"
-                                        placeholder="Ej. Eduardo" {...register("nombre", { required: true })} />
+                            <div className="flex w-1/4 mb-5">
+                                <div className="flex-row">
+                                    <div className=" mt-5">
+                                        <label className="etiqueta"> Nombre </label>
+                                        <input id="nom_cliente" type="text"
+                                            className="inputs"
+                                            placeholder="Ej. Eduardo" {...register("nombre", { required: true })} />
+                                    </div>
+                                    <div className=" mt-5">
+                                        <label className="etiqueta"> Correo </label>
+                                        <input id="correo" type="email"
+                                            className="inputs"
+                                            placeholder="Ej. edu12@" {...register("correo", { required: true })} />
+                                    </div>
                                 </div>
-
-                                <div className=" mt-5">
-                                    <label className="etiqueta"> Apellido paterno </label>
-                                    <input id="ape_paterno" type="text"
-                                        className="inputs"
-                                        placeholder="Ej. Pérez" {...register("ape_paterno", { required: true })} />
+                                <div className="flex-col ml-5">
+                                    <div className=" mt-5">
+                                        <label className="etiqueta"> Apellido paterno </label>
+                                        <input id="ape_paterno" type="text"
+                                            className="inputs"
+                                            placeholder="Ej. Pérez" {...register("ape_paterno", { required: true })} />
+                                    </div>
+                                    <div className=" mt-5">
+                                        <label className="etiqueta"> Teléfono </label>
+                                        <input id="telefono" type="text"
+                                            className="inputs"
+                                            placeholder="Ej. 9212834738" {...register("telefono", { required: true })} />
+                                    </div>
                                 </div>
-
-                                <div className=" mt-5">
+                                <div className=" ml-5 mt-5">
                                     <label className="etiqueta"> Apellido materno </label>
                                     <input id="ape_materno" type="text"
                                         className="inputs"
                                         placeholder="Ej. Ruiz" {...register("ape_materno", { required: true })} />
                                 </div>
-
-                                <div className=" mt-5">
-                                    <label className="etiqueta"> Correo </label>
-                                    <input id="correo" type="email"
-                                        className="inputs"
-                                        placeholder="Ej. edu12@" {...register("correo", { required: true })} />
-                                </div>
-
-                                <div className=" mt-5">
-                                    <label className="etiqueta"> Teléfono </label>
-                                    <input id="telefono" type="text"
-                                        className="inputs"
-                                        placeholder="Ej. 9212834738" {...register("telefono", { required: true })} />
-                                </div>
-
                             </div>
                         )}
 
@@ -337,22 +340,27 @@ export function RegistrarOrden() {
                         </button>
                     </div>
 
-                    <div className="flex-col ml-10 mb-5">
+                    <div className="flex-col w-1/4 ml-80 mb-5">
                         <div className="mt-5">
                             <label className="etiqueta"> Fecha entrega </label>
+                            <br />
                             <input id="fecha_entrega" type="date"
                                 className="inputs"
                                 {...register("fecha_entrega", { required: true })} />
                             {errors.fecha_entrega && <span>Este campo es necesario</span>}
                         </div>
+
                         <div className="mt-5">
                             <label className="etiqueta"> Material </label>
+                            <br />
                             <textarea id="materiales_requeridos"
                                 className="area_texto"
                                 placeholder="Materiales requeridos" {...register("materialtrabajo")}></textarea>
                         </div>
+                        
                         <div className="mt-5">
                             <label className="etiqueta"> Especificaciones del trabajo </label>
+                            <br />
                             <textarea id="descripcion"
                                 className="area_texto"
                                 placeholder="Escriba los detalles del trabajo a realizar" {...register("especificaciones", { required: true })}></textarea>
