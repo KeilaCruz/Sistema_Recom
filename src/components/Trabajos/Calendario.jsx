@@ -59,17 +59,17 @@ function Calendario() {
     console.log(infoEvento)
 
     return (
-        <div className="flex-col p-4 ml-80">
+        <div className="flex-col w-2/3 p-4 ml-80 text-[14px]">
             <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
                 locales={[esLocale]} // Establece el idioma español
                 locale="es" // Establece el idioma por defecto
-                height={"90vh"}
+                height={"80vh"}
                 events={eventos}
                 eventContent={(info) => (
                     <div>
-                        <b>{info.event.title.substring(0, 20)}{info.event.title.length > 20 ? '...' : ''}</b>
+                        <b>{info.event.title.substring(0, 12)}{info.event.title.length > 12 ? '...' : ''}</b>
                         <p>{info.event.description}</p>
                     </div>
                 )}
