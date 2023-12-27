@@ -91,27 +91,35 @@ export function RegistrarOrden() {
         setTrabajadores(res)
     }
 
+    const validarCriterioBusqueda = (criterioB) => {
+        const criterioBRegex = /^[A-Za-zÁÉÍÓÚáéíóúü0-9\s]{1,120}$/
+
+        return criterioBRegex.test(criterioB)
+    }
+
     const handleBusqueda = async () => {
         resetBusqueda();
-        const isNumber = numberReg.test(criterioBusqueda);
-        const isNombre = nombre.test(criterioBusqueda);
-        if (isNumber) {
-            const id_cliente = parseInt(criterioBusqueda);
-            setIdCliente(id_cliente);
-            setNombreCliente(null);
-            setApePaterCliente(null);
-            setApeMaterCliente(null);
-        } else if (isNombre) {
-            const nombres = criterioBusqueda.split(" ");
-            setIdCliente(null);
-            setNombreCliente(nombres[0]);
-            setApePaterCliente(nombres[1]);
-            setApeMaterCliente(nombres[2]);
-        } else {
-            //mostrar toast que no es un criterio válido
-            console.log("No es un criterio de búsqueda");
-            return;
+        const validacionBusqueda = validarCriterioBusqueda(criterioBusqueda)
+        if (validacionBusqueda) {
+            const isNumber = numberReg.test(criterioBusqueda);
+            const isNombre = nombre.test(criterioBusqueda);
+            if (isNumber) {
+                const id_cliente = parseInt(criterioBusqueda);
+                setIdCliente(id_cliente);
+                setNombreCliente(null);
+                setApePaterCliente(null);
+                setApeMaterCliente(null);
+            } else if (isNombre) {
+                const nombres = criterioBusqueda.split(" ");
+                setIdCliente(null);
+                setNombreCliente(nombres[0]);
+                setApePaterCliente(nombres[1]);
+                setApeMaterCliente(nombres[2]);
+            }
+        } else{
+            toast.error('Ingrese un dato valido');
         }
+
     }
 
     const handleBuscar = async () => {
@@ -250,8 +258,9 @@ export function RegistrarOrden() {
 
                     <button className="boton_busqueda" onClick={handleBuscar}>Buscar</button>
                     {resultBusqueda.map(cliente => (
-                        <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
-                    ))}
+                            <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
+                        ))
+                    }
                 </div>
 
                 <form className="flex font-sans" onSubmit={onSubmit}>
