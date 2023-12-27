@@ -188,7 +188,7 @@ export function VisualizarOrden() {
         )}
       </div>
 
-      <div className="mt-5 mb-5">
+      <div className="ml-80 mt-5 mb-5">
         {!activateEdit && (<button className="boton_generico" onClick={handleActivateEdit}>
           Editar
         </button>
