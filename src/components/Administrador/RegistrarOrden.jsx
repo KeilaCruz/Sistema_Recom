@@ -168,19 +168,8 @@ export function RegistrarOrden() {
             toast.error("El precio ingresado sólo debe ser con números")
         } else if (!especificacionValida) {
             toast.error("Sólo se permiten caracteres alfanuméricos y ./-")
-        } else if (!nombreCValida) {
-            toast.error("El nombre debe ser máximo de 40 letras")
-        } else if (!apePaternoCValida) {
-            toast.error("El apellido paterno debe ser máximo de 40 letras")
-        } else if (!apeMaternoCValida) {
-            toast.error("El apellido materno debe ser máximo de 40 letras")
-        } else if (!correoValido) {
-            toast.error("El correo ingresado no es valido, asegurese que contenga @ y .")
-        } else if (!telefonoValido) {
-            toast.error("El teléfono debe ser de 10 dígitos numéricos")
-        } else {
+        } else if (existeCliente) {
             try {
-
                 idOrdenRegistrada = await registrarOrden(data);
 
                 toast.success("Se ha registrado con éxito")
@@ -189,6 +178,30 @@ export function RegistrarOrden() {
 
             } catch (e) {
                 console.error("Error al registrar orden" + e)
+            }
+        } else {
+            if (!nombreCValida) {
+                toast.error("El nombre debe ser máximo de 40 letras")
+            } else if (!apePaternoCValida) {
+                toast.error("El apellido paterno debe ser máximo de 40 letras")
+            } else if (!apeMaternoCValida) {
+                toast.error("El apellido materno debe ser máximo de 40 letras")
+            } else if (!correoValido) {
+                toast.error("El correo ingresado no es valido, asegurese que contenga @ y .")
+            } else if (!telefonoValido) {
+                toast.error("El teléfono debe ser de 10 dígitos numéricos")
+            } else {
+                try {
+
+                    idOrdenRegistrada = await registrarOrden(data);
+
+                    toast.success("Se ha registrado con éxito")
+                    navigate("/trabajos")
+                    await generarPDF(data)
+
+                } catch (e) {
+                    console.error("Error al registrar orden" + e)
+                }
             }
         }
     })
@@ -357,7 +370,7 @@ export function RegistrarOrden() {
                                 className="area_texto"
                                 placeholder="Materiales requeridos" {...register("materialtrabajo")}></textarea>
                         </div>
-                        
+
                         <div className="mt-5">
                             <label className="etiqueta"> Especificaciones del trabajo </label>
                             <br />
