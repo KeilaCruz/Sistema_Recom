@@ -34,10 +34,18 @@ export function RegistrarOrden() {
         const fecha = new Date()
         const diaActual = fecha.getDate()
         const mesActual = fecha.getMonth() + 1
-        const anioActual = fecha.getFullYear()
-        const fechaActual = `${anioActual}-${mesActual}-${diaActual}`
-        //const fechaActual = `${diaActual}-${mesActual}-${anioActual}`        
-        setValue('fecha_solicitud', fechaActual)
+        const anioActual = fecha.getFullYear()        
+        //const fechaActual = `${diaActual}-${mesActual}-${anioActual}` 
+               
+        if (diaActual < 10) {
+            let dia = "0" + diaActual
+            const fechaActual = `${anioActual}-${mesActual}-${dia}`
+            setValue('fecha_solicitud', fechaActual)
+        } else {
+            const fechaActual = `${anioActual}-${mesActual}-${diaActual}`
+            setValue('fecha_solicitud', fechaActual)
+        }
+
     }
 
     const validarFechaEntrega = () => {
@@ -116,7 +124,7 @@ export function RegistrarOrden() {
                 setApePaterCliente(nombres[1]);
                 setApeMaterCliente(nombres[2]);
             }
-        } else{
+        } else {
             toast.error('Ingrese un dato valido');
         }
 
@@ -258,8 +266,8 @@ export function RegistrarOrden() {
 
                     <button className="boton_busqueda" onClick={handleBuscar}>Buscar</button>
                     {resultBusqueda.map(cliente => (
-                            <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
-                        ))
+                        <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
+                    ))
                     }
                 </div>
 
