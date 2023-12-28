@@ -110,6 +110,7 @@ export function VisualizarOrden() {
     else {
       try {
         await editarOrden(data)
+        handleActivateEdit()
       } catch (error) {
         console.error(error)
         toast.error("Ups ha ocurrido un error, vuelva a intentarlo")
@@ -144,7 +145,7 @@ export function VisualizarOrden() {
 
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="tipo_trabajo">Tipo de trabajo</label>
-            <select className="selects" id="tipo_trabajo" {...register("tipo_trabajo")} disabled={!activateEdit}>
+            <select className="selects" id="tipo_trabajo" {...register("tipo_trabajo")} disabled={true}>
               <option value="Nuevo">Nuevo</option>
               <option value="Reparacion">Reparación</option>
             </select>
@@ -253,7 +254,7 @@ export function VisualizarOrden() {
 
         {activateEdit && (
           //Llama a 2 métodos para permanecer en la misma página
-          <button className="boton_generico" onClick={() => { onSubmit(); handleActivateEdit() }}>Guardar</button>
+          <button className="boton_generico" onClick={() =>  onSubmit()}>Guardar</button>
         )}
       </div>
     </>
