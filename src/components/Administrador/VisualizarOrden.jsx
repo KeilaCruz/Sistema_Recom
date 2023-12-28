@@ -7,7 +7,7 @@ import { getTrabajadores } from "../../services/Trabajador"
 import Sidebar from "../partials/Sidebar"
 export function VisualizarOrden() {
   let { id } = useParams()
-  const { setValue, register, handleSubmit, formState: { errors } } = useForm()
+  const { setValue, register, handleSubmit, formState: { errors },getValues } = useForm()
   const [trabajadores, setTrabajadores] = useState([]);
   const [orden, setOrden] = useState([]);
   const [trabajadoresSeleccionados, setTrabajadoresSeleccionados] = useState([])
