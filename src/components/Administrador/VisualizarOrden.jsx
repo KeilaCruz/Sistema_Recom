@@ -16,7 +16,7 @@ export function VisualizarOrden() {
   const validarFechaEntrega = () => {
     const fechaActual = new Date();
     fechaActual.setHours(0, 0, 0, 0)
-    
+
     const data = getValues();
     const [dia, mes, anio] = data.fecha_entrega.split('/')
     const fechaEntrega = new Date(`${anio}/${mes}/${dia}`);

@@ -51,7 +51,7 @@ export function RegistrarOrden() {
     const validarFechaEntrega = () => {
         const fechaActual = new Date();
         fechaActual.setHours(0,0,0,0)
-        
+
         const data = getValues();
         const [dia, mes, anio] = data.fecha_entrega.split('/')
         const fechaEntrega = new Date(`${anio}/${mes}/${dia}`);
@@ -293,7 +293,7 @@ export function RegistrarOrden() {
                             <select id="tipo_trabajo"
                                 className="selects"
                                 {...register("tipotrabajo", { required: true })}>
-                                <option value="" disabled>Elija una opción</option>
+                                <option value="" selected disabled>Elija una opción</option>
                                 <option value="Nuevo">Nuevo</option>
                                 <option value="Reparacion">Reparación</option>
                             </select>
