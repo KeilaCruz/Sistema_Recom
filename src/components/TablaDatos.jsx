@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
+
+
 const TablaDatos = ({ data }) => {
+
+
+
   const [pestañaActual, setPestañaActual] = useState(1);
   const itemsPagina = 8;
 
@@ -9,6 +14,8 @@ const TablaDatos = ({ data }) => {
   const currentItems = data.slice(primerIndice, ultimoIndice);
 
   const totalPaginas = Math.ceil(data.length / itemsPagina);
+
+  
 
   const handleSiguientePagina = () => {
     setPestañaActual((prevPage) => prevPage + 1);
@@ -32,7 +39,7 @@ const TablaDatos = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {currentItems.map((cliente) => (
+            {resultados.map((cliente) => (
               <tr
                 key={cliente.idcliente}
                 className="font-sans font-normal text-[15px] border-b-[1px] border-black bg-white "

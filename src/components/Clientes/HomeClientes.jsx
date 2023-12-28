@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { getClientes } from "../../services/Cliente";
 import TablaDatos from "../TablaDatos";
 
+import { ResultadosProvider } from "../../Context/ResultadosProvider";
 
 function HomeClientes() {
-
   const [clientes, setClientes] = useState([]);
 
   useEffect(() => {
@@ -27,39 +27,43 @@ function HomeClientes() {
 
   return (
     <>
-      <main className="h-screen w-screen flex flex-row bg-colorFondo">
-        <div className="fixed h-full">
-          <Sidebar />
-        </div>
-        <section className="flex flex-col w-full h-auto ml-[289px]">
-          <Header placeholder={"Buscar por nombre de cliente ..."} />
+      <ResultadosProvider>
+        <main className="h-screen w-screen flex flex-row bg-colorFondo">
+          <div className="fixed h-full">
+            <Sidebar />
+          </div>
+          <section className="flex flex-col w-full h-auto ml-[289px]">
+            <Header placeholder={"Buscar por nombre de cliente ..."} />
 
-          <section className="m-[50px] flex flex-col rounded-[5px]  gap-[50px]">
-            <Link className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-[150px] rounded-[5px] hover:bg-[#3b315fd3] "
-              to="/nuevo'cliente">
-              <img
-                src="/src/assets/icons/add-icon.svg"
-                alt="icono para agregar un nuevo cliente"
-              />
-              <p className="font-sans font-medium text-[14px] text-white">
-                Nuevo cliente
-              </p>
-            </Link>
+            <section className="m-[50px] flex flex-col rounded-[5px]  gap-[50px]">
+              <Link
+                className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-[150px] rounded-[5px] hover:bg-[#3b315fd3] "
+                to="/nuevo'cliente"
+              >
+                <img
+                  src="/src/assets/icons/add-icon.svg"
+                  alt="icono para agregar un nuevo cliente"
+                />
+                <p className="font-sans font-medium text-[14px] text-white">
+                  Nuevo cliente
+                </p>
+              </Link>
 
-            
-            <section>
-              <TablaDatos data={clientes}/>
+              <section>
+                <TablaDatos data={clientes} />
+              </section>
             </section>
           </section>
-        </section>
-      </main>
+        </main>
+      </ResultadosProvider>
     </>
   );
 }
 
 export default HomeClientes;
 
-{/*
+{
+  /*
 
 <table className="w-full text-left shadow">
                 <thead className="bg-colorMain text-white ">
@@ -123,4 +127,5 @@ export default HomeClientes;
               </section>
 
 
-*/}
+*/
+}

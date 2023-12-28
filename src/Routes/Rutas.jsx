@@ -16,6 +16,8 @@ import { VisualizarTrabajador } from "../components/Administrador/VisualizarTrab
 import Clientes from "../Views/V_Clientes.jsx";
 import AddCliente from '../Views/V_NuevoCliente.jsx'
 
+import Trabajadores from "../Views/V_HomeTrabajadores.jsx"
+import AddTrabajador from "../Views/V_NuevoTrabajador.jsx"
 
 
 function Rutas() {
@@ -32,6 +34,7 @@ function Rutas() {
 
       <Route path="/nueva-contraseña" element={<NuevaContraseña />}></Route>
       <Route path="/clientes" element={<Clientes/>}></Route>
+      <Route path="/trabajadores" element={<Trabajadores/>}/>
       <Route path="/registrar-orden-trabajo" element={<RegistrarOrden />} />
       <Route path="/registrar-trabajador" element={<RegistrarTrabajador />} />
       <Route path="/visualizar-ordenes" element={<VisualizarOrdenes />} />
@@ -45,6 +48,8 @@ function Rutas() {
       />
     
       <Route path="/nuevo-cliente" element={<AddCliente/>}/>
+
+      <Route path='/nuevo-trabajador' element={<AddTrabajador/>}/>
   
     </Routes>
     
