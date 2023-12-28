@@ -289,8 +289,8 @@ export function RegistrarOrden() {
                                 className="selects"
                                 {...register("tipotrabajo", { required: true })}>
                                 <option value="" disabled>Elija una opción</option>
-                                <option value="nuevo">Nuevo</option>
-                                <option value="reparacion">Reparación</option>
+                                <option value="Nuevo">Nuevo</option>
+                                <option value="Reparacion">Reparación</option>
                             </select>
                             {errors.tipotrabajo && <span>Este campo es necesario</span>}
                         </div>

@@ -1,16 +1,46 @@
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
+import { toast } from "react-hot-toast"
 import { useParams } from "react-router-dom"
 import { editarOrden, marcarEstadoOrden, visualizarOrden } from "../../services/OrdenTrabajo"
 import { getTrabajadores } from "../../services/Trabajador"
 import Sidebar from "../partials/Sidebar"
 export function VisualizarOrden() {
   let { id } = useParams()
-  const { setValue, register, handleSubmit } = useForm()
+  const { setValue, register, handleSubmit, formState: { errors } } = useForm()
   const [trabajadores, setTrabajadores] = useState([]);
   const [orden, setOrden] = useState([]);
   const [trabajadoresSeleccionados, setTrabajadoresSeleccionados] = useState([])
   const [activateEdit, setActivateEdit] = useState(false)
+
+  const validarFechaEntrega = () => {
+    const fecha = new Date()
+    const diaActual = fecha.getDay()
+    const mesActual = fecha.getMonth()
+    const anioActual = fecha.getFullYear()
+    const fechaActual = new Date(diaActual, mesActual - 1, anioActual)
+
+    const data = getValues()
+    const fechaEntrega = new Date(data.fecha_entrega)
+
+    if (fechaActual <= fechaEntrega) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const validarPrecio = (precio) => {
+    const precioRegex = /^[0-9][0-9.]{1,10}$/
+
+    return precioRegex.test(precio)
+  }
+
+  const validarEspecificacionesYMaterial = (especificacionOMaterial) => {
+    const especificacionRegex = /^[A-Za-zÁÉÍÓÚáéíóúü0-9./\s-]{1,1000}$/
+
+    return especificacionRegex.test(especificacionOMaterial)
+  }
 
   useEffect(() => {
     async function loadTrabajadores() {
@@ -57,8 +87,33 @@ export function VisualizarOrden() {
     data.precio_material = parseFloat(data.precio_material);
     data.precio_trabajo = parseFloat(data.precio_trabajo)
     data.trabajadores = trabajadoresSeleccionados;
-    console.log(data)
-    editarOrden(data)
+
+    const validarPrecioMaterial = validarPrecio(data.precio_material)
+    const validarPrecioTrabajo = validarPrecio(data.precio_trabajo)
+    const fechaEntregaValida = validarFechaEntrega(data.fecha_entrega)
+    const materialValidado = validarEspecificacionesYMaterial(data.material_requerido)
+    const especificacionesvalidadas = validarEspecificacionesYMaterial(data.especificaciones)
+
+    //console.log(data)
+    if (!fechaEntregaValida) {
+      toast.error("La fecha de entrega debe ser posterior o igual a la actual")
+    } else if (!validarPrecioMaterial) {
+      toast.error("El precio debe tener sólo números y punto decimal")
+    } else if (!validarPrecioTrabajo) {
+      toast.error("El precio debe tener sólo números y punto decimal")
+    } else if (!materialValidado) {
+      toast.error("Sólo se permiten caracteres alfanuméricos y ./-")
+    } else if (!especificacionesvalidadas) {
+      toast.error("Sólo se permiten caracteres alfanuméricos y ./-")
+    }
+    else {
+      try {
+        editarOrden(data)
+      } catch (error) {
+        console.error(error)
+        toast.error("Ups ha ocurrido un error, vuelva a intentarlo")
+      }
+    }
   })
   const handleEstadoChange = async () => {
     await marcarEstadoOrden(id);
@@ -90,17 +145,17 @@ export function VisualizarOrden() {
             <select className="selects" id="tipo_trabajo" {...register("tipo_trabajo")} disabled={!activateEdit}>
               <option value="Nuevo">Nuevo</option>
               <option value="Reparacion">Reparación</option>
-            </select>
+            </select>            
           </div>
 
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="precio_material">Precio del material</label>
-            <input className="inputs_precio" id="precio_material" type="number" step="any" {...register("precio_material")} disabled={!activateEdit} />
+            <input className="inputs_precio" id="precio_material" type="number" step="any" {...register("precio_material")} disabled={!activateEdit} />            
           </div>
 
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="precio_trabajo">Precio del trabajo</label>
-            <input className="inputs_precio" id="precio_trabajo" type="number" step="any"  {...register("precio_trabajo")} disabled={!activateEdit} />
+            <input className="inputs_precio" id="precio_trabajo" type="number" step="any"  {...register("precio_trabajo")} disabled={!activateEdit} />            
           </div>
 
           <div className="mt-5">
@@ -127,12 +182,12 @@ export function VisualizarOrden() {
         <div className="flex-col ml-80 mt-5">
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="fecha_entrega">Fecha entrega </label>
-            <input className="inputs" id="fecha_entrega" type="date" {...register("fecha_entrega")} disabled={!activateEdit} />
+            <input className="inputs" id="fecha_entrega" type="date" {...register("fecha_entrega")} disabled={!activateEdit} />            
           </div>
 
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="material_requerido">Material requerido </label>
-            <textarea className="area_texto" id="material_requerido" type="text" {...register("material_requerido")} disabled={!activateEdit}></textarea>
+            <textarea className="area_texto" id="material_requerido" type="text" {...register("material_requerido")} disabled={!activateEdit}></textarea>            
           </div>
 
           <div className="mt-5">
