@@ -34,9 +34,9 @@ export function RegistrarOrden() {
         const fecha = new Date()
         const diaActual = fecha.getDate()
         const mesActual = fecha.getMonth() + 1
-        const anioActual = fecha.getFullYear()        
+        const anioActual = fecha.getFullYear()
         //const fechaActual = `${diaActual}-${mesActual}-${anioActual}` 
-               
+
         if (diaActual < 10) {
             let dia = "0" + diaActual
             const fechaActual = `${anioActual}-${mesActual}-${dia}`
@@ -49,21 +49,23 @@ export function RegistrarOrden() {
     }
 
     const validarFechaEntrega = () => {
-        const fecha = new Date()
-        const diaActual = fecha.getDay()
-        const mesActual = fecha.getMonth()
-        const anioActual = fecha.getFullYear()
-        const fechaActual = new Date(diaActual, mesActual - 1, anioActual)
+        const fechaActual = new Date();
+        fechaActual.setHours(0,0,0,0)
+        
+        const data = getValues();
+        const [dia, mes, anio] = data.fecha_entrega.split('/')
+        const fechaEntrega = new Date(`${anio}/${mes}/${dia}`);
 
-        const data = getValues()
-        const fechaEntrega = new Date(data.fecha_entrega)
+        console.log(fechaActual + " ---- " + fechaEntrega);
 
+        // Comparar las fechas y horas completas
         if (fechaActual <= fechaEntrega) {
-            return true
+            return true;
         } else {
-            return false
+            return false;
         }
     }
+
 
     const validarPrecio = (precio) => {
         const precioRegex = /^[0-9][0-9.]{1,10}$/
@@ -184,13 +186,16 @@ export function RegistrarOrden() {
             toast.error("El precio ingresado sólo debe ser con números")
         } else if (!especificacionValida) {
             toast.error("Sólo se permiten caracteres alfanuméricos y ./-")
-        } else if (existeCliente) {
+        } else if (trabajadoresSeleccionados.length === 0) {
+            toast.error("Debe seleccionar al menos a un trabajador")
+        }
+        else if (existeCliente) {
             try {
                 idOrdenRegistrada = await registrarOrden(data);
 
                 toast.success("Se ha registrado con éxito")
-                navigate("/trabajos")
-                await generarPDF(data)
+                //navigate("/trabajos")
+                //await generarPDF(data)
 
             } catch (e) {
                 console.error("Error al registrar orden" + e)

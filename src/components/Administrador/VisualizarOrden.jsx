@@ -14,19 +14,20 @@ export function VisualizarOrden() {
   const [activateEdit, setActivateEdit] = useState(false)
 
   const validarFechaEntrega = () => {
-    const fecha = new Date()
-    const diaActual = fecha.getDay()
-    const mesActual = fecha.getMonth()
-    const anioActual = fecha.getFullYear()
-    const fechaActual = new Date(diaActual, mesActual - 1, anioActual)
+    const fechaActual = new Date();
+    fechaActual.setHours(0, 0, 0, 0)
+    
+    const data = getValues();
+    const [dia, mes, anio] = data.fecha_entrega.split('/')
+    const fechaEntrega = new Date(`${anio}/${mes}/${dia}`);
 
-    const data = getValues()
-    const fechaEntrega = new Date(data.fecha_entrega)
+    console.log(fechaActual + " ---- " + fechaEntrega);
 
+    // Comparar las fechas y horas completas
     if (fechaActual <= fechaEntrega) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   }
 
@@ -145,17 +146,17 @@ export function VisualizarOrden() {
             <select className="selects" id="tipo_trabajo" {...register("tipo_trabajo")} disabled={!activateEdit}>
               <option value="Nuevo">Nuevo</option>
               <option value="Reparacion">Reparación</option>
-            </select>            
+            </select>
           </div>
 
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="precio_material">Precio del material</label>
-            <input className="inputs_precio" id="precio_material" type="number" step="any" {...register("precio_material")} disabled={!activateEdit} />            
+            <input className="inputs_precio" id="precio_material" type="number" step="any" {...register("precio_material")} disabled={!activateEdit} />
           </div>
 
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="precio_trabajo">Precio del trabajo</label>
-            <input className="inputs_precio" id="precio_trabajo" type="number" step="any"  {...register("precio_trabajo")} disabled={!activateEdit} />            
+            <input className="inputs_precio" id="precio_trabajo" type="number" step="any"  {...register("precio_trabajo")} disabled={!activateEdit} />
           </div>
 
           <div className="mt-5">
@@ -182,12 +183,12 @@ export function VisualizarOrden() {
         <div className="flex-col ml-80 mt-5">
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="fecha_entrega">Fecha entrega </label>
-            <input className="inputs" id="fecha_entrega" type="date" {...register("fecha_entrega")} disabled={!activateEdit} />            
+            <input className="inputs" id="fecha_entrega" type="date" {...register("fecha_entrega")} disabled={!activateEdit} />
           </div>
 
           <div className="mt-5">
             <label className="etiqueta mt-5" htmlFor="material_requerido">Material requerido </label>
-            <textarea className="area_texto" id="material_requerido" type="text" {...register("material_requerido")} disabled={!activateEdit}></textarea>            
+            <textarea className="area_texto" id="material_requerido" type="text" {...register("material_requerido")} disabled={!activateEdit}></textarea>
           </div>
 
           <div className="mt-5">
