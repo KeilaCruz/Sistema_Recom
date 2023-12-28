@@ -109,13 +109,14 @@ export function VisualizarOrden() {
     }
     else {
       try {
-        editarOrden(data)
+        await editarOrden(data)
       } catch (error) {
         console.error(error)
         toast.error("Ups ha ocurrido un error, vuelva a intentarlo")
       }
     }
   })
+  
   const handleEstadoChange = async () => {
     await marcarEstadoOrden(id);
 
