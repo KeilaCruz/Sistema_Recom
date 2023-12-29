@@ -50,7 +50,7 @@ export function RegistrarOrden() {
 
     const validarFechaEntrega = () => {
         const fechaActual = new Date();
-        fechaActual.setHours(0,0,0,0)
+        fechaActual.setHours(0, 0, 0, 0)
 
         const data = getValues();
         const [dia, mes, anio] = data.fecha_entrega.split('/')
@@ -195,7 +195,7 @@ export function RegistrarOrden() {
 
                 toast.success("Se ha registrado con éxito")
                 //navigate("/trabajos")
-                //await generarPDF(data)
+                await generarPDF(data)
 
             } catch (e) {
                 console.error("Error al registrar orden" + e)
@@ -235,8 +235,8 @@ export function RegistrarOrden() {
             const trabajador = trabajadores.find(t => t.idtrabajador === trabajadorId);
             return `${trabajador.nom_trabajador} ${trabajador.apepaterno} ${trabajador.apematerno} ${trabajador.tipotrabajador}`;
         }).join(', ');
-
         const documento = new jsPDF()
+
         documento.setFont("Arial", "normal")
         documento.setFontSize(20)
         documento.text('Torno-Soldadura y Servicios En General RECOM \t', 40, 10)
@@ -244,7 +244,6 @@ export function RegistrarOrden() {
         documento.text('AV. Uno 305 Col.Tierra y Libertad \tRFC: BARC820218UU7 \tCURP: BARC820218MVZRTL03', 15, 20)
         documento.text('TEL. 9212066688 \tCorreo: Claus2118.cb@gmail.com \tCP.96580', 20, 30)
         documento.text(`Coatzacoalcos, Ver., a ${fechaFormateada}`, 60, 40)
-        documento.text(`${data.nombre} ${data.ape_paterno} ${data.ape_materno}`, 60, 50)
         documento.text(`Especificaciones del trabajo: ${data.especificaciones}`, 20, 60)
         documento.text(`Tipo de trabajo: ${data.tipotrabajo}`, 20, 70)
         documento.text(`Material: ${data.materialtrabajo}`, 20, 80)
@@ -252,7 +251,14 @@ export function RegistrarOrden() {
         documento.text(`Precio del trabajo: ${data.precio}`, 20, 100)
         documento.text(`Trabajadores: ${trabajadoresText}`, 20, 110);
 
-        documento.save(`Orden_Trabajo_${data.nombre}_${idOrdenRegistrada}.pdf`)//De momento
+        if (existeCliente) {
+            const cliente = resultBusqueda[0]
+            documento.text(`${cliente.nombre} ${cliente.ape_paterno} ${cliente.ape_materno}`, 60, 50)
+            documento.save(`Orden_Trabajo_${cliente.nombre}_${idOrdenRegistrada}.pdf`)
+        } else {
+            documento.text(`${data.nombre} ${data.ape_paterno} ${data.ape_materno}`, 60, 50)
+            documento.save(`Orden_Trabajo_${data.nombre}_${idOrdenRegistrada}.pdf`)
+        }
     }
 
     return (
