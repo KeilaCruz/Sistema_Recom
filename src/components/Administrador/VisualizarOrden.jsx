@@ -7,11 +7,12 @@ import { getTrabajadores } from "../../services/Trabajador"
 import Sidebar from "../partials/Sidebar"
 export function VisualizarOrden() {
   let { id } = useParams()
-  const { setValue, register, handleSubmit, formState: { errors },getValues } = useForm()
+  const { setValue, register, handleSubmit, formState: { errors }, getValues } = useForm()
   const [trabajadores, setTrabajadores] = useState([]);
   const [orden, setOrden] = useState([]);
   const [trabajadoresSeleccionados, setTrabajadoresSeleccionados] = useState([])
   const [activateEdit, setActivateEdit] = useState(false)
+  const [fechaOriginal, setFechaOriginal] = useState('')
 
   const validarFechaEntrega = () => {
     const fechaActual = new Date();
@@ -71,6 +72,7 @@ export function VisualizarOrden() {
       setValue("telefono_cliente", orden.telefonoc)
 
       setTrabajadoresSeleccionados(orden.idtrabajadores || [])
+      setFechaOriginal(orden.fechaentrega)
     }
     loadOrden();
   }, [])
@@ -95,8 +97,26 @@ export function VisualizarOrden() {
     const materialValidado = validarEspecificacionesYMaterial(data.material_requerido)
     const especificacionesvalidadas = validarEspecificacionesYMaterial(data.especificaciones)
 
-    //console.log(data)
-    if (!fechaEntregaValida) {
+    if (fechaOriginal === data.fecha_entrega) {
+      if (!validarPrecioMaterial) {
+        toast.error("El precio debe tener sólo números y punto decimal")
+      } else if (!validarPrecioTrabajo) {
+        toast.error("El precio debe tener sólo números y punto decimal")
+      } else if (!materialValidado) {
+        toast.error("Sólo se permiten caracteres alfanuméricos y ./-")
+      } else if (!especificacionesvalidadas) {
+        toast.error("Sólo se permiten caracteres alfanuméricos y ./-")
+      }
+      else {
+        try {
+          await editarOrden(data)
+          handleActivateEdit()
+        } catch (error) {
+          console.error(error)
+          toast.error("Ups ha ocurrido un error, vuelva a intentarlo")
+        }
+      }
+    } else if (!fechaEntregaValida) {
       toast.error("La fecha de entrega debe ser posterior o igual a la actual")
     } else if (!validarPrecioMaterial) {
       toast.error("El precio debe tener sólo números y punto decimal")
@@ -117,7 +137,7 @@ export function VisualizarOrden() {
       }
     }
   })
-  
+
   const handleEstadoChange = async () => {
     await marcarEstadoOrden(id);
 
@@ -254,7 +274,7 @@ export function VisualizarOrden() {
 
         {activateEdit && (
           //Llama a 2 métodos para permanecer en la misma página
-          <button className="boton_generico" onClick={() =>  onSubmit()}>Guardar</button>
+          <button className="boton_generico" onClick={() => onSubmit()}>Guardar</button>
         )}
       </div>
     </>
