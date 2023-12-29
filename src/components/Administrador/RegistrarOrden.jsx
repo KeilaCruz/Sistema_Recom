@@ -135,12 +135,12 @@ export function RegistrarOrden() {
     const handleBuscar = async () => {
         let resultado = await buscarCliente(idCliente, nombreCliente, apePaterCliente, apeMaterCliente);
         setResultBusqueda(resultado);
-        if (resultado.length > 0) {
+        if (Array.isArray(resultado) && resultado.length > 0) {
             setExisteCliente(true)
             setIdClienteResult(resultado[0].id_cliente);
         } else {
             setExisteCliente(false)
-            toast.error("El cliente no está registrado en el sistema")
+            toast.error("Ingrese el nombre completo, si aún así no aparece, entonces registrelo")
         }
     }
     const handleCheckboxChange = (trabajadorId) => {
@@ -276,7 +276,7 @@ export function RegistrarOrden() {
                         onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
 
                     <button className="boton_busqueda" onClick={handleBuscar}>Buscar</button>
-                    {resultBusqueda.map(cliente => (
+                    {resultBusqueda && resultBusqueda.map(cliente => (
                         <CardBusquedaCliente key={cliente.id_cliente} cliente={cliente} />
                     ))
                     }
@@ -326,7 +326,7 @@ export function RegistrarOrden() {
                         <div className="mt-5 mb-5">
                             <label className="etiqueta"> Seleccione el trabajador </label>
                             <br />
-                            {trabajadores.map((trabajador) => (
+                            {trabajadores && trabajadores.map((trabajador) => (
                                 <div key={trabajador.idtrabajador}>
                                     <input id="trabaador" type="checkbox" value={trabajador.idtrabajador} onChange={() => handleCheckboxChange(trabajador.idtrabajador)} />
                                     <label className="etiqueta_checkbox" htmlFor={`trabajador_${trabajador.idtrabajador}`}>
