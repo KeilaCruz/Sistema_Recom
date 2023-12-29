@@ -39,7 +39,7 @@ const TablaDatos = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {resultados.map((cliente) => (
+            {currentItems.map((cliente) => (
               <tr
                 key={cliente.idcliente}
                 className="font-sans font-normal text-[15px] border-b-[1px] border-black bg-white "

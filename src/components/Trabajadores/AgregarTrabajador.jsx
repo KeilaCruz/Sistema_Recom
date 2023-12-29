@@ -83,7 +83,7 @@ function AgregarTrabajador() {
                       Teléfono
                     </label>
                     <input
-                      className="px-[10px] py-[8px] mt-2 rounded-[5px] border-[1px] border-colorSecundario focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F] text-colorSecundario w-[400px]"
+                      className="px-[10px] py-[8px] mt-2 rounded-[5px] border-[1px] border-colorSecundario focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F] text-colorSecundario w-[400px] "
                       type="tel"
                       placeholder="Ingresa el teléfono del trabajador "
                     />

@@ -38,7 +38,7 @@ function HomeClientes() {
             <section className="m-[50px] flex flex-col rounded-[5px]  gap-[50px]">
               <Link
                 className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-[150px] rounded-[5px] hover:bg-[#3b315fd3] "
-                to="/nuevo'cliente"
+                to="/nuevo-cliente"
               >
                 <img
                   src="/src/assets/icons/add-icon.svg"

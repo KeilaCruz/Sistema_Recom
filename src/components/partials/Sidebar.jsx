@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { cerrarSesion } from "../../services/Auth/Autenticación";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import OptionSidebar from "./OptionSidebar";
 
