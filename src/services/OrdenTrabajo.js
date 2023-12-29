@@ -11,7 +11,7 @@ const rpcVisualizarCalendario = "get_calendar_ordenes";
 const rpcMarcarEntregado = "marcar_estado_orden";
 export const registrarOrden = async (orden) => {
     try {
-        const { error } = await supabase.rpc(rpcRegistrarOrden, {
+        const { error,data } = await supabase.rpc(rpcRegistrarOrden, {
             idcliente_b: orden.idCliente,
             name: orden.nombre,
             apepaterno: orden.ape_paterno,
@@ -27,8 +27,9 @@ export const registrarOrden = async (orden) => {
             trabajadores_id: orden.trabajadores,
             materialrequerido: orden.materialtrabajo,
             preciomaterial: orden.preciomaterial
-        });
+        });        
         if (error) throw error;
+        return data;
     } catch (error) {
         console.error(error);
     }

@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "../partials/Sidebar";
 import Calendario from "./Calendario";
+import { VisualizarOrdenes } from "../Administrador/VisualizarOrdenes";
 
 function HomeTrabajos() {
     return (
@@ -19,6 +20,9 @@ function HomeTrabajos() {
 
             <div>
                 <Calendario/>
+            </div>
+            <div>
+                <VisualizarOrdenes></VisualizarOrdenes>
             </div>
 
         </>

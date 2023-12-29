@@ -1,8 +1,11 @@
 import { useEffect } from "react"
 import { useState } from "react"
+import { toast } from 'react-hot-toast'
 import { buscarOrden, getAllOrdenTrabajo, getOrdenActivas, getOrdenEntregada } from "../../services/OrdenTrabajo"
 import { useNavigate } from "react-router-dom";
 import { CardBusquedaOrden } from "./CardBusquedaOrden";
+import Sidebar from "../partials/Sidebar";
+
 
 export function VisualizarOrdenes() {
     const [ordenes, setOrdenes] = useState([])
@@ -75,6 +78,9 @@ export function VisualizarOrdenes() {
     const handleBuscar = async () => {
         let resultado = await buscarOrden(idOrden, fechaOrden, nombreCliente, apePaterno, apeMaterno);
         setResultBusqueda(resultado);
+        if(resultado.length == 0){
+            toast.error('No se encontraron resultados');
+        }
     }
 
     const handleNavegar = async (idOrden) => {
@@ -82,42 +88,56 @@ export function VisualizarOrdenes() {
     }
     return (
         <>
-            <input id="barra_busqueda" placeholder="Núm orden: 123, Fecha solicitud: 0000-00-00, Nombre: Lucas Cruz Romero" onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
-            <button onClick={handleBuscar}>Buscar</button>
-            {resultBusqueda.map(orden => (
-                <CardBusquedaOrden orden={orden} />
-            ))}
-            <button onClick={() => handleFiltro("Todos")}>Todos</button>
-            <button onClick={() => handleFiltro("Pendientes")}>Pendientes</button>
-            <button onClick={() => handleFiltro("Entregado")}>Entregado</button>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Orden de trabajo</td>
-                        <td>Trabajador</td>
-                        <td>Fecha entrega</td>
-                        <td>Estado</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {ordenes.map((orden) => (
-                        <tr key={orden.ordentrabajo}>
-                            <td>{orden.ordentrabajo}</td>
-                            <td>{orden.nomtrabajadores[0]}</td>
-                            <td>{orden.fechaentrega}</td>
-                            {orden.estado_o ? (
-                                <td>Pendiente</td>
-                            ) : (
-                                <td>Entregado</td>
-                            )}
-                            {/* Aquí ira un icono de una flechita*/}
-                            <td>
-                                <button onClick={() => handleNavegar(orden.ordentrabajo)}>Detalles</button>
-                            </td>
+            <div className="fixed">
+                <Sidebar />
+            </div>
+            <div className="ml-80">
+                <input className="inputs" id="barra_busqueda" placeholder="Núm orden: 123, Fecha solicitud: 0000-00-00, Nombre: Lucas Cruz Romero" onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
+                <button className="boton_busqueda" onClick={handleBuscar}>Buscar</button>
+                {resultBusqueda.map(orden => (
+                    <CardBusquedaOrden orden={orden} />
+                ))}
+
+            </div>
+            <div className="ml-80 mt-5 mb-5">
+                <button className="boton_filtrado" onClick={() => handleFiltro("Todos")}>Todos</button>
+                <button className="boton_filtrado" onClick={() => handleFiltro("Pendientes")}>Pendientes</button>
+                <button className="boton_filtrado" onClick={() => handleFiltro("Entregado")}>Entregado</button>
+            </div>
+
+            <section className="mb-4">
+                <table className="w-3/4 ml-80 text-left shadow">
+                    <thead className="bg-colorMain font-sans font-normal text-[18px] text-white sticky">
+                        <tr>
+                            <td>Orden de trabajo</td>
+                            <td>Trabajador</td>
+                            <td>Fecha entrega</td>
+                            <td>Estado</td>
+                            <td>Ver detalles</td>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {ordenes.map((orden) => (
+                            <tr key={orden.ordentrabajo} className="font-sans font-normal text-[18px] border-b-[1px] border-black bg-white">
+                                <td className="p-[5px] ">{orden.ordentrabajo}</td>
+                                <td>{orden.nomtrabajadores[0]}</td>
+                                <td>{orden.fechaentrega}</td>
+                                {orden.estado_o ? (
+                                    <td>Pendiente</td>
+                                ) : (
+                                    <td>Entregado</td>
+                                )}
+                                {/* Aquí ira un icono de una flechita*/}
+                                <td>
+                                    <button className=" hover:bg-[#4D407E]" onClick={() => handleNavegar(orden.ordentrabajo)}>Detalles</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
+            </section>
+
         </>
     )
 }

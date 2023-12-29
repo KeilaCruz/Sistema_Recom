@@ -5,16 +5,25 @@ import React, { useEffect, useState } from "react";
 import { parseISO } from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 
-import { visualizarCalendario, visualizarOrden } from "../../services/OrdenTrabajo";
+import { visualizarCalendario } from "../../services/OrdenTrabajo";
 import { ModalCalendario } from "../Modales/ModalCalendario";
+import { useNavigate } from "react-router-dom";
 
 function Calendario() {
 
     const [eventos, setEventos] = useState([]);
+    const [infoEvento, setInfoEvento] = useState(null)
     const [showModal, setShowModal] = useState(false)
+    const navigate = useNavigate()
 
-    const handleModal = () => {
+    const handleRedireccion = () => {
+        const idOrden = infoEvento.idorden
+        navigate(`/visualizar-orden/${idOrden}`)
+    }
+
+    const handleModal = (info) => {
         setShowModal(true)
+        setInfoEvento(info.event.extendedProps)
     }
 
     const handleCloseModal = () => {
@@ -32,6 +41,7 @@ function Calendario() {
                 return {
                     title: evento.especificacion,
                     description: evento.idorden,
+                    extendedProps: evento,
                     start: new Date(fechaEntregaZonificada),
                 }
             });
@@ -41,31 +51,33 @@ function Calendario() {
             console.error("Error al obtener eventos:", error);
         }
     }
-    
+
     useEffect(() => {
         fetchEventos();
     }, [])
 
+    console.log(infoEvento)
+
     return (
-        <div className="flex-col p-4 ml-80">
+        <div className="flex-col w-2/3 p-4 ml-80 text-[14px]">
             <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
                 locales={[esLocale]} // Establece el idioma español
                 locale="es" // Establece el idioma por defecto
-                height={"90vh"}
+                height={"80vh"}
                 events={eventos}
                 eventContent={(info) => (
                     <div>
-                        <b>{info.event.title}</b>
+                        <b>{info.event.title.substring(0, 12)}{info.event.title.length > 12 ? '...' : ''}</b>
                         <p>{info.event.description}</p>
                     </div>
                 )}
-                eventClick={() => handleModal()}
+                eventClick={(info) => handleModal(info)}
             />
             {showModal && (
                 <div>
-                    <ModalCalendario onClose={handleCloseModal} orden={eventos}></ModalCalendario>
+                    <ModalCalendario onClose={handleCloseModal} orden={infoEvento} verOrden={handleRedireccion}></ModalCalendario>
                 </div>
             )
             }
