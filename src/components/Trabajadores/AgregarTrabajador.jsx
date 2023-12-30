@@ -2,9 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../partials/Sidebar";
 import Profile from "../partials/Profile";
+import { useForm } from "react-hook-form";
 
 function AgregarTrabajador() {
   const navigate = useNavigate();
+  const {register, handleSubmit} = useForm()
+
+  const onSubmit = handleSubmit(async(data)=>{
+
+  })
 
   const regresar = () => {
     navigate(-1);
@@ -39,7 +45,7 @@ function AgregarTrabajador() {
             </article>
           </header>
 
-          <section className="bg-white p-[40px] mx-[70px] my-[30px] flex flex-col i font-sans shadow rounded-[5px] w-[1000px]">
+          <section className="bg-white p-[40px] mx-[70px] my-[30px] flex flex-col  font-sans shadow rounded-[5px] w-[1000px]">
             <form>
               <ul className="flex flex-col gap-[30px]">
                 <li className="flex flex-row items-center gap-[100px]">
