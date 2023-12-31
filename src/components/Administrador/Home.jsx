@@ -20,7 +20,10 @@ function Home() {
           <Sidebar />
         </div>
         <div className="flex flex-col w-full h-auto ml-[290px]">
-          <Header placeholder={"Buscar por trabajo, cliente, trabajores....."} />
+          <Header
+            placeholder={"Buscar por trabajo, cliente, trabajores....."}
+          />
+
         </div>
       </main>
     </>
