@@ -35,15 +35,17 @@ export const agregarCliente = async (cliente) => {
   try {
     const { data, error } = await supabase.rpc(rpcAddClient, {
       nombre: cliente.nombre,
-      apePaterno: cliente.apellidoPaterno,
-      apeMaterno: cliente.apellidoMaterno,
+      apepaterno: cliente.apellidoPaterno,
+      apematerno: cliente.apellidoMaterno,
       correo: cliente.correo,
       telefono: cliente.telefono,
     });
 
-    if(error) throw error
-
-    if(data) return true
+    if(data){
+      return true;
+    }else{
+      return false;
+    }
   } catch (error) {
     console.log(error);
   }

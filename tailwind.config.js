@@ -7,6 +7,7 @@ export default {
         colorMain: "#152034",
         colorFondo: "#F4F1ED",
         colorSecundario: "#3B315F",
+        colorHover: "rgba(255,255,255,0.2)",
         colorDisabled: "rgba(255,255,255,0.2)",
         hoverButtonAceptar: "#0D1422",
 

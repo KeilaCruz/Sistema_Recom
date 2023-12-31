@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 
 
-export default function ModalConfirmacion() {
+
+export default function ModalConfirmacion({mostrar,onClose, texto}) {
   const modalRef = useRef(null);
 
   const cerrarModal = () => {
@@ -24,7 +25,7 @@ export default function ModalConfirmacion() {
   }, [mostrar]);
 
   return (
-    <>
+    <> 
       <dialog
         ref={modalRef}
         className={` flex flex-col justify-center items-center bg-[#3B315F]  w-[700px] h-auto p-[30px] rounded-[5px] ${
@@ -33,11 +34,11 @@ export default function ModalConfirmacion() {
       >
         <section className="flex flex-row items-center gap-[30px] ">
           <img
-            src="/src/assets/icons/valid-icon.svg"
+            src="/src/assets/icons/warning-icon.svg"
             alt="icono de flecha aceptado"
           />
           <p className="text-[20px] text-white font-sans font-semibold ">
-            {children}
+            ¿Estas seguro de {texto}
           </p>
         </section>
       </dialog>

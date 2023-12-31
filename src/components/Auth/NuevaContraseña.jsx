@@ -11,12 +11,13 @@ function NuevaContraseña() {
   const [mostrarModal, setMostrarModal] = useState(false);
 
   const handleMostrarModal = () => {
-    setMostrarModal(true);
+    setMostrarModal(true); 
   };
 
   const handleCerrarModal = () => {
     setMostrarModal(false);
   };
+  
   const regresar = () => {
     navigate(-1);
   };

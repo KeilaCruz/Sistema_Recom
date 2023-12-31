@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form"
 import { toast } from 'react-hot-toast'
 import { registrarTrabajador } from "../../services/Trabajador";
-export function RegistrarTrabajador() {
+
+
+function RegistrarTrabajador() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -17,7 +19,6 @@ export function RegistrarTrabajador() {
         const apePaternoValido = validarNombreCompleto(data.apepaterno)
         const apeMaternoValido = validarNombreCompleto(data.apematerno)
 
-        console.log(data)
         if (!nombreValido) {
             toast.error('El nombre debe incluir máximo 40 letras')
         } else if (!apePaternoValido) {
@@ -64,3 +65,4 @@ export function RegistrarTrabajador() {
     )
 }
 
+export default RegistrarTrabajador;

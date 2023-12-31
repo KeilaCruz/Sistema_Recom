@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-
-
+import { Link } from "react-router-dom";
 
 const TablaDatos = ({ data }) => {
-
-
-
   const [pestañaActual, setPestañaActual] = useState(1);
   const itemsPagina = 8;
 
@@ -14,8 +10,6 @@ const TablaDatos = ({ data }) => {
   const currentItems = data.slice(primerIndice, ultimoIndice);
 
   const totalPaginas = Math.ceil(data.length / itemsPagina);
-
-  
 
   const handleSiguientePagina = () => {
     setPestañaActual((prevPage) => prevPage + 1);
@@ -49,11 +43,13 @@ const TablaDatos = ({ data }) => {
                 <td>{cliente.apepaterno}</td>
                 <td>{cliente.apematerno}</td>
                 <td>
-                  <img
-                    src="/src/assets/icons/go-details-icon.svg"
-                    alt="icono para ver más detalles del cliente"
-                    className=""
-                  />
+                  <Link to="/detalle-cliente">
+                    <img
+                      src="/src/assets/icons/go-details-icon.svg"
+                      alt="icono para ver más detalles del cliente"
+                      className="cursor-pointer"
+                    />
+                  </Link>
                 </td>
               </tr>
             ))}
