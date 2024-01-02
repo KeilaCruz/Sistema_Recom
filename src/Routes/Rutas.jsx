@@ -9,7 +9,7 @@ import Clientes from "../Views/V_Clientes.jsx";
 import HomeTrabajos from "../Views/V_HomeTrabajos.jsx";
 import V_RegistrarOrden from "../Views/V_RegistrarOrden";
 import V_RegistrarTrabajador from "../Views/V_RegistrarTrabajador"
-import V_VisualizarOrdenes from "../Views/V_VisualizarOrdenes";
+//import V_VisualizarOrdenes from "../Views/V_VisualizarOrdenes";
 import V_VisualizarTrabajadores from "../Views/V_VisualizarTrabajadores";
 import V_VisualizarTrabajador from "../Views/V_VisualizarTrabajador";
 import V_VisualizarOrden from "../Views/V_VisualizarOrden";
@@ -29,7 +29,7 @@ function Rutas() {
 
       <Route path="/trabajos" element={<HomeTrabajos />}></Route>
       <Route path="/registrar-orden-trabajo" element={<V_RegistrarOrden />}></Route>
-      <Route path="/visualizar-ordenes" element={<V_VisualizarOrdenes />} />
+      {/*<Route path="/visualizar-ordenes" element={<V_VisualizarOrdenes />} />*/}
       <Route path="/visualizar-orden/:id" element={<V_VisualizarOrden />} />
       {/*<Route path="/trabajos" element={<EventosProvider> <HomeTrabajos /></EventosProvider>}></Route>
       <Route path="/registrar-orden-trabajo" element={<EventosProvider><RegistrarOrden/></EventosProvider>} />*/}
