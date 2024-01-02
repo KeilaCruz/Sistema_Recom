@@ -133,13 +133,13 @@ export function VisualizarOrdenes() {
                                 <td>{orden.nomtrabajadores[0]}</td>
                                 <td>{orden.fechaentrega}</td>
                                 {orden.estado_o ? (
-                                    <td>Pendiente</td>
+                                    <td className="trabajos_pendientes">Pendiente</td>
                                 ) : (
-                                    <td>Entregado</td>
+                                    <td className="trabajos_entregados">Entregado</td>
                                 )}
                                 {/* Aquí ira un icono de una flechita*/}
                                 <td>
-                                    <button className=" hover:bg-[#4D407E]" onClick={() => handleNavegar(orden.ordentrabajo)}>Detalles</button>
+                                    <button className="boton_detalles_orden" onClick={() => handleNavegar(orden.ordentrabajo)}>Detalles</button>
                                 </td>
                             </tr>
                         ))}

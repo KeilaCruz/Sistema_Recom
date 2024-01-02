@@ -32,3 +32,12 @@
 .boton_detalle_busqueda{
     @apply bg-white p-[5px] w-[100px] h-[40px] mt-5 ml-40 text-black text-[16px] font-sans font-medium rounded hover:bg-slate-500
 }
+.trabajos_pendientes{
+    @apply text-red-700 font-sans font-semibold
+}
+.trabajos_entregados{
+    @apply text-green-900 font-sans font-semibold
+}
+.boton_detalles_orden{
+    @apply  p-[10px] w-[150px] mt-0 text-black font-sans  rounded hover:bg-[#4D407E] hover:text-white
+}
