@@ -19,6 +19,12 @@ export function VisualizarOrdenes() {
     const [apeMaterno, setApeMaterno] = useState(null);
     const navigate = useNavigate();
 
+    const validarCriterioBusqueda = (criterioB) => {
+        const criterioBRegex = /^[A-Za-zÁÉÍÓÚáéíóúü0-9\s]{1,120}$/
+
+        return criterioBRegex.test(criterioB)
+    }
+
     let numberReg = /^\d+$/;
     let dateReg = /^\d{4}[-]\d{2}[-]\d{2}$/;
     let nombreReg = /^\D+$/;
@@ -37,11 +43,18 @@ export function VisualizarOrdenes() {
         }
         loadOrdenes()
     }, [filtro])
+
     const handleFiltro = (filtro) => {
         setFiltro(filtro)
     }
+
     useEffect(() => {
-        const handleBusqueda = async () => {
+        handleBusqueda();
+    }, [criterioBusqueda])
+
+    const handleBusqueda = async () => {
+        const validacionBusqueda = validarCriterioBusqueda(criterioBusqueda)
+        if (validacionBusqueda) {
             const isNumOrden = numberReg.test(criterioBusqueda);
             const isFecha = dateReg.test(criterioBusqueda);
             const isName = nombreReg.test(criterioBusqueda);
@@ -66,19 +79,16 @@ export function VisualizarOrdenes() {
                 setNombre(nombres[0]);
                 setApePaterno(nombres[1]);
                 setApeMaterno(nombres[2]);
-            } else {
-                //mostrar toast que no es un criterio válido
-                console.log("No es un criterio de búsqueda");
-                return;
             }
+        } else {
+            toast.error("No es un criterio de búsqueda");
         }
-        handleBusqueda();
-    }, [criterioBusqueda])
+    }
 
     const handleBuscar = async () => {
         let resultado = await buscarOrden(idOrden, fechaOrden, nombreCliente, apePaterno, apeMaterno);
         setResultBusqueda(resultado);
-        if(resultado.length == 0){
+        if (!Array.isArray(resultado) || resultado.length === 0) {
             toast.error('No se encontraron resultados');
         }
     }
@@ -94,7 +104,7 @@ export function VisualizarOrdenes() {
             <div className="ml-80">
                 <input className="inputs" id="barra_busqueda" placeholder="Núm orden: 123, Fecha solicitud: 0000-00-00, Nombre: Lucas Cruz Romero" onChange={(evt) => setCriterioBusqueda(evt.target.value)} />
                 <button className="boton_busqueda" onClick={handleBuscar}>Buscar</button>
-                {resultBusqueda.map(orden => (
+                {resultBusqueda && resultBusqueda.map(orden => (
                     <CardBusquedaOrden orden={orden} />
                 ))}
 
