@@ -2,8 +2,10 @@ import React from "react";
 import Sidebar from "../partials/Sidebar";
 import Calendario from "./Calendario";
 import { VisualizarOrdenes } from "../Administrador/VisualizarOrdenes";
+import { useNavigate } from "react-router-dom";
 
 function HomeTrabajos() {
+    const navigate = useNavigate()    
     return (
         <>
             <div className="fixed">
@@ -11,9 +13,7 @@ function HomeTrabajos() {
             </div>
 
             <div className="flex-col p-4 ">
-                <button className="bg-[#3B315F] p-[10px] w-[150px] ml-80 mt-0
-                 text-white text-[20px] font-sans font-medium rounded 
-                 hover:bg-[#4D407E]">
+                <button className="ml-80 boton_generico" onClick={() => navigate("/registrar-orden-trabajo")}>
                     Agregar trabajo
                 </button>
             </div>
