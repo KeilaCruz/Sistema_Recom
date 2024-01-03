@@ -16,26 +16,7 @@ export function VisualizarTrabajadores() {
     }
     return (
         <>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Número de trabajador</td>
-                        <td>Nombre</td>
-                        <td>Cargo</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {trabajadores.map((trabajador) => (
-                        <tr key={trabajador.idtrabajador}>
-                            <td>{trabajador.idtrabajador}</td>
-                            <td>{trabajador.nom_trabajador} {trabajador.apepaterno} {trabajador.apematerno}</td>
-                            <td>{trabajador.tipotrabajador}</td>
-                            {/* Aquí ira un icono de una flechita*/}
-                            <button onClick={() => handleNavigate(trabajador.idtrabajador)}>Detalles</button>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            
         </>
     )
 }

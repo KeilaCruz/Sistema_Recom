@@ -4,7 +4,7 @@ import Sidebar from "../partials/Sidebar";
 import { detalleCliente, datosCliente } from "../../services/Clientes";
 import HeaderPestaña from "../partials/headers/HeaderPestaña";
 import CardDatosCliente from "./CardDatosCliente";
-import OrdenesCard from "./OrdenesCard";
+import OrdenCard from "./OrdenCard";
 
 function DetalleCliente() {
   const { id } = useParams();
@@ -16,7 +16,7 @@ function DetalleCliente() {
       const datos = await datosCliente(id);
       setDatos(datos);
       const trabajos = await detalleCliente(id);
-      console.log(trabajos);
+      setOrdenes(trabajos);
     };
 
     cargarDatos();
@@ -24,7 +24,7 @@ function DetalleCliente() {
 
   return (
     <>
-      <main className="h-screen w-screen flex flex-row bg-colorFondo">
+      <main className="h-full w-auto flex flex-row bg-colorFondo">
         <aside className="fixed h-full">
           <Sidebar />
         </aside>
@@ -33,7 +33,7 @@ function DetalleCliente() {
           <header>
             <HeaderPestaña
               srcArrow="/src/assets/icons/backpage-icon.svg"
-              nombrePestaña="Detalles de trabajos realizados"
+              nombrePestaña="Trabajos realizados"
               srcIcon="/src/assets/icons/active/trabajosActive-icon.svg"
             />
           </header>
@@ -41,9 +41,25 @@ function DetalleCliente() {
           <section className="my-10 mx-11">
             <CardDatosCliente data={datos} />
 
-            <article className="mt-5 ">
-              <OrdenesCard />
-            </article>
+            <section className="mt-5 ">
+              <p className="font-semibold text-[18px] text-colorMain mb-5">
+                Ordenes realizadas
+              </p>
+              <article className="flex flex-row flex-wrap gap-8  mb-5">
+                {ordenes.map((orden) => (
+                  <>
+                    <div key={orden.id_orden}>
+                      <OrdenCard
+                        idorden={orden.id_orden}
+                        descripcion={orden.especificaciones_trabajo}
+                        fechaEntrega={orden.fecha_entrega}
+                        estado={orden.estado}
+                      />
+                    </div>
+                  </>
+                ))}
+              </article>
+            </section>
           </section>
         </section>
       </main>

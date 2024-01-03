@@ -27,16 +27,22 @@
     @apply bg-[#3B315F] p-[10px] w-[150px] mt-0 text-white text-[20px] font-sans font-medium rounded hover:bg-[#4D407E]
 }
 .boton_filtrado{
-    @apply  border-[1px] border-colorMain rounded-[15px] p-[5px] w-[100px] h-[36px] mt-0 ml-5 text-colorMain text-[16px] font-sans font-medium hover:bg-colorMain hover:text-white
+    @apply  border-[1px] border-colorMain rounded-[15px] p-[5px] w-[100px] h-[36px] text-colorMain text-[16px] font-sans font-medium hover:bg-colorMain hover:text-white shadow-md 
 }
+
+.boton_seleccionado {
+    @apply  border-[1px] border-colorMain bg-colorMain rounded-[15px] p-[5px] w-[100px] h-[36px] text-white text-[16px] font-sans font-medium  shadow-md 
+}
+
+
 .boton_detalle_busqueda{
     @apply bg-white p-[5px] w-[100px] h-[40px] mt-5 ml-40 text-black text-[16px] font-sans font-medium rounded hover:bg-slate-500
 }
 .trabajos_pendientes{
-    @apply text-red-700 font-sans font-semibold
+    @apply text-white font-sans font-semibold bg-red-500 rounded-[5px] px-3 py-1
 }
 .trabajos_entregados{
-    @apply text-green-900 font-sans font-semibold
+    @apply text-white  font-sans bg-green-500 font-semibold rounded-[5px] px-3 py-1 
 }
 .boton_detalles_orden{
     @apply  p-[10px] w-[150px] mt-0 text-black font-sans  rounded hover:bg-[#4D407E] hover:text-white

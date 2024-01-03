@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const TablaDatosCliente = ({ data, nombreColumna, nombre }) => {
+const TablaDatosTrabajadores = ({ data }) => {
   const [hoverRow, setHoverRow] = useState(null);
-  const handleMouseEnter = (idCliente) => {
-    setHoverRow(idCliente);
+  const handleMouseEnter = (idtrabajador) => {
+    setHoverRow(idtrabajador);
   };
 
   const handleMouseLeave = () => {
@@ -34,38 +34,39 @@ const TablaDatosCliente = ({ data, nombreColumna, nombre }) => {
         <table className="w-full text-left ">
           <thead className=" text-white ">
             <tr className="bg-colorMain">
-              <th className="px-3 w-1/10 ">No. Cliente</th>
-              <th className="px-3 py-3 w-1/4">Nombre</th>
-              <th className="px-3 py-3">Apellido Paterno</th>
-              <th className="px-3 py-3">Apellido Materno</th>
-              <th className="px-3 py-3"></th>
+              <th className="px-3 w-[15%] ">No. Trabajador</th>
+              <th className="px-3 py-3 w-[20%]">Nombre</th>
+              <th className="px-3 py-3 w-[20%]">Apellido Paterno</th>
+              <th className="px-3 py-3 w-[20%]">Apellido Materno</th>
+              <th className="px-3 py-3 w-[20%]">Tipo trabajador</th>
+              <th className="px-3 py-3 w-1/12"></th>
             </tr>
           </thead>
           <tbody>
-            {currentItems.map((cliente) => (
+            {currentItems.map((trabajador) => (
               <tr
-                key={cliente.idcliente}
+                key={trabajador.idtrabajador}
                 className="font-sans font-normal text-[15px] border-b-[1px] border-black bg-white hover:bg-colorMain hover:text-white"
               >
-                <td className="px-3 py-3 ">{cliente.idcliente}</td>
-                <td className="px-3 py-3 ">{cliente.nombre_cliente}</td>
-                <td className="px-3 py-3 ">{cliente.apepaterno}</td>
-                <td className="px-3 py-3 ">{cliente.apematerno}</td>
+                <td className="px-3 py-3 ">{trabajador.idtrabajador}</td>
+                <td className="px-3 py-3 ">{trabajador.nom_trabajador}</td>
+                <td className="px-3 py-3 ">{trabajador.apepaterno}</td>
+                <td className="px-3 py-3 ">{trabajador.apematerno}</td>
+                <td className="px-3 py-3 ">{trabajador.tipotrabajador}</td>
                 <td
                   className="px-2 py-2 "
                   onMouseEnter={() => {
-                    handleMouseEnter(cliente.idcliente);
+                    handleMouseEnter(trabajador.idtrabajador);
                   }}
                   onMouseLeave={handleMouseLeave}
                 >
                   <Link
-                    to={`/detalle-cliente/${cliente.idcliente}`}
+                    to={`/visualizar-trabajador/${trabajador.idtrabajador}`}
                     className=""
-                  
                   >
                     <img
                       src={
-                        hoverRow === cliente.idcliente
+                        hoverRow === trabajador.idtrabajador
                           ? "/src/assets/icons/active/detailsActive-icon.svg"
                           : "/src/assets/icons/go-details-icon.svg"
                       }
@@ -80,7 +81,7 @@ const TablaDatosCliente = ({ data, nombreColumna, nombre }) => {
         </table>
       </section>
 
-      <section className="flex flex-row items-center justify-center font-sans bg-colorMain p-[5px] w-max rounded-[5px]">
+      <section className="flex flex-row justify-center font-sans bg-colorMain p-[5px] w-max rounded-[5px]">
         <button
           onClick={handlePaginaAnterior}
           className={`py-2 px-4  text-white mr-2 disabled:bg-[#15203499] rounded-full  ${
@@ -123,4 +124,4 @@ const TablaDatosCliente = ({ data, nombreColumna, nombre }) => {
   );
 };
 
-export default TablaDatosCliente;
+export default TablaDatosTrabajadores;

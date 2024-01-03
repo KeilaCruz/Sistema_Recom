@@ -3,9 +3,8 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/headers/Header";
 import { Link } from "react-router-dom";
 import { getClientes } from "../../services/Cliente";
-import TablaDatos from "../TablaDatosCliente";
+import TablaDatos from "./TablaDatosCliente";
 
-import { ResultadosProvider } from "../../Context/ResultadosProvider";
 
 function HomeClientes() {
   const [clientes, setClientes] = useState([]);
@@ -35,7 +34,7 @@ function HomeClientes() {
 
           <section className="my-[30px] mx-[40px]  flex flex-col rounded-[5px]  gap-[30px] ">
             <Link
-              className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-[150px] rounded-[5px] hover:bg-[#3b315fd3] "
+              className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-[150px] rounded-[5px] hover:bg-[#4D407E]"
               to="/nuevo-cliente"
             >
               <img

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import Header from "../partials/headers/Header";
 import Sidebar from "../partials/Sidebar";
-import TablaDatos from "../TablaDatosCliente";
+import TablaDatos from "../Trabajadores/TablaDatosTrabajadores";
 import { getTrabajadores } from "../../services/Trabajador";
 
 function HomeTrabajadores() {
@@ -25,7 +25,7 @@ function HomeTrabajadores() {
 
   return (
     <>
-      <main className="h-screen w-screen flex flex-row bg-colorFondo">
+      <main className="h-full w-auto flex flex-row bg-colorFondo">
         <div className="fixed h-full">
           <Sidebar />
         </div>
@@ -35,7 +35,7 @@ function HomeTrabajadores() {
 
           <section className="m-[50px] flex flex-col rounded-[5px]  gap-[50px]">
             <Link
-              className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-max rounded-[5px] hover:bg-[#3b315fd3] box-border "
+              className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-max rounded-[5px] hover:bg-[#4D407E] box-border "
               to="/nuevo-trabajador"
             >
               <img
@@ -48,7 +48,7 @@ function HomeTrabajadores() {
             </Link>
 
             <section>
-              <TablaDatos data={trabajadores} nombreC="Trabajador"/>
+              <TablaDatos data={trabajadores}/>
             </section>
             
           </section>

@@ -50,7 +50,6 @@ function Rutas() {
       <Route path="/registrar-orden-trabajo" element={<EventosProvider><RegistrarOrden/></EventosProvider>} />*/}
 
    
-      <Route path="/visualizar-trabajadores" element={<V_VisualizarTrabajadores />} />
       <Route path="/visualizar-trabajador/:id" element={<V_VisualizarTrabajador />} />
 
       <Route path='/nuevo-trabajador' element={<V_RegistrarTrabajador />}/>

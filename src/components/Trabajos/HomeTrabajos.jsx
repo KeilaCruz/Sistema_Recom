@@ -1,32 +1,39 @@
 import React from "react";
 import Sidebar from "../partials/Sidebar";
-import Calendario from "./Calendario";
 import { VisualizarOrdenes } from "../Administrador/VisualizarOrdenes";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Header from "../partials/headers/Header";
 
 function HomeTrabajos() {
-    const navigate = useNavigate()    
-    return (
-        <>
-            <div className="fixed">
-                <Sidebar />
-            </div>
+  return (
+    <>
+      <main className=" w-auto flex flex-row bg-colorFondo">
+        <div className="fixed h-full">
+          <Sidebar />
+        </div>
 
-            <div className="flex-col p-4 ">
-                <button className="ml-80 boton_generico" onClick={() => navigate("/registrar-orden-trabajo")}>
-                    Agregar trabajo
-                </button>
-            </div>
+        <section className="flex flex-col w-full h-auto ml-[289px]">
+          <Header />
+          <section className="m-[50px] flex flex-col rounded-[5px]  gap-[50px]">
+            <Link
+              to="/registrar-orden-trabajo"
+              className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-max rounded-[5px] hover:bg-[#4D407E] box-border"
+            >
+              <img
+                src="/src/assets/icons/add-icon.svg"
+                alt="icono para agregar un nuevo trabajador"
+              />
+              <p className="text-white font-medium">Agregar trabajo</p>
+            </Link>
 
-            <div>
-                <Calendario/>
-            </div>
-            <div>
-                <VisualizarOrdenes></VisualizarOrdenes>
-            </div>
-
-        </>
-    );
+            <section>
+              <VisualizarOrdenes />
+            </section>
+          </section>
+        </section>
+      </main>
+    </>
+  );
 }
 
 export default HomeTrabajos;
