@@ -3,7 +3,7 @@
 ## Miembreo del equipo
 - [López Villegas Juan Carlos](https://github.com/JuanCarlosLV)
 - [Romero Reyes Mayreli](https://github.com/MayreliR)
-- [Cruz De la Cruz Keila](ttps://github.com/KeilaCruz)
+- [Cruz De la Cruz Keila](https://github.com/KeilaCruz)
 ## Command lines 
 1. npm install
 2. npm run dev
