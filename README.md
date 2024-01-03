@@ -1,9 +1,9 @@
 # Sistema_Recom 
 ## El presente proyecto corresponde a la construcción de un sistema web para dar solución a una problematica expuesta por una microempresa, en el cuál se pusieron en prácticas los conocimientos y habilidades adquiridas en la EE de Desarrollo de Sistema Web
 ## Miembreo del equipo
--[López Villegas Juan Carlos][https://github.com/JuanCarlosLV]
--[Romero Reyes Mayreli][https://github.com/MayreliR]
--[Cruz De la Cruz Keila][https://github.com/KeilaCruz]
+- [López Villegas Juan Carlos](https://github.com/JuanCarlosLV)
+- [Romero Reyes Mayreli](https://github.com/MayreliR)
+- [Cruz De la Cruz Keila](ttps://github.com/KeilaCruz)
 ## Command lines 
 1. npm install
 2. npm run dev
