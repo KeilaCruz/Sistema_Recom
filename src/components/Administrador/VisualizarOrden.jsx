@@ -4,10 +4,12 @@ import { toast } from "react-hot-toast"
 import { useParams } from "react-router-dom"
 import { editarOrden, marcarEstadoOrden, visualizarOrden } from "../../services/OrdenTrabajo"
 import { getTrabajadores } from "../../services/Trabajador"
+import { CardBusquedaCliente } from "./CardBusquedaCliente"
+
 import Sidebar from "../partials/Sidebar"
 export function VisualizarOrden() {
   let { id } = useParams()
-  const { setValue, register, handleSubmit, formState: { errors }, getValues } = useForm()
+  const { setValue, register, handleSubmit, formState: { errors }, getValues, watch } = useForm()
   const [trabajadores, setTrabajadores] = useState([]);
   const [orden, setOrden] = useState([]);
   const [trabajadoresSeleccionados, setTrabajadoresSeleccionados] = useState([])
@@ -146,138 +148,137 @@ export function VisualizarOrden() {
     }))
   }
   return (
-    <>
-      <div className="fixed">
+    <div className="flex">
+      <div className="w-1/4 sticky top-0 h-screen">
         <Sidebar />
       </div>
-      <div className="flex-col ml-80">
-        <label className="etiqueta mt-5" htmlFor="orden">Número de orden</label>
-        <input className="inputs" id="orden" type="number" {...register("orden_trabajo")} disabled={true} />
-      </div>
 
-      <form className="flex gap-5 font-sans">
+      <div className="w-3/4 mt-0">
 
-        <div className="flex-col ml-80 mt-5">
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="fecha_solicitud">Fecha solicitud</label>
-            <input className="inputs" id="fecha_solicitud" type="date" {...register("fecha_solicitud")} disabled={true} />
-          </div>
-
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="tipo_trabajo">Tipo de trabajo</label>
-            <select className="selects" id="tipo_trabajo" {...register("tipo_trabajo")} disabled={true}>
-              <option value="Nuevo">Nuevo</option>
-              <option value="Reparacion">Reparación</option>
-            </select>
-          </div>
-
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="precio_material">Precio del material</label>
-            <input className="inputs_precio" id="precio_material" type="number" step="any" {...register("precio_material")} disabled={!activateEdit} />
-          </div>
-
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="precio_trabajo">Precio del trabajo</label>
-            <input className="inputs_precio" id="precio_trabajo" type="number" step="any"  {...register("precio_trabajo")} disabled={!activateEdit} />
-          </div>
-
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="trabajador_asignado">Trabajadores asignados</label>
-            {trabajadores.map((trabajador) => (
-              <div key={trabajador.idtrabajador}>
-                <input
-                  id={`trabajador_${trabajador.idtrabajador}`}
-                  type="checkbox"
-                  value={trabajador.idtrabajador}
-                  onChange={() => handleCheckboxChange(trabajador.idtrabajador)}
-                  checked={trabajadoresSeleccionados.includes(trabajador.idtrabajador)}
-                  disabled={!activateEdit}
-                />
-                <label className="etiqueta mt-5" htmlFor={`trabajador_${trabajador.idtrabajador}`}></label>
-                {trabajador.nom_trabajador} {trabajador.apepaterno} {trabajador.apematerno} {trabajador.tipotrabajador}
-
-              </div>
-            ))}
-          </div>
-
+        <div className="ml-5 mt-5">
+          <label className="etiqueta mt-5" htmlFor="orden">Número de orden</label>
+          <input className="inputs" id="orden" type="number" {...register("orden_trabajo")} disabled={true} />
         </div>
 
-        <div className="flex-col ml-80 mt-5">
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="fecha_entrega">Fecha entrega </label>
-            <input className="inputs" id="fecha_entrega" type="date" {...register("fecha_entrega")} disabled={!activateEdit} />
+        <div className="ml-5 mt-5 w-5/6 flex bg-colorSecundario rounded text-white">
+          <div className="flex-col w-[1/2] ml-10 mb-5">
+            <p className="mt-2 font-semibold">Nombre del cliente</p>
+            <p>{watch("nom_cliente")} {watch("ape_paterno_c")} {watch("ape_materno_c")} </p>
+
+            <p className="mt-2 font-semibold">Correo del cliente </p>
+            <p> {watch("correo_cliente")}</p>
           </div>
 
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="material_requerido">Material requerido </label>
-            <textarea className="area_texto" id="material_requerido" type="text" {...register("material_requerido")} disabled={!activateEdit}></textarea>
+          <div className="flex-col w-[1/2] ml-80 mb-5">            
+            <p className="mt-2 font-semibold">Telefono del cliente</p>
+            <p> {watch("telefono_cliente")} </p>
           </div>
-
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="expecificaciones">Especificaciones del trabajo</label>
-            <textarea className="area_texto" id="especificaciones" type="date" {...register("especificaciones")} disabled={!activateEdit}></textarea>
-          </div>
-
+          
         </div>
 
-        <div className="flex-col ml-80 mt-5">
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="nom_cliente">Nombre del cliente</label>
-            <input className="inputs" id="nom_cliente" type="text" {...register("nom_cliente")} disabled={true} />
+        <form className="flex font-sans mb-2">
+
+          <div className="flex-col w-1/4 ml-5">
+            <div className="mt-5">
+              <label className="etiqueta mt-5" htmlFor="fecha_solicitud">Fecha solicitud</label>
+              <br />
+              <input className="inputs" id="fecha_solicitud" type="date" {...register("fecha_solicitud")} disabled={true} />
+            </div>
+
+            <div className="mt-5">
+              <label className="etiqueta mt-5" htmlFor="tipo_trabajo">Tipo de trabajo</label>
+              <br />
+              <select className="selects" id="tipo_trabajo" {...register("tipo_trabajo")} disabled={true}>
+                <option value="Nuevo">Nuevo</option>
+                <option value="Reparacion">Reparación</option>
+              </select>
+            </div>
+
+            <div className="mt-5">
+              <label className="etiqueta mt-5" htmlFor="precio_material">Precio del material</label>
+              <br />
+              <input className="inputs_precio" id="precio_material" type="number" step="any" {...register("precio_material")} disabled={!activateEdit} />
+            </div>
+
+            <div className="mt-5">
+              <label className="etiqueta mt-5" htmlFor="precio_trabajo">Precio del trabajo</label>
+              <br />
+              <input className="inputs_precio" id="precio_trabajo" type="number" step="any"  {...register("precio_trabajo")} disabled={!activateEdit} />
+            </div>
+
+            <div className="mt-5">
+              <label className="etiqueta mt-5" htmlFor="trabajador_asignado">Trabajadores asignados</label>
+              <br />
+              {trabajadores.map((trabajador) => (
+                <div key={trabajador.idtrabajador}>
+                  <input
+                    id={`trabajador_${trabajador.idtrabajador}`}
+                    type="checkbox"
+                    value={trabajador.idtrabajador}
+                    onChange={() => handleCheckboxChange(trabajador.idtrabajador)}
+                    checked={trabajadoresSeleccionados.includes(trabajador.idtrabajador)}
+                    disabled={!activateEdit}
+                  />
+                  <label className="etiqueta mt-5" htmlFor={`trabajador_${trabajador.idtrabajador}`}></label>
+                  {trabajador.nom_trabajador} {trabajador.apepaterno} {trabajador.apematerno} {trabajador.tipotrabajador}
+
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="ape_paterno">Apellido paterno</label>
-            <input className="inputs" id="ape_paterno" type="text" {...register("ape_paterno_c")} disabled={true} />
+          <div className="flex-col w-1/4 ml-80">
+            <div className="mt-5">
+              <label className="etiqueta mt-5" htmlFor="fecha_entrega">Fecha entrega </label>
+              <br />
+              <input className="inputs" id="fecha_entrega" type="date" {...register("fecha_entrega")} disabled={!activateEdit} />
+            </div>
+
+            <div className="mt-5">
+              <label className="etiqueta mt-5" htmlFor="material_requerido">Material requerido </label>
+              <br />
+              <textarea className="area_texto" id="material_requerido" type="text" {...register("material_requerido")} disabled={!activateEdit}></textarea>
+            </div>
+
+            <div className="mt-5">
+              <label className="etiqueta mt-5" htmlFor="expecificaciones">Especificaciones del trabajo</label>
+              <br />
+              <textarea className="area_texto" id="especificaciones" type="date" {...register("especificaciones")} disabled={!activateEdit}></textarea>
+            </div>
+
+            <div className="ml-5 mt-5 mb-5">
+              <label className="font-bold" htmlFor="Trabajo entregado">
+                Trabajo entregado
+              </label>              
+              {/*Marcar estado de orden */}
+              <input className="ml-5" id="marcar_estado"
+                type="checkbox" checked={!orden.estadot} onChange={handleEstadoChange} />
+              {/*Mostrar mensaje de estado de orden */}
+
+              {orden.estadot ? (
+                <td className="font-normal text-colorSecundario text-[16px]">Pendiente</td>
+              ) : (
+                <td className="font-semibold text-colorSecundario text-[16px]">Entregado</td>
+              )}
+            </div>
+
+            <div className="ml-5 mt-5 mb-5">
+              {!activateEdit && (<button className="boton_generico" onClick={handleActivateEdit}>
+                Editar
+              </button>
+              )}
+
+              {activateEdit && (
+                //Llama a 2 métodos para permanecer en la misma página
+                <button className="boton_generico" onClick={() => onSubmit()}>Guardar</button>
+              )}
+            </div>
           </div>
 
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="ape_materno">Apellido materno</label>
-            <input className="inputs" id="ape_materno" type="text" {...register("ape_materno_c")} disabled={true} />
-          </div>
+        </form>
 
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="correo_cliente">Correo del cliente </label>
-            <input className="inputs" id="correo_cliente" type="text" {...register("correo_cliente")} disabled={true} />
-          </div>
-
-          <div className="mt-5">
-            <label className="etiqueta mt-5" htmlFor="telefono_cliente">Telefono del cliente</label>
-            <input className="inputs" id="telefono_cliente" type="text"{...register("telefono_cliente")} disabled={true} />
-          </div>
-
-        </div>
-      </form>
-
-      <div className="ml-80 mt-5 mb-5">
-        <label className="font-bold" htmlFor="Trabajo entregado">
-          Trabajo entregado
-        </label>
-
-        {/*Marcar estado de orden */}
-        <input className="ml-5" id="marcar_estado"
-          type="checkbox" checked={!orden.estadot} onChange={handleEstadoChange} />
-        {/*Mostrar mensaje de estado de orden */}
-
-        {orden.estadot ? (
-          <td className="font-normal text-colorSecundario text-[16px]">Pendiente</td>
-        ) : (
-          <td className="font-semibold text-colorSecundario text-[16px]">Entregado</td>
-        )}
       </div>
-
-      <div className="ml-80 mt-5 mb-5">
-        {!activateEdit && (<button className="boton_generico" onClick={handleActivateEdit}>
-          Editar
-        </button>
-        )}
-
-        {activateEdit && (
-          //Llama a 2 métodos para permanecer en la misma página
-          <button className="boton_generico" onClick={() => onSubmit()}>Guardar</button>
-        )}
-      </div>
-    </>
+    </div>
   )
 }
 
