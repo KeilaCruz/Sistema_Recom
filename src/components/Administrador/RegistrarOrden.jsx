@@ -162,7 +162,10 @@ export function RegistrarOrden() {
     }, [])
 
     useEffect(() => {
-        handleBusqueda();
+        if(criterioBusqueda.trim()!== ""){
+            handleBusqueda();
+        }
+        
     }, [criterioBusqueda])
 
   const onSubmit = handleSubmit(async (data) => {

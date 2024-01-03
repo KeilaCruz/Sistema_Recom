@@ -7,9 +7,9 @@ import {
   getOrdenActivas,
   getOrdenEntregada,
 } from "../../services/OrdenTrabajo";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CardBusquedaOrden } from "./CardBusquedaOrden";
-import Sidebar from "../partials/Sidebar";
+
 
 export function VisualizarOrdenes() {
   const [ordenes, setOrdenes] = useState([]);
@@ -21,14 +21,22 @@ export function VisualizarOrdenes() {
   const [nombreCliente, setNombre] = useState(null);
   const [apePaterno, setApePaterno] = useState(null);
   const [apeMaterno, setApeMaterno] = useState(null);
-  const navigate = useNavigate();
 
   const [seleccionado, setSeleccionado] = useState("Todos");
+  const [hoverRow, setHoverRow] = useState(null);
 
   const validarCriterioBusqueda = (criterioB) => {
     const criterioBRegex = /^[A-Za-zÁÉÍÓÚáéíóúü0-9\s]{1,120}$/;
 
     return criterioBRegex.test(criterioB);
+  };
+
+  const handleMouseEnter = (idorden) => {
+    setHoverRow(idorden);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverRow(null);
   };
 
   let numberReg = /^\d+$/;
@@ -56,7 +64,9 @@ export function VisualizarOrdenes() {
   };
 
   useEffect(() => {
-    handleBusqueda();
+    if (criterioBusqueda.trim() !== "") {
+      handleBusqueda();
+    }
   }, [criterioBusqueda]);
 
   const handleBusqueda = async () => {
@@ -106,9 +116,7 @@ export function VisualizarOrdenes() {
     }
   };
 
-  const handleNavegar = async (idOrden) => {
-    navigate(`/visualizar-orden/${idOrden}`);
-  };
+
   return (
     <>
       <main className="flex flex-col h-auto">
@@ -137,7 +145,9 @@ export function VisualizarOrdenes() {
           </button>
           <button
             className={`${
-              seleccionado === "Pendientes" ? "boton_seleccionado" : "boton_filtrado"
+              seleccionado === "Pendientes"
+                ? "boton_seleccionado"
+                : "boton_filtrado"
             }`}
             onClick={() => handleFiltro("Pendientes")}
           >
@@ -145,7 +155,9 @@ export function VisualizarOrdenes() {
           </button>
           <button
             className={`${
-              seleccionado === "Entregado" ? "boton_seleccionado" : "boton_filtrado"
+              seleccionado === "Entregado"
+                ? "boton_seleccionado"
+                : "boton_filtrado"
             }`}
             onClick={() => handleFiltro("Entregado")}
           >
@@ -155,37 +167,50 @@ export function VisualizarOrdenes() {
 
         <section className="mt-5 mb-6 shadow-md rounded bg-white overflow-hidden">
           <table className="text-left w-full">
-            <thead className="text-white font-medium">
+            <thead className="text-white font-medium ">
               <tr className="bg-colorMain">
                 <td className="px-3 w-[15%] ">Orden de trabajo</td>
                 <td className="px-3 py-3 w-[20%]">Trabajador</td>
                 <td className="px-3 py-3 w-[20%]">Fecha entrega</td>
-                <td className="px-3 py-3 w-[20%]">Estado</td>
-                <td className="px-3 py-3 w-1/12"></td>
+                <td className="px-3 py-3 w-[10%]">Estado</td>
+                <td className="px-3 py-3 w-[5%]"></td>
               </tr>
             </thead>
             <tbody>
               {ordenes.map((orden) => (
                 <tr
                   key={orden.ordentrabajo}
-                  className="font-sans font-normal text-[15px] border-b-[1px] border-black bg-white"
+                  className="font-sans font-normal text-[15px] border-b-[1px] border-black bg-white hover:bg-colorMain hover:text-white"
                 >
                   <td className="px-3 py-3">{orden.ordentrabajo}</td>
                   <td className="px-3 py-3">{orden.nomtrabajadores[0]}</td>
                   <td className="px-3 py-3">{orden.fechaentrega}</td>
                   {orden.estado_o ? (
-                    <td className="trabajos_pendientes px-3 py-3">Pendiente</td>
+                    <td className="trabajos_pendientes ">Pendiente</td>
                   ) : (
-                    <td className="trabajos_entregados px-3 py-3">Entregado</td>
+                    <td className="trabajos_entregados ">Entregado</td>
                   )}
-                  {/* Aquí ira un icono de una flechita*/}
-                  <td>
-                    <button
-                      className="boton_detalles_orden"
-                      onClick={() => handleNavegar(orden.ordentrabajo)}
+
+                  <td
+                    onMouseEnter={() => {
+                      handleMouseEnter(orden.ordentrabajo);
+                    }}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <Link
+                      to={`/visualizar-orden/${orden.ordentrabajo}`}
+                      className=""
                     >
-                      Detalles
-                    </button>
+                      <img
+                        src={
+                          hoverRow === orden.ordentrabajo
+                            ? "/src/assets/icons/active/detailsActive-icon.svg"
+                            : "/src/assets/icons/go-details-icon.svg"
+                        }
+                        alt="icono para ver más detalles del trabajo"
+                        className="cursor-pointer h-[30px]"
+                      />
+                    </Link>
                   </td>
                 </tr>
               ))}
