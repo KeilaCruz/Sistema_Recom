@@ -1,9 +1,28 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import Header from "../partials/headers/Header";
 import Sidebar from "../partials/Sidebar";
+import TablaDatos from "../TablaDatosCliente";
+import { getTrabajadores } from "../../services/Trabajador";
 
 function HomeTrabajadores() {
+  const [trabajadores, setTrabajadores] = useState([]);
+
+  useEffect(() => {
+    const cargarTrabajadores = async () => {
+      const dataTrabajadores = await getTrabajadores();
+      console.log(dataTrabajadores);
+      setTrabajadores(dataTrabajadores);
+    };
+
+    cargarTrabajadores();
+    const tiempoCarga = setInterval(() => {
+      cargarTrabajadores();
+    }, 10000); // el useEffect se actualiza cada 10 segundos
+
+    return () => clearInterval(tiempoCarga);
+  }, []);
+
   return (
     <>
       <main className="h-screen w-screen flex flex-row bg-colorFondo">
@@ -29,8 +48,9 @@ function HomeTrabajadores() {
             </Link>
 
             <section>
-             
+              <TablaDatos data={trabajadores} nombreC="Trabajador"/>
             </section>
+            
           </section>
         </section>
       </main>

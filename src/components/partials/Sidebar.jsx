@@ -9,11 +9,12 @@ function Sidebar() {
   const [rutaActiva, setRutaActiva] = useState("");
   const navigate = useNavigate();
   const onSubmit = async () => {
-    const { error } = await cerrarSesion();
-    if (error) {
-      alert("Error al salir");
-    } else {
+    const logout = await cerrarSesion();
+    console.log(logout)
+    if (logout) {
       navigate("/login");
+    } else {
+      alert("No se pudo cerrar sesión");
     }
   };
 

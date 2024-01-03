@@ -1,5 +1,5 @@
 import React from 'react'
-import { RegistrarTrabajador } from '../components/Administrador/RegistrarTrabajador'
+import  RegistrarTrabajador  from '../components/Trabajadores/RegistrarTrabajador'
 
 function V_RegistrarTrabajador() {
     return (

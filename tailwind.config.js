@@ -12,6 +12,7 @@ export default {
         hoverButtonAceptar: "#0D1422",
 
       },
+      
     },
   },
   

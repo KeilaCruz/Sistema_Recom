@@ -219,7 +219,6 @@ function AgregarCliente() {
                 <ModalCancelar
                   mostrar={mostrarModal}
                   onClose={handleCerrarModal}
-                  accept={regresar}
                   text={"¿Estas seguro de cancelar el registro?"}
                 />
               </>
