@@ -3,9 +3,23 @@ import { useParams } from "react-router-dom";
 import Sidebar from "../partials/Sidebar";
 import HeaderPestaña from "../partials/headers/HeaderPestaña";
 import CardDatosTrabajador from "../Trabajadores/CardDatosTrabajador";
+import { getTrabajosAsignados } from "../../services/Trabajador";
+import OrdenCard from "../Trabajadores/OrdenCard";
 
 export function VisualizarTrabajador() {
   const { id } = useParams();
+
+  const [trabajos, setTrabajos] = useState([]);
+
+  useEffect(() => {
+    const cargarDatos = async () => {
+      const datos = await getTrabajosAsignados(id);
+      console.log(datos)
+      setTrabajos(datos)
+    };
+
+    cargarDatos();
+  }, []);
 
   return (
     <>
@@ -26,9 +40,24 @@ export function VisualizarTrabajador() {
           <section className="my-10 mx-11 ">
             <CardDatosTrabajador id={id} />
 
-            <section className="mt-3">
-
-          
+            <section className="mt-5 ">
+              <p className="font-semibold text-[18px] text-colorMain mb-5">
+                Ordenes asignadas
+              </p>
+              <article className="flex flex-row flex-wrap gap-8  mb-5">
+                {trabajos.map((orden) => (
+                  <>
+                    <div key={orden.ordentrabajo}>
+                      <OrdenCard
+                        idorden={orden.ordentrabajo}
+                        descripcion={orden.especificaciones}
+                        fechaEntrega={orden.fechaentrega}
+                        estado={orden.estadot}
+                      />
+                    </div>
+                  </>
+                ))}
+              </article>
             </section>
           </section>
         </section>
@@ -36,4 +65,3 @@ export function VisualizarTrabajador() {
     </>
   );
 }
-

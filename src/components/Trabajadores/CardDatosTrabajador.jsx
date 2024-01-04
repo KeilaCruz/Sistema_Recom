@@ -172,6 +172,7 @@ function CardDatosTrabajador({ id }) {
                   id="tipo_pago"
                   type="text"
                   {...register("tipo_pago")}
+                  
                   disabled={true}
                   className="bg-white text-colorSecundario px-2 py-1 rounded-[5px] mt-2"
                 />

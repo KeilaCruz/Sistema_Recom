@@ -55,7 +55,7 @@ function Login() {
   };
 
   return (
-    <main className="flex flex-col font-sans w-screen">
+    <main className="flex flex-col font-sans w-screen bg-white">
       <Header />
 
       <section className="m-[40px] flex flex-row p-[20px] items-center gap-[220px] ">
@@ -72,7 +72,7 @@ function Login() {
           </picture>
         </article>
 
-        <section className="flex flex-col shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] rounded-[5px] p-[30px]">
+        <section className="flex flex-col shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] rounded-[5px] p-[30px] bg-white">
           <p className="text-[22px] text-[#3B315F] font-bold mb-[30px]">
             INICIAR SESIÓN
           </p>
@@ -127,10 +127,11 @@ function Login() {
 
             <Link
               to="/recuperar-contraseña"
-              className=" text-[18px] text-[#3B315F] underline font-semibold mt-[18px] hover:text-[#4D407E]"
+              className=" text-[18px] text-[#3B315F] font-semibold mt-[18px] hover:text-[#4D407E] hover:underline transition-transform"
             >
               ¿Olvidaste tu contraseña?
             </Link>
+            
           </section>
         </section>
       </section>

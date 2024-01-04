@@ -48,15 +48,9 @@ export const actualizarContraseña = async (contraseña) => {
       password: contraseña,
     });
 
-    if (data) {
-      return true;
-    } else {
-      return false;
-    }
+    if (error) throw error
 
-    if (error) {
-      return error.message();
-    }
+    return data
   } catch (error) {
     return error;
   }

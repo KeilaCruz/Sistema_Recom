@@ -7,6 +7,7 @@ const rpcDarBajaTrabajador = "delete_trabajador";
 const rpcVisualizarTrabajador = "get_trabajador";
 const rpcEditarTrabajador = "edit_trabajador";
 const rpcRolTrabajador = "get_rol_trabajador";
+const rpcOrdenesTrabajador = "get_trabajos_asignados";
 
 export const registrarTrabajador = async (trabajador) => {
   try {
@@ -40,7 +41,7 @@ export const registrarTrabajador = async (trabajador) => {
 
     if (error) throw error;
 
-    return data
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -96,6 +97,19 @@ export const editarTrabajador = async (trabajador) => {
 export const rolTrabajadores = async () => {
   try {
     const { error, data } = await supabase.rpc(rpcRolTrabajador);
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getTrabajosAsignados = async (idtrabajador) => {
+  try {
+    const { error, data } = await supabase.rpc(rpcOrdenesTrabajador, {
+      idtrabajador: idtrabajador,
+    });
+
     if (error) throw error;
     return data;
   } catch (error) {

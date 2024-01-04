@@ -34,12 +34,13 @@ function NuevaContraseña() {
 
     if (actualizar) {
       setActualizado(!actualizado);
+      setMostrarModal(true)
     }
   });
 
   return (
     <>
-      <main className="flex flex-col">
+      <main className="flex flex-col bg-white">
         <Header />
         <section className="flex flex-row gap-[20px] font-sans m-[50px]">
           <Link onClick={regresar} className="h-[40px] mt-3">
@@ -100,11 +101,11 @@ function NuevaContraseña() {
               </form>
               <button
                 className="mt-[20px] text-white bg-[#3B315F] rounded-[5px] p-[10px] font-sans font-medium text-[22px] w-[500px] hover:bg-[#2f274d]"
-                onClick={handleMostrarModal}
+                onClick={onSubmit}
               >
                 Actualizar
               </button>
-              {mostrarModal && (
+              {actualizado && (
                 <>
                   <ModalExito
                     mostrar={mostrarModal}
