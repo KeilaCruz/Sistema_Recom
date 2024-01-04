@@ -9,10 +9,8 @@ import Calendario from "../Trabajos/Calendario";
 function Home() {
   const navigate = useNavigate();
 
-  const handelSubmit = async () => {
-    const sesion = await cerrarSesion();
-    navigate("/login");
-  };
+  
+  
 
   return (
     <>

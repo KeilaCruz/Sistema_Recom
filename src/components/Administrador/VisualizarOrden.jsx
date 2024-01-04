@@ -179,12 +179,12 @@ export function VisualizarOrden() {
         />
 
         <section className="maincontainer mx-[40px] my-[20px] px-5 py-4 shadow-md bg-white rounded-[5px]">
-          <article className="">
-            <label className="etiqueta mt-5" htmlFor="orden">
+          <article className="flex flex-row gap-3 items-center ">
+            <label className="etiqueta " htmlFor="orden">
               Número de orden
             </label>
             <input
-              className="inputs"
+              className="inputs bg-colorSecundario text-center w-[100px] text-white"
               id="orden"
               type="number"
               {...register("orden_trabajo")}
@@ -345,7 +345,7 @@ export function VisualizarOrden() {
                 ></textarea>
               </div>
 
-              <div className="ml-5 mt-5 mb-5">
+              <div className="mt-5">
                 <label className="font-bold" htmlFor="Trabajo entregado">
                   Trabajo entregado
                 </label>
@@ -354,41 +354,49 @@ export function VisualizarOrden() {
                   className="ml-5"
                   id="marcar_estado"
                   type="checkbox"
+                  disabled={!activateEdit}
                   checked={!orden.estadot}
                   onChange={handleEstadoChange}
                 />
-                {/*Mostrar mensaje de estado de orden */}
 
                 {orden.estadot ? (
-                  <td className="font-normal text-colorSecundario text-[16px]">
+                  <p className="text-white font-medium bg-red-500 rounded-[5px] px-3 py-1 text-[18px] mt-4">
                     Pendiente
-                  </td>
+                  </p>
                 ) : (
-                  <td className="font-semibold text-colorSecundario text-[16px]">
+                  <p className="text-white font-medium bg-green-500 rounded-[5px] px-3 py-1 text-[18px] mt-4">
                     Entregado
-                  </td>
-                )}
-              </div>
-
-              <div className="ml-5 mt-5 mb-5">
-                {!activateEdit && (
-                  <button
-                    className="boton_generico"
-                    onClick={handleActivateEdit}
-                  >
-                    Editar
-                  </button>
-                )}
-
-                {activateEdit && (
-                  //Llama a 2 métodos para permanecer en la misma página
-                  <button className="boton_generico" onClick={() => onSubmit()}>
-                    Guardar
-                  </button>
+                  </p>
                 )}
               </div>
             </div>
           </form>
+          <div className="ml-5 mt-5 mb-5">
+            {!activateEdit && (
+              <button className="boton_generico" onClick={handleActivateEdit}>
+                Editar
+              </button>
+            )}
+
+            {activateEdit && (
+              //Llama a 2 métodos para permanecer en la misma página
+              <>
+                <article className="flex flex-row gap-3">
+                  <button className="boton_generico" onClick={() => onSubmit()}>
+                    Guardar
+                  </button>
+                  <button
+                    className="boton_generico"
+                    onClick={() => {
+                      setActivateEdit(false);
+                    }}
+                  >
+                    Cancelar
+                  </button>
+                </article>
+              </>
+            )}
+          </div>
         </section>
       </section>
     </main>

@@ -26,7 +26,7 @@ export function VisualizarOrdenes() {
   const [hoverRow, setHoverRow] = useState(null);
 
   const validarCriterioBusqueda = (criterioB) => {
-    const criterioBRegex = /^[A-Za-zÁÉÍÓÚáéíóúü0-9\s]{1,120}$/;
+    const criterioBRegex = /^[A-Za-zÁÉÍÓÚáéíóúü0-9\s-]{1,120}$/;
 
     return criterioBRegex.test(criterioB);
   };
@@ -124,7 +124,7 @@ export function VisualizarOrdenes() {
           <input
             className="inputs"
             id="barra_busqueda"
-            placeholder="Núm orden: 123, Fecha solicitud: 0000-00-00, Nombre: Lucas Cruz Romero"
+            placeholder="Buscar por numero de orden: 123, Fecha solicitud: 0000-00-00, Nombre: Lucas Cruz Romero"
             onChange={(evt) => setCriterioBusqueda(evt.target.value)}
           />
           <button className="boton_busqueda" onClick={handleBuscar}>
@@ -186,7 +186,7 @@ export function VisualizarOrdenes() {
                   <td className="px-3 py-3">{orden.nomtrabajadores[0]}</td>
                   <td className="px-3 py-3">{orden.fechaentrega}</td>
                   {orden.estado_o ? (
-                    <td className="trabajos_pendientes ">Pendiente</td>
+                    <td className="hover:bg-colorMain hover:text-white trabajos_pendientes ">Pendiente</td>
                   ) : (
                     <td className="trabajos_entregados ">Entregado</td>
                   )}

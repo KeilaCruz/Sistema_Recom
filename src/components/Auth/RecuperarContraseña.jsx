@@ -27,7 +27,7 @@ function RestorePassword() {
 
   return (
     <>
-      <main className="flex flex-col font-sans">
+      <main className="flex flex-col font-sans bg-white">
         <Header />
 
         <section className="flex flex-row gap-[20px] font-sans m-[50px]">
