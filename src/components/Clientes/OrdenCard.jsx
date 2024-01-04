@@ -1,11 +1,11 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 function OrdenCard(props) {
   return (
     <>
       <Link
-      to={`/visualizar-orden/${props.idorden}`}
+        to={`/visualizar-orden/${props.idorden}`}
         className="flex flex-col  font-sans bg-white rounded-[5px] shadow-md text-colorMain px-4 py-3 duration-100 hover:scale-105 hover:shadow-lg  mr-auto ml-auto w-[350px] h-auto
       "
       >

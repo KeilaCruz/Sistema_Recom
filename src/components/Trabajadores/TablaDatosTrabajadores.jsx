@@ -46,7 +46,7 @@ const TablaDatosTrabajadores = ({ data }) => {
             {currentItems.map((trabajador) => (
               <tr
                 key={trabajador.idtrabajador}
-                className="font-sans font-normal text-[15px] border-b-[1px] border-black bg-white hover:bg-colorMain hover:text-white"
+                className="font-sans font-normal text-[15px] border-b-[1px] border-black group bg-white hover:bg-colorMain hover:text-white"
               >
                 <td className="px-3 py-3 ">{trabajador.idtrabajador}</td>
                 <td className="px-3 py-3 ">{trabajador.nom_trabajador}</td>
@@ -71,7 +71,7 @@ const TablaDatosTrabajadores = ({ data }) => {
                           : "/src/assets/icons/go-details-icon.svg"
                       }
                       alt="icono para ver más detalles del cliente"
-                      className="cursor-pointer h-[30px]"
+                      className="cursor-pointer h-[30px] group-hover:filter group-hover:saturate-200 group-hover:brightness-200"
                     />
                   </Link>
                 </td>

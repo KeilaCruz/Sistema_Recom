@@ -1,36 +1,42 @@
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export function CardBusquedaOrden({ orden }) {
-    const navigate = useNavigate()
-    const handleNavegar = async (idOrden) => {
-        navigate(`/visualizar-orden/${idOrden}`)
-    }
-    return (
-        <>
-            <div className="mt-5 w-2/4 flex bg-colorSecundario rounded text-white" key={orden.ordentrabajo}>
+  return (
+    <>
+      <Link
+        to={`/visualizar-orden/${orden.ordentrabajo}`}
+        className="flex flex-col  font-sans bg-white rounded-[5px] shadow-md text-colorMain px-4 py-3 duration-100 hover:scale-105 hover:shadow-lg  mr-auto ml-auto w-max h-auto"
+      >
+        <p className="bg-colorMain text-white rounded-[5px] p-2 font-medium mb-3 text-center">
+          Numero de orden: {orden.ordentrabajo}{" "}
+        </p>
 
-                <div className="flex-col w-[1/2] ml-10 mb-5">
-                    <p className="mt-2">Número de orden</p>
-                    <p>{orden.ordentrabajo}</p>
-                    <p className="mt-2">Fecha Solicitud</p>
-                    <p>{orden.fechasolicitud}</p>
-                </div>
+        <section className="flex flex-col gap-2">
+          <article className="flex flex-row  gap-2">
+            <p className="font-medium ">Nombre del cliente:</p>
+            <p>
+              {orden.nomcliente} {orden.apepaterno} {orden.apematerno}
+            </p>
+          </article>
 
-                <div className="flex-col w-[1/2] ml-10 mb-5">
-                    <p className="mt-2">Nombre del cliente</p>
-                    <p>{orden.nomcliente} {orden.apepaterno} {orden.apematerno}</p>
-                    <p className="mt-2">Estado </p>
-                    {orden.estado_o ? (
-                        <p>Pendiente</p>
-                    ) : (
-                        <p>Entregado</p>
-                    )}
-                    {/* Aquí ira un icono de una flechita*/}
-                    <button className="boton_detalle_busqueda" onClick={() => handleNavegar(orden.ordentrabajo)}>Detalles</button>
-                </div>
-
-            </div>
-        </>
-    )
+          <article className="flex flex-row gap-2 items-center">
+            <p className="font-medium ">Estado: </p>
+            {orden.estado_o ? (
+              <>
+                <p className="text-white bg-red-500 rounded-[5px] px-3 py-1 ">
+                  Pendiente
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-white bg-green-500 rounded-[5px] px-3 py-1">
+                  Entregado
+                </p>
+              </>
+            )}
+          </article>
+        </section>
+      </Link>
+    </>
+  );
 }
-

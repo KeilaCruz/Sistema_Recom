@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom";
 import { CardBusquedaOrden } from "./CardBusquedaOrden";
 
-
 export function VisualizarOrdenes() {
   const [ordenes, setOrdenes] = useState([]);
   const [filtro, setFiltro] = useState("Todos");
@@ -116,11 +115,10 @@ export function VisualizarOrdenes() {
     }
   };
 
-
   return (
     <>
       <main className="flex flex-col h-auto">
-        <section className="busqueda flex gap-3 items-center">
+        <section className="busqueda flex flex-row gap-3 items-center">
           <input
             className="inputs"
             id="barra_busqueda"
@@ -130,9 +128,17 @@ export function VisualizarOrdenes() {
           <button className="boton_busqueda" onClick={handleBuscar}>
             Buscar
           </button>
-          {resultBusqueda &&
-            resultBusqueda.map((orden) => <CardBusquedaOrden orden={orden} />)}
         </section>
+        <article className="flex flex-row flex-wrap gap-8 mt-5">
+          {resultBusqueda &&
+            resultBusqueda.map((orden) => (
+              <>
+                <div key={orden.ordentrabajo}>
+                  <CardBusquedaOrden orden={orden} />
+                </div>
+              </>
+            ))}
+        </article>
 
         <section className="options mt-10 flex flex-row gap-4">
           <button
@@ -180,7 +186,7 @@ export function VisualizarOrdenes() {
               {ordenes.map((orden) => (
                 <tr
                   key={orden.ordentrabajo}
-                  className="font-sans font-normal text-[15px] border-b-[1px] border-black bg-white hover:bg-colorMain hover:text-white"
+                  className="font-sans font-normal text-[15px] border-b-[1px] border-black bg-white group hover:bg-colorMain hover:text-white"
                 >
                   <td className="px-3 py-3">{orden.ordentrabajo}</td>
                   <td className="px-3 py-3">{orden.nomtrabajadores[0]}</td>
@@ -208,7 +214,7 @@ export function VisualizarOrdenes() {
                             : "/src/assets/icons/go-details-icon.svg"
                         }
                         alt="icono para ver más detalles del trabajo"
-                        className="cursor-pointer h-[30px]"
+                        className="cursor-pointer h-[30px] group-hover:saturate-200 group-hover:brightness-200"
                       />
                     </Link>
                   </td>
