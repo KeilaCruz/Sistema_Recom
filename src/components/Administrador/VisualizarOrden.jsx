@@ -176,6 +176,7 @@ export function VisualizarOrden() {
           nombrePestaña="Detalles de orden de trabajo"
           srcIcon="/src/assets/icons/active/trabajosActive-icon.svg"
           descripcionImagenPestaña="icono de trabajos"
+          showPerfil={true}
         />
 
         <section className="maincontainer mx-[40px] my-[20px] px-5 py-4 shadow-md bg-white rounded-[5px]">

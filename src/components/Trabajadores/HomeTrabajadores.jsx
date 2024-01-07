@@ -31,9 +31,9 @@ function HomeTrabajadores() {
         </div>
 
         <section className="flex flex-col w-full h-auto ml-[289px]">
-          <Header placeholder={"Buscar por nombre de trabajador"} />
+          <Header/>
 
-          <section className="m-[50px] flex flex-col rounded-[5px]  gap-[50px]">
+          <section className="my-[30px] mx-[40px] flex flex-col rounded-[5px]  gap-[50px]">
             <Link
               className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-max rounded-[5px] hover:bg-[#4D407E] box-border "
               to="/nuevo-trabajador"

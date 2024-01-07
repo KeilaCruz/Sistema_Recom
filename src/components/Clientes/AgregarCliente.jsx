@@ -10,6 +10,7 @@ import CancelButton from "../buttons/CancelButton";
 import { agregarCliente } from "../../services/Cliente";
 
 import ModalCancelar from "../Modales/ModalCancelar";
+import HeaderPestaña from "../partials/headers/HeaderPestaña";
 
 import {
   validarNombre,
@@ -95,28 +96,12 @@ function AgregarCliente() {
         </section>
 
         <section className="flex flex-col w-full h-screen ml-[289px]">
-          <nav className="flex items-center justify-between bg-white p-[20px] font-sans font-semibold">
-            <section className="flex items-center gap-[20px]">
-              <img
-                src="/src/assets/icons/backpage-icon.svg"
-                alt="icono para regresar a página principal "
-                className="h-[30px] cursor-pointer"
-                onClick={regresar}
-              />
-              <article className="flex items-center gap-[10px]">
-                <img
-                  src="/src/assets/icons/active/clientesActive-icon.svg"
-                  alt="icono de agregar cliente"
-                  className="h-[30px]"
-                />
-                <p className="text-[18px]">Nuevo Cliente</p>
-              </article>
-            </section>
-
-            <section>
-              <Profile />
-            </section>
-          </nav>
+          <HeaderPestaña
+            srcIcon="/src/assets/icons/active/clientesActive-icon.svg"
+            nombrePestaña="Nuevo cliente"
+            descripcionImagenPestaña="icono de agregar cliente"
+            showPerfil={true}
+          />
 
           <section className="bg-white p-[40px] mx-[70px] my-[30px] flex flex-col  font-sans shadow rounded-[5px] w-[1000px]">
             <form onSubmit={onSubmit}>
@@ -211,7 +196,7 @@ function AgregarCliente() {
               </ul>
             </form>
             <article className="flex gap-[20px] items-center mt-[40px]">
-              <AcceptButton label="Agregar" onClick={onSubmit} />
+              <AcceptButton label="Registrar" onClick={onSubmit} />
               <CancelButton label="Cancelar" onClick={handleMostrarModal} />
             </article>
             {mostrarModal && (

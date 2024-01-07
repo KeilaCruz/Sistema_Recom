@@ -59,10 +59,11 @@ export const getTrabajadores = async () => {
 
 export const darBajaTrabajador = async (idTrabajador) => {
   try {
-    const { error } = await supabase.rpc(rpcDarBajaTrabajador, {
+    const {data,  error } = await supabase.rpc(rpcDarBajaTrabajador, {
       idtrabajador: idTrabajador,
     });
     if (error) throw error;
+    return data
   } catch (error) {
     console.log(error);
   }

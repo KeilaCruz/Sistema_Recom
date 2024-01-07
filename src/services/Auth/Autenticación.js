@@ -1,7 +1,5 @@
 import { supabase } from "../../supabase/connection";
 
-
-
 export const iniciarSesion = async (datos) => {
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -48,27 +46,29 @@ export const actualizarContraseña = async (contraseña) => {
       password: contraseña,
     });
 
-    if (error) throw error
+    if (error) throw error;
 
-    return data
+    return data;
   } catch (error) {
     return error;
   }
 };
 
-export const obtenerTipoCuenta = async (idusuario) => {
-  /*try {
-    const { error, data } = await supabase.rpc(rpcTipoCuenta, {
-      id_usuario: idusuario,
-    })
-    console.log(data)
+export const actualizarCorreo = async (correo) => {
+  try {
+    const { data, error } = await supabase.auth.updateUser({
+      email: correo,
+    });
+
     if (error) throw error;
 
     return data;
   } catch (error) {
     console.log(error);
-  } */
+  }
+};
 
+export const obtenerTipoCuenta = async (idusuario) => {
   try {
     const { data, error } = await supabase
       .from("tipoUsuario")

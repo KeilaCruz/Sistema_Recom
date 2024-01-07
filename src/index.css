@@ -6,19 +6,19 @@
   @apply text-[18px] font-semibold;
 }
 .inputs {
-  @apply border-[1px] border-[#3B315F] px-3 py-2 rounded-[5px] w-[350px]  text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F];
+  @apply border-[1px] border-[#3B315F] px-3 py-2 rounded-[5px] w-[300px]  text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F];
 }
 .inputs_precio {
-  @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[100px] h-[36px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F];
+  @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[200px] h-[36px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F];
 }
 .selects {
-  @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[100px] h-[36px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F];
+  @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[150px] h-[36px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F];
 }
 .etiqueta_checkbox {
-  @apply text-[16px] ml-10;
+  @apply text-[16px]  ml-4;
 }
 .area_texto {
-  @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] w-[250px] h-[100px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F];
+  @apply border-[1px] border-[#3B315F] p-[5px] rounded-[5px] resize-none h-[100px] w-[300px] text-[16px]  focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F]  ;
 }
 .boton_busqueda {
   @apply bg-[#3B315F] px-3 py-2 w-[100px] h-auto mt-0 text-white text-[16px] font-sans font-medium rounded hover:bg-[#4D407E];

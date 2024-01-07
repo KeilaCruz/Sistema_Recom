@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { cerrarSesion } from "../../services/Auth/Autenticación";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import OptionSidebar from "./OptionSidebar";
 
@@ -8,9 +8,10 @@ function Sidebar() {
   const location = useLocation();
   const [rutaActiva, setRutaActiva] = useState("");
   const navigate = useNavigate();
+
   const onSubmit = async () => {
     const logout = await cerrarSesion();
-    console.log(logout)
+    console.log(logout);
     if (logout) {
       navigate("/login");
     } else {
@@ -26,7 +27,7 @@ function Sidebar() {
     <>
       <aside className="bg-colorMain flex flex-col justify-between pt-[20px] p-[40px] h-screen ">
         <section className="flex flex-col ">
-          <article className="flex gap-[20px] font-sans ">
+          <Link className="flex gap-[20px] font-sans " to="/">
             <img
               src="/src/assets/icons/icon-main.svg"
               alt="logotipo de la empresa RECOM"
@@ -38,7 +39,7 @@ function Sidebar() {
                 Taller de Torno<br></br> y Soldadura
               </h2>
             </div>
-          </article>
+          </Link>
 
           <ul className="mt-[50px] font-sans gap-[20px] flex flex-col text-white justify-center ">
             <OptionSidebar

@@ -35,6 +35,8 @@ function DetalleCliente() {
               srcArrow="/src/assets/icons/backpage-icon.svg"
               nombrePestaña="Trabajos realizados"
               srcIcon="/src/assets/icons/active/trabajosActive-icon.svg"
+              descripcionImagenPestaña="icono de trabajos realizados"
+              showPerfil={true}
             />
           </header>
 
@@ -46,18 +48,28 @@ function DetalleCliente() {
                 Ordenes realizadas
               </p>
               <article className="flex flex-row flex-wrap gap-8  mb-5">
-                {ordenes.map((orden) => (
+                {ordenes.length !== 0 ? (
                   <>
-                    <div key={orden.id_orden}>
-                      <OrdenCard
-                        idorden={orden.id_orden}
-                        descripcion={orden.especificaciones_trabajo}
-                        fechaEntrega={orden.fecha_entrega}
-                        estado={orden.estado}
-                      />
-                    </div>
+                    {ordenes.map((orden) => (
+                      <>
+                        <div key={orden.id_orden}>
+                          <OrdenCard
+                            idorden={orden.id_orden}
+                            descripcion={orden.especificaciones_trabajo}
+                            fechaEntrega={orden.fecha_entrega}
+                            estado={orden.estado}
+                          />
+                        </div>
+                      </>
+                    ))}
                   </>
-                ))}
+                ) : (
+                  <>
+                    <p className="bg-colorMain text-white text-[20px] px-4 py-2 rounded">
+                      No hay trabajos asignados a este cliente
+                    </p>
+                  </>
+                )}
               </article>
             </section>
           </section>

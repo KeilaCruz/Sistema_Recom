@@ -10,10 +10,10 @@ function Profile() {
 
   return (
     <>
-      <article className="profile  mr-3">
+      <article className="">
         <button
           onClick={abrirDropdown}
-          className="flex flex-row gap-[10px] items-center"
+          className="flex flex-row gap-[10px] items-center hover:bg-gray-200 rounded-[5px] px-2 py-1 "
         >
           <img
             src="/src/assets/icons/profile-user.svg"
@@ -41,25 +41,10 @@ function Profile() {
 
         {dropdownOpen && (
           <>
-            <section className="absolute z-10 flex flex-col bg-colorMain p-[10px] mt-[5px] rounded-[5px] max-w-[200px] right-0 mr-[20px]">
-              <Link to="/mi-perfil" className="text-white">
-                Mi cuenta
-              </Link>
-              <hr className="mt-2" />
-              <Link
-                to="/setting"
-                className="text-white font-sans flex flex-row gap-[10px]"
-              >
-                <div className="bg-white">
-                  <img
-                    src="/src/assets/icons/active/trabajadoresActive-icon.svg"
-                    alt="icono de usuario del sistema"
-                    className=""
-                  />
-                </div>
-                Configuracion
-              </Link>
-            </section>
+            <Link
+              className="absolute z-10 flex flex-col bg-colorMain text-white p-[10px] mt-[5px] rounded-[5px] max-w-[200px] right-0 mr-[20px] hover:opacity-80 cursor-pointer"
+              to="/mi-perfil"
+            >Mi Cuenta</Link>
           </>
         )}
       </article>

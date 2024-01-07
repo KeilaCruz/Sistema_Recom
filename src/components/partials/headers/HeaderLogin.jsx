@@ -15,14 +15,7 @@ function HeaderLogin() {
           <p className="text-white text-[22px]">RECOM Taller de torno y soldadura</p>
         </Link>
 
-        <section className="flex gap-[50px]">
-          <Link to="/contacto" className="text-white text-[22px]">
-            Contacto
-          </Link>
-          <Link to="/faq" className="text-white text-[22px]">
-            FAQ
-          </Link>
-        </section>
+        
       </main>
     </>
   );

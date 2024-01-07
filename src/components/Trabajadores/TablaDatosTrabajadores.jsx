@@ -104,7 +104,7 @@ const TablaDatosTrabajadores = ({ data }) => {
               {Math.min(pestañaActual * itemsPagina, data.length)}
             </span>{" "}
             resultados de <span className="font-medium">{data.length}</span>{" "}
-            clientes
+            trabajadores
           </p>
         </section>
         <button

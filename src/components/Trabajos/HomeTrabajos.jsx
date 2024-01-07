@@ -3,6 +3,7 @@ import Sidebar from "../partials/Sidebar";
 import { VisualizarOrdenes } from "../Administrador/VisualizarOrdenes";
 import { Link } from "react-router-dom";
 import Header from "../partials/headers/Header";
+import SearchBar from "../partials/SearchBar";
 
 function HomeTrabajos() {
   return (
@@ -14,10 +15,11 @@ function HomeTrabajos() {
 
         <section className="flex flex-col w-full h-auto ml-[289px]">
           <Header />
-          <section className="m-[50px] flex flex-col rounded-[5px]  gap-[50px]">
+          <section className="my-[30px] mx-[40px]  flex flex-col rounded-[5px]  gap-[10px]">
+            <SearchBar />
             <Link
               to="/registrar-orden-trabajo"
-              className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-max rounded-[5px] hover:bg-[#4D407E] box-border"
+              className="flex items-center gap-[10px] p-[10px] bg-colorSecundario w-max rounded-[5px] hover:bg-[#4D407E] box-border "
             >
               <img
                 src="/src/assets/icons/add-icon.svg"
@@ -26,9 +28,7 @@ function HomeTrabajos() {
               <p className="text-white font-medium">Agregar trabajo</p>
             </Link>
 
-            <section>
-              <VisualizarOrdenes />
-            </section>
+            <VisualizarOrdenes />
           </section>
         </section>
       </main>

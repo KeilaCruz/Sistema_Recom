@@ -72,6 +72,7 @@ function RegistrarTrabajador() {
             nombrePestaña="Nuevo trabajador"
             srcIcon="/src/assets/icons/active/trabajadoresActive-icon.svg"
             descripcionImagenPestaña="icono de trabajador"
+            showPerfil={true}
           />
 
           <section className="bg-white p-[40px] mx-[70px] my-[30px] flex flex-col  font-sans shadow rounded-[5px] ">

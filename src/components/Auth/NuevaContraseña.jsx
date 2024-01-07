@@ -4,6 +4,7 @@ import { actualizarContraseña } from "../../services/Auth/Autenticación";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ModalExito from "../Modales/ModalExito";
+import ErrorInput from "../partials/ErrorInput";
 
 function NuevaContraseña() {
   const navigate = useNavigate();
@@ -11,13 +12,13 @@ function NuevaContraseña() {
   const [mostrarModal, setMostrarModal] = useState(false);
 
   const handleMostrarModal = () => {
-    setMostrarModal(true); 
+    setMostrarModal(true);
   };
 
   const handleCerrarModal = () => {
     setMostrarModal(false);
   };
-  
+
   const regresar = () => {
     navigate(-1);
   };
@@ -34,7 +35,7 @@ function NuevaContraseña() {
 
     if (actualizar) {
       setActualizado(!actualizado);
-      setMostrarModal(true)
+      setMostrarModal(true);
     }
   });
 
@@ -91,13 +92,11 @@ function NuevaContraseña() {
                     {...register("contraseñaConfirmada", { required: true })}
                   />
                 </div>
-                {/*{errors.correo && (
+                {errors.correo && (
                   <>
-                    <span className="text-[22px] text-[#C71111] font-medium font-sans">
-                      Se debe ingresar un correo electrónico
-                    </span>
+                    <ErrorInput nombre="La contraseña" />
                   </>
-                )} */}
+                )}
               </form>
               <button
                 className="mt-[20px] text-white bg-[#3B315F] rounded-[5px] p-[10px] font-sans font-medium text-[22px] w-[500px] hover:bg-[#2f274d]"
@@ -111,14 +110,16 @@ function NuevaContraseña() {
                     mostrar={mostrarModal}
                     onClose={handleCerrarModal}
                   >
-                    <p className="uppercase'">Tu contraseña se actualizo correctamente</p>
+                    <p className="uppercase'">
+                      Tu contraseña se actualizo correctamente
+                    </p>
                     <p>En un momento serás redirigido a la página de logueo.</p>
                   </ModalExito>
                 </>
               )}
             </section>
           </section>
-          {/* Debo arreglar lo de picture para WR, ya que no se muestra al hacer zoom */}
+
           <picture>
             <img
               src="/src/assets/icons/icon-main.svg"

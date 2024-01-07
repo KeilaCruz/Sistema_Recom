@@ -10,8 +10,14 @@ import { useForm } from "react-hook-form";
 import EditButton from "../buttons/EditButton";
 import AcceptButton from "../buttons/AcceptButton";
 import CancelButton from "../buttons/CancelButton";
+import {toast} from 'react-hot-toast'
+import {useNavigate} from 'react-router-dom'
 
-function CardDatosTrabajador({ id }) {
+function 
+CardDatosTrabajador({ id }) {
+
+  const navigate = useNavigate()
+
   const [isOpen, setIsOpen] = useState(false);
 
   const { register, handleSubmit, setValue } = useForm();
@@ -68,7 +74,12 @@ function CardDatosTrabajador({ id }) {
   };
   const handleDarBaja = async () => {
     const res = await darBajaTrabajador(id);
-    console.log(res);
+    console.log(res)
+    if(res==null){
+      toast.success("El trabajador ha sido eliminado ")
+      navigate(-1)
+
+    }
   };
   const onSubmit = handleSubmit(async (data) => {
     const res = await editarTrabajador(data);
@@ -91,7 +102,7 @@ function CardDatosTrabajador({ id }) {
           />
         </summary>
 
-        <section className="flex flex-col text-white gap-5 font-sans mt-4 ">
+        <section className="flex flex-col text-white gap-5 font-sans mt-5 ">
           <form className="flex flex-col" onSubmit={onSubmit}>
             <label className="text-[16px]">
               <strong>No. Trabajador</strong>
@@ -102,7 +113,7 @@ function CardDatosTrabajador({ id }) {
                 className="bg-white text-colorSecundario px-2 py-1 rounded-[5px] mt-2 ml-2"
               />
             </label>
-            <section className="flex flex-row items-center justify-between mt-5 ">
+            <section className="flex flex-row items-center gap-10 mt-5 ">
               <div className="flex flex-col gap-2">
                 <label className="text-[16px]">
                   <strong>Nombre</strong>
@@ -116,7 +127,7 @@ function CardDatosTrabajador({ id }) {
                 />
               </div>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col ">
                 <label className="text-[16px]">
                   <strong>Apellido Paterno</strong>
                 </label>
@@ -179,7 +190,7 @@ function CardDatosTrabajador({ id }) {
               </div>
             </section>
           </form>
-          <section className="flex flex-row items-center justify-end gap-4 mt-3 mb-3">
+          <section className="flex flex-row items-center  gap-4 mt-3 mb-3">
             {activateEdit ? (
               <>
                 <CancelButton
@@ -188,7 +199,7 @@ function CardDatosTrabajador({ id }) {
                     setActivateEdit(false);
                   }}
                 />
-                <AcceptButton label="Guardar" onClick="" />
+                <AcceptButton label="Guardar" onClick={onSubmit} />
               </>
             ) : (
               <>

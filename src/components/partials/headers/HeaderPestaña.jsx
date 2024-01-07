@@ -1,12 +1,14 @@
-import React from "react";
-import {useNavigate} from "react-router-dom";
-import Profile from '../Profile'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Profile from "../Profile";
 
 function HeaderPestaña({
   srcIcon,
   descripcionImagenPestaña,
   nombrePestaña,
+  showPerfil,
 }) {
+  const [showProfile, setShowProfile] = useState(showPerfil);
   const navigate = useNavigate();
 
   const regresar = () => {
@@ -29,13 +31,19 @@ function HeaderPestaña({
               alt={descripcionImagenPestaña}
               className="h-[30px]"
             />
-            <p className="text-colorMain font-semibold text-[18px]">{nombrePestaña}</p>
+
+            <p className="text-colorMain font-semibold text-[18px]">
+              {nombrePestaña}
+            </p>
           </article>
         </section>
-
-        <article className="profile">
-            <Profile/>
-        </article>
+        {showProfile ? (
+          <>
+            <Profile />
+          </>
+        ) : (
+          <></>
+        )}
       </header>
     </>
   );

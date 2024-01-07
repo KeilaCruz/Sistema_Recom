@@ -14,8 +14,8 @@ export function VisualizarTrabajador() {
   useEffect(() => {
     const cargarDatos = async () => {
       const datos = await getTrabajosAsignados(id);
-      console.log(datos)
-      setTrabajos(datos)
+      console.log(datos);
+      setTrabajos(datos);
     };
 
     cargarDatos();
@@ -34,6 +34,7 @@ export function VisualizarTrabajador() {
               nombrePestaña="Detalles del trabajador"
               srcIcon="/src/assets/icons/active/trabajadoresActive-icon.svg"
               descripcionImagenPestaña="icono de trabajador"
+              showPerfil={true}
             />
           </header>
 
@@ -45,18 +46,26 @@ export function VisualizarTrabajador() {
                 Ordenes asignadas
               </p>
               <article className="flex flex-row flex-wrap gap-8  mb-5">
-                {trabajos.map((orden) => (
+                {trabajos.length!==0 ? (
                   <>
-                    <div key={orden.ordentrabajo}>
-                      <OrdenCard
-                        idorden={orden.ordentrabajo}
-                        descripcion={orden.especificaciones}
-                        fechaEntrega={orden.fechaentrega}
-                        estado={orden.estadot}
-                      />
-                    </div>
+                    {trabajos.map((orden) => (
+                      <>
+                        <div key={orden.ordentrabajo}>
+                          <OrdenCard
+                            idorden={orden.ordentrabajo}
+                            descripcion={orden.especificaciones}
+                            fechaEntrega={orden.fechaentrega}
+                            estado={orden.estadot}
+                          />
+                        </div>
+                      </>
+                    ))}
                   </>
-                ))}
+                ) : (
+                  <>
+                  <p className="bg-colorMain text-white text-[20px] px-4 py-2 rounded">No hay trabajos asignados a este trabajador</p>
+                  </>
+                )}
               </article>
             </section>
           </section>

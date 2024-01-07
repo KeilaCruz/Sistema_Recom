@@ -1,24 +1,31 @@
-
 export function CardBusquedaCliente({ cliente }) {
-    return (
-        <>
-            <div className="mt-5 w-5/6 flex bg-colorSecundario rounded text-white" key={cliente.id_cliente}>
-                <div className="flex-col w-[1/2] ml-10 mb-5">
-                    <p className="mt-2 font-semibold">Id del cliente</p>
-                    <p>{cliente.id_cliente}</p>
-                    <p className="mt-2 font-semibold">Correo</p>
-                    <p>{cliente.correo}</p>
-                </div>
-                <div className="flex-col w-[1/2] ml-80 mb-5">
-                    <p className="mt-2 font-semibold">Nombre del cliente</p>
-                    <p>{cliente.nombre} {cliente.ape_paterno} {cliente.ape_materno}</p>
+  return (
+    <>
+      <main
+        className="mt-5 flex flex-col bg-colorSecundario rounded text-white px-4 py-2 w-max "
+        key={cliente.id_cliente}
+      >
+        <p className="mt-2 font-semibold items-center px-3 py-2 bg-white text-colorMain rounded">
+          Id del cliente: {cliente.id_cliente}
+        </p>
 
-                    <p className="mt-2 font-semibold">Teléfono</p>
-                    <p>{cliente.telefono}</p>
-                </div>
+        <article className="flex gap-3 items-center mt-2">
+          <p className="font-medium">Nombre del cliente:</p>
+          <p>
+            {cliente.nombre} {cliente.ape_paterno} {cliente.ape_materno}
+          </p>
+        </article>
 
-            </div>
-        </>
-    )
+        <article className="flex gap-3 items-center mt-2">
+          <p className="font-medium">Correo:</p>
+          <p>{cliente.correo}</p>
+        </article>
+
+        <article className="flex gap-3 items-center mt-2">
+          <p className="font-medium">Teléfono:</p>
+          <p>{cliente.telefono}</p>
+        </article>
+      </main>
+    </>
+  );
 }
-

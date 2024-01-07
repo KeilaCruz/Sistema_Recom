@@ -30,7 +30,7 @@ function HomeClientes() {
           <Sidebar />
         </aside>
         <section className="flex flex-col w-full  ml-[289px]">
-          <Header placeholder={"Buscar por nombre de cliente ..."} />
+          <Header />
 
           <section className="my-[30px] mx-[40px]  flex flex-col rounded-[5px]  gap-[30px] ">
             <Link

@@ -9,9 +9,6 @@ import Calendario from "../Trabajos/Calendario";
 function Home() {
   const navigate = useNavigate();
 
-  
-  
-
   return (
     <>
       <main className="flex flex-row bg-colorFondo w-auto  ">
@@ -20,14 +17,11 @@ function Home() {
         </aside>
         <section className="flex flex-col w-full h-auto ml-[290px]">
           <header>
-            <Header
-              placeholder={"Buscar por trabajo, cliente, trabajores....."}
-            />
-
-            <section className="bg-white mx-[30px] my-[20px] rounded-[5px]">
-              <Calendario/>
-            </section>
+            <Header />
           </header>
+          <section className="bg-white mx-[30px] my-[20px] rounded-[5px]">
+            <Calendario />
+          </section>
         </section>
       </main>
     </>
