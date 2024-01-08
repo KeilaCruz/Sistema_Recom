@@ -10,6 +10,7 @@ function NuevaContraseña() {
   const navigate = useNavigate();
   const [actualizado, setActualizado] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
+  const [samePassword, setSamePassword] = useState(true);
 
   const handleMostrarModal = () => {
     setMostrarModal(true);
@@ -30,12 +31,17 @@ function NuevaContraseña() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    const { contraseña } = data;
-    const actualizar = await actualizarContraseña(contraseña);
+    const { contraseña, contraseñaConfirmada } = data;
 
-    if (actualizar) {
-      setActualizado(!actualizado);
-      setMostrarModal(true);
+    if (contraseña === contraseñaConfirmada) {
+      const actualizar = await actualizarContraseña(contraseña);
+
+      if (actualizar) {
+        setActualizado(!actualizado);
+        setMostrarModal(true);
+      }
+    } else {
+      setSamePassword(!samePassword);
     }
   });
 
@@ -73,7 +79,13 @@ function NuevaContraseña() {
                       "focus:border-[#C71111] focus:ring-[#C71111]  focus:outline-none "
                     } focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F]`}
                     {...register("contraseña", { required: true })}
+                  
                   />
+                  {errors.contraseña && (
+                    <>
+                      <ErrorInput nombre="La contraseña" />
+                    </>
+                  )}
                 </div>
                 <div className="flex flex-col ">
                   <label
@@ -92,12 +104,19 @@ function NuevaContraseña() {
                     {...register("contraseñaConfirmada", { required: true })}
                   />
                 </div>
-                {errors.correo && (
+                {errors.contraseñaConfirmada && (
                   <>
                     <ErrorInput nombre="La contraseña" />
                   </>
                 )}
               </form>
+              {!samePassword && (
+                <>
+                  <span className="text-[22px] text-[#C71111] font-medium font-sans">
+                    Ambas contraseñas deben coincidir
+                  </span>
+                </>
+              )}
               <button
                 className="mt-[20px] text-white bg-[#3B315F] rounded-[5px] p-[10px] font-sans font-medium text-[22px] w-[500px] hover:bg-[#2f274d]"
                 onClick={onSubmit}

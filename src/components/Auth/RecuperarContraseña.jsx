@@ -117,7 +117,6 @@ function RestorePassword() {
               </>
             )}
           </section>
-          {/* Debo arreglar lo de picture para WR, ya que no se muestra al hacer zoom */}
           <picture>
             <img
               src="/src/assets/icons/icon-main.svg"

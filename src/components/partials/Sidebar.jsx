@@ -15,7 +15,7 @@ function Sidebar() {
     if (logout) {
       navigate("/login");
     } else {
-      alert("No se pudo cerrar sesión");
+      toast.error("No se pudo cerrar sesión");
     }
   };
 
@@ -24,6 +24,7 @@ function Sidebar() {
   }, [location]);
 
   return (
+    
     <>
       <aside className="bg-colorMain flex flex-col justify-between pt-[20px] p-[40px] h-screen ">
         <section className="flex flex-col ">
