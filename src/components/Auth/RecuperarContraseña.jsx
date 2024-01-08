@@ -3,6 +3,7 @@ import Header from "../partials/headers/HeaderLogin";
 import { recuperarContraseña } from "../../services/Auth/Autenticación";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import ErrorInput from "../partials/ErrorInput";
 
 function RestorePassword() {
   const navigate = useNavigate();
@@ -98,14 +99,15 @@ function RestorePassword() {
                         } focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F]`}
                         {...register("correo", { required: true })}
                       />
+                      {errors.correo && (
+                        <>
+                          <div className="w-[500px] mt-2">
+                            <ErrorInput nombre="El correo" />
+                          </div>
+                        </>
+                      )}
                     </div>
-                    {errors.correo && (
-                      <>
-                        <span className="text-[22px] text-[#C71111] font-medium font-sans">
-                          Se debe ingresar un correo electrónico
-                        </span>
-                      </>
-                    )}
+
                     <button
                       type="submit"
                       className="text-white bg-[#3B315F] rounded-[5px] p-[10px] font-sans font-medium text-[22px] w-[500px] hover:bg-[#2f274d]"

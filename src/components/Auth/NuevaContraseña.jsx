@@ -67,7 +67,7 @@ function NuevaContraseña() {
                 <div className="flex flex-col ">
                   <label
                     htmlFor="nueva contraseña"
-                    className="font-semibold text-[25px] text-[#152034]"
+                    className="font-semibold text-[25px] text-[#152034] "
                   >
                     Nueva contraseña
                   </label>
@@ -79,11 +79,12 @@ function NuevaContraseña() {
                       "focus:border-[#C71111] focus:ring-[#C71111]  focus:outline-none "
                     } focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F]`}
                     {...register("contraseña", { required: true })}
-                  
                   />
                   {errors.contraseña && (
                     <>
-                      <ErrorInput nombre="La contraseña" />
+                      <div className="w-[500px] mt-2  ">
+                        <ErrorInput nombre="La contraseña" />
+                      </div>
                     </>
                   )}
                 </div>
@@ -103,12 +104,14 @@ function NuevaContraseña() {
                     } focus:border-[#3B315F] focus:outline-none focus:ring-1 focus:ring-[#3B315F]`}
                     {...register("contraseñaConfirmada", { required: true })}
                   />
+                   {errors.contraseñaConfirmada && (
+                    <>
+                      <div className="w-[500px] mt-2">
+                        <ErrorInput nombre="La contraseña" />
+                      </div>
+                    </>
+                  )}
                 </div>
-                {errors.contraseñaConfirmada && (
-                  <>
-                    <ErrorInput nombre="La contraseña" />
-                  </>
-                )}
               </form>
               {!samePassword && (
                 <>
@@ -128,6 +131,7 @@ function NuevaContraseña() {
                   <ModalExito
                     mostrar={mostrarModal}
                     onClose={handleCerrarModal}
+                    ruta="login"
                   >
                     <p className="uppercase'">
                       Tu contraseña se actualizo correctamente

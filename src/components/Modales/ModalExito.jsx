@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from "react";
+import {useNavigate} from 'react-router-dom'
 
-function ModalExito({ mostrar, onClose, children }) {
+function 
+ModalExito({ mostrar, onClose, children, ruta}) {
+
+
+  const navigate = useNavigate()
   const modalRef = useRef(null);
 
   const cerrarModal = () => {
@@ -15,6 +20,7 @@ function ModalExito({ mostrar, onClose, children }) {
     if (mostrar) {
       timer = setTimeout(() => {
         cerrarModal();
+        navigate(`/${ruta}`)
       }, 3000);
     }
     return () => {
